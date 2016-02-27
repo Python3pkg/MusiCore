@@ -2,9 +2,26 @@ from __future__ import print_function
 import librosa
 import os
 
-#---------------- Analyse du BPM ---------------------
+#----------------------------- Analyse du BPM -------------------------------
 #fonctionne pour le mp3, wav
 #entree: (position du fichier dans le systeme)
+
+def extraire_path(path):
+    """
+    :param path: chemin absolue d'une fichier audio
+    :return: list =[nom fichier, chemin du repertoire du dossier contenant le fichier audio]
+    Comment: permet d'extraire d'un chemin absolu le nom du fichier une list:
+
+    """
+    path1=path[::-1]
+    k=0
+    while path[len(path)-k-1]!="/":
+        k=k+1
+    return [path[len(path)-k:], path[:len(path)-k-1] ]
+
+#print(extraire_path('/home/bettini/Musique/Deorro.wav')[0])
+#print(list)
+
 
 def analyse_bpm(pathtofile,fichier_csv):
     """
@@ -14,21 +31,14 @@ def analyse_bpm(pathtofile,fichier_csv):
     Comment:
 
     """
-    #extraction des données de pathtofile
-    path1=pathtofile[::-1]
-    k=0
-    while pathtofile[len(pathtofile)-k-1]!="/":
-        k=k+1
-    list=[pathtofile[len(pathtofile)-k:], pathtofile[:len(pathtofile)-k-1] ]
-
     # On l'emplacement courant a dossier ou se situe la musique
-    os.chdir(list[1])
+    os.chdir(extraire_path(pathtofile)[1])
     #retval = os.getcwd()
-    #print("Current working directory %s" % retval)
+    #print("Le dossier courant est %s" % retval)
 
 
     #filename le fichier qui va etre analyse
-    filename = list[0]
+    filename = extraire_path(pathtofile)[0]
 
     #enregistrement du fichier audio comme une forme d'onde 'y'
     #enrigistrement de taux d'echantillon en 'sr'
@@ -48,21 +58,5 @@ def analyse_bpm(pathtofile,fichier_csv):
     librosa.output.times_csv('fichier_csv.csv', beat_times)
     #lecteur_csv.read_csv(beat_times.csv)
 
-analyse_bpm("/home/bettini/Musique/Deorro.wav", "fichier_csv")
+analyse_bpm("/home/bettini/Musique/Deorro.wav", "fichier_csv") #test de mesure de BPM
 
-def extraire_path(path):
-    """
-    :param path: chemin absolue d'une fichier audio
-    :return: list =[nom fichier, chemin du repertoire du dossier contenant le fichier audio]
-    Comment: permet d'extraire d'un chemin absolu le nom du fichier une list:
-
-    """
-    path1=path[::-1]
-    k=0
-    while path[len(path)-k-1]!="/":
-        k=k+1
-        #print(path[len(path)-k:])
-    return [path[len(path)-k:], path[:len(path)-k-1] ]
-
-#print(extraire_path('/home/bettini/Musique/Deorro')[0])
-#print(list)
