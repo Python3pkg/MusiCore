@@ -13,7 +13,7 @@ def extraire_path(path):
     Comment: permet d'extraire d'un chemin absolu le nom du fichier une list:
 
     """
-    path1=path[::-1]
+    #path1=path[::-1]
     k=0
     while path[len(path)-k-1]!="/":
         k=k+1
@@ -33,30 +33,35 @@ def analyse_bpm(pathtofile,fichier_csv):
     """
     # On l'emplacement courant a dossier ou se situe la musique
     os.chdir(extraire_path(pathtofile)[1])
-    #retval = os.getcwd()
-    #print("Le dossier courant est %s" % retval)
-
 
     #filename le fichier qui va etre analyse
     filename = extraire_path(pathtofile)[0]
 
-    #enregistrement du fichier audio comme une forme d'onde 'y'
-    #enrigistrement de taux d'echantillon en 'sr'
+    #enregistrement du fichier audio comme une forme d'onde 'y' ; enrigistrement de taux d'echantillon en 'sr'
     y, sr = librosa.load(filename)
 
     # execution du tracker bpm par default
     tempo, beat_frames = librosa.beat.beat_track(y=y, sr=sr)
 
-    print('Estimated tempo: {:.2f} beats per minute'.format(tempo))
+    #bpm moyen
+    #print('tempo moyen: {:.2f} BPM'.format(tempo))
 
     # Converti les sequences d'indice de beat en un chronogramme
     beat_times = librosa.frames_to_time(beat_frames, sr=sr)
 
+    bpm_d=0                         #calcul du bpm du debut et de la fin de la musique dans le cas d'un changement au cours de la musique
+    bpm_f=0
+    for i in range(100):
+        bpm_d=bpm_d+(beat_times[i+1]-beat_times[i])
+        bpm_f=bpm_f+(beat_times[len(beat_times)-i-1]-beat_times[len(beat_times)-i-2])
+    #print("BPM_debut = %s" %(60/(bpm_d/100)))
+
+    return(tempo, 60/(bpm_d/100), 60/(bpm_f/100))
+
     #enregistrement du fichier csv
-    print('enregistrement du fichier csv')
-    #librosa.output.times_csv('beat_times.csv', beat_times)
-    librosa.output.times_csv('fichier_csv.csv', beat_times)
+    #print('enregistrement du fichier csv')
+    #librosa.output.times_csv('fichier_csv.csv', beat_times)
+    #librosa.output.times_csv('fichier_csv.csv', beat_times)
     #lecteur_csv.read_csv(beat_times.csv)
 
 analyse_bpm("/home/bettini/Musique/Deorro.wav", "fichier_csv") #test de mesure de BPM
-

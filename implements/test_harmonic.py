@@ -5,11 +5,7 @@ from numpy import sin, linspace, pi
 from scipy.io.wavfile import read,write
 import numpy
 
-os.chdir("/home/bettini")
-retval = os.getcwd()
-print("Current working directory %s" % retval)
-
-
+os.chdir("/home/bettini/Musique/")
 
 def plotSpectru(y,Fs):
  n = len(y) # lungime semnal
