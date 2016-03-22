@@ -34,7 +34,7 @@ def ecrirecsv(pathtofile, list):
 
     if os.path.isfile(pathtofile) == True:                                      #si le fichier existe:
         try:                                                            #rajoute seulement les lignes voulu
-            print('le fichier existe')
+            print('le fichier csv existe, rajout des donnees dans le csv')
             file = open(fname, "a")
             # Creation de l'ecrivain'' CSV
             writer = csv.writer(file)
@@ -48,7 +48,7 @@ def ecrirecsv(pathtofile, list):
 
     else:                                                               #si le fichier n'existe pas
         try:                                                            #rajoute une entete
-            print("le fichier n'existe pas")
+            print("le fichier csv n'existe pas, creation d'un nouveau fichier csv")
             file = open(fname, "wb")
             # Creation de l'ecrivain'' CSV
             writer = csv.writer(file)
