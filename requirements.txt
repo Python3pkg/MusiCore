@@ -1,0 +1,10 @@
+'''
+Created on 23 mars 2016
+@author: Aurélien
+'''
+
+
+API installés: numpy, librosa, matplotlib
+        #pour installer ces api, vous pouvez utiliser les paquets presents sur PyPI ou le paquets pip
+
+IDE: Pycharm
