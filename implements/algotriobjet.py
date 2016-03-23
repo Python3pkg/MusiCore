@@ -1,4 +1,4 @@
-# coding: utf-8
+# -*- coding: utf-8 -*-
 #test orienté_objet
 #classe Musique déf par titre, BPM_debut, BPM_fin, pitch
 
@@ -20,6 +20,11 @@ def csvcount(filename):
 #transfo chaine de caractere '140' en 140 + nombre
 
 def conversion(chaine):
+    '''
+
+    :param chaine:
+    :return:
+    '''
     correc=chaine[0:len(chaine)]
     correcnombre=float(correc)
     return correcnombre
@@ -27,6 +32,9 @@ def conversion(chaine):
 #-----------------------
 
 class Musique:#def classe musique
+    '''
+    expliquer ce que fait la classe
+    '''
     #titre, BPM_debut, BPM_fin, pitch
     def _init_(self, titre, BPM_debut, BPM_fin, pitch):#methode constructeur
        self.titre = titre #il faut extraire les données du csv

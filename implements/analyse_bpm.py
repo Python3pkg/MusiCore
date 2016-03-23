@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from __future__ import print_function
 import librosa
 import os
@@ -63,6 +64,9 @@ def ecrirecsv(pathtofile, list):
             # Fermeture du fichier source
             file.close()
 
+def islineIncsc():
+
+    return
 
 
 def analyse_bpm(pathtofile,NomFichierCsv):
@@ -89,7 +93,7 @@ def analyse_bpm(pathtofile,NomFichierCsv):
     # execution du tracker bpm par default
     tempo, beat_frames = librosa.beat.beat_track(y=y, sr=sr)
 
-    #bpm moyen
+    #affichage du bpm moyen
     #print('tempo moyen: {:.2f} BPM'.format(tempo))
 
     #Converti les sequences d'indice de beat en un chronogramme

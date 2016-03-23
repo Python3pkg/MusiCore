@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import os
 from pylab import plot, show, title, xlabel, ylabel, subplot, savefig
 from scipy import fft, arange, ifft
