@@ -6,8 +6,8 @@ Created on 7 avr. 2014
 import sys, os
 
 # Importe tout les sous modules de implements
-from . import analyseaudio
-from . import algotriobjet
+# from .analyseaudio import *
+# from .algotriobjet import *
 
 # Importe les modules de tests
-from MusiCoreTest.test import *
+from tests import *
