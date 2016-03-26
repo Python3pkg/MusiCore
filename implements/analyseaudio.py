@@ -188,7 +188,11 @@ class analyse:
         # ecriture des donnees dans le fichier csv
         self.ecrirecsv(ElemCsv)
 
-    def analysefft(self, y, Fs):
+    def analysefft(self, y=None, Fs=None):
+
+        if y is None or Fs is None:
+            raise ValueError("largument y ou Fs est manquant")
+
 
         n = len(y)  # lungime semnal
         k = arange(n)
@@ -199,6 +203,7 @@ class analyse:
         Y = fft(y) / n  # fft computing and normalization
         Y = Y[range(n / 2)]
 
+        '''
         plot(frq, abs(Y), 'r')  # plotting the spectrum
         xlabel('Freq (Hz)')
         ylabel('|Y(freq)|')
@@ -210,6 +215,7 @@ class analyse:
         t = linspace(0, timp, len(y))
         print(len(y))
         print(len(t))
+        '''
 
     def recherchenote(self):
         '''
