@@ -71,3 +71,62 @@ for i in range(cvscount(testprojetinfo.csv)):
     # test daffichage
     titre.titre1
     titree.titre2
+    
+#------------------------------------------------------
+#Tri bpm avec méthode du "plus court chemin"
+#Idée : on calcule la différence de bpm entre chaque musique et on cherche le min de la somme des différences totales
+
+#---------------------------
+#Recherche du premier point
+#ie le BPMmini du tableau
+
+def BPMmini (tableaucool):
+    BPM_min = 1000000
+    i=0
+    while i<len(tableaucool):
+        if tableaucool[i]<= BPM_min:
+            BPM_min = tableaucool[i]
+        i=i+1
+    return BPM_min
+
+
+def BPMmaxi (tableaucool):
+    BPM_max = 0
+    i=0
+    while i<len(tableaucool):
+        if tableaucool[i]>= BPM_max:
+            BPM_max = tableaucool[i]
+        i=i+1
+    return BPM_max
+
+
+def tribpm (tableaucool):
+    resultat = []
+    resultat.append(BPMmini(tableaucool))
+    sommet = (BPMmini(tableaucool))
+    j=0
+    i=0
+    compteur = 100000
+    print resultat
+    for j in range (len(tableaucool)):
+        while i<(len(tableaucool)):
+            #if tableaucool[i] > sommet:
+            #   print "test1"
+            if abs(resultat[j]-tableaucool[i])<=compteur and tableaucool[i]>resultat[j]:
+                compteur = abs(resultat[j]-tableaucool[i])
+                    #if sommet == BPMmaxi(tableaucool):
+                    #    return resultat
+                sommet = tableaucool[i]
+                print "test2"
+            i=i+1
+        resultat.append(sommet)
+        j=j+1
+
+    return resultat
+
+
+tableaucool=[130,138,124,112]
+print(tribpm(tableaucool))
+
+    
+    
