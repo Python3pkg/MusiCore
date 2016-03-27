@@ -73,10 +73,6 @@ def parseaudio(nomanalyse):
         file.close()
 
 
-# test de parseaudio: parcourt toutes les musiques étant dans le fichier test_parseaudio
-parseaudio("playlistbob")
-
-
 '''
     analyse1 = implements.analyseaudio.analyse("/home/bettini/Musique/Deorro.wav", "fichier_csv")
     # print(analyse1.extraire_path())
