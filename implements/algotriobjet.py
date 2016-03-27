@@ -27,8 +27,16 @@ def conversion(chaine):
 #-----------------------
 #classe musique
 class Musique:#def classe musique
-    #titre, BPM_debut, BPM_fin, pitch
-    def _init_(self, titre, emplacement, BPM_moy, BPM_debut, BPM_fin, pitch):#methode constructeur
+    #titre, BPM_debut, BPM_fin,BPM_moy, pitch
+    """
+    titre = ""
+    emplacement = ""
+    BPM_moy = 0
+    BPM_debut = 0
+    BPM_fin = 0
+    pitch = ""
+    """
+    def __init__(self, titre, emplacement, BPM_moy, BPM_debut, BPM_fin, pitch):#methode constructeur
        self.titre = titre #il faut extraire les données du csv
        self.emplacement = emplacement
        self.BPM_moy = BPM_moy
@@ -36,14 +44,18 @@ class Musique:#def classe musique
        self.BPM_fin = BPM_fin
        self.pitch = pitch
 
+a = Musique("a","b","c","d","e","f")
+print(a.BPM_moy)
 
 #--------------------------------------------
 #extraction du csv et copie dans classe Musique
 #recuperation de la colonne BPM_debut dans le csv
-"""tableaucool = []
+#tableauMus contient les objets Musiques extraits du  csv
+"""
+tableauMus = []
 fname1 = "testprojetinfo.csv"
 file1 = open(fname1, "rb")
-for i in range (csvcount(testprojetinfo.csv)):
+for i in range (csvcount("testprojetinfo.csv")):
     try:
         reader = csv.reader(file1)
         for row in reader:
@@ -53,29 +65,29 @@ for i in range (csvcount(testprojetinfo.csv)):
             print row[0],row[1]
             temp = Musique(row[0], row[1], conversion(row[2]), conversion(row[3]), conversion(row[4]), row[5])
             i=i+1
-            tableaucool.append(temp)
+            tableauMus.append(temp)
 
     finally:
         file1.close()
     #test daffichage
-    titre.titre1
-    titree.titre2
-"""
+    print tableauMus
+""" #erreur inconnue
 #----------------------------------------------------
 #test
 
 """print tableaucool"""
 
 #------------------------------------------------------
-#Tri bpm avec méthode du "plus court chemin"
-#Idée : on calcule la différence de bpm entre chaque musique et on cherche le min de la somme des différences totales
+#------------------------------------------------------
+# TRI BPM AVEC METHODE DU PLUS COURT CHEMIN
+# #Idée : on calcule la différence de bpm entre chaque musique et on cherche le min de la somme des différences totales
 
 #---------------------------
 #Recherche du premier point
 #ie le BPMmini du tableau
 
 def BPMmini (tableaucool):
-    BPM_min = 1000000
+    BPM_min = 1000000 #on part d'un BPM de base "infini"
     i=0
     while i<len(tableaucool):
         if tableaucool[i]<= BPM_min:
@@ -83,7 +95,7 @@ def BPMmini (tableaucool):
         i=i+1
     return BPM_min
 
-
+#inutilisé pour le moment, sera supprimé si non nécessaire
 def BPMmaxi (tableaucool):
     BPM_max = 0
     i=0
@@ -94,7 +106,12 @@ def BPMmaxi (tableaucool):
     return BPM_max
 
 
-
+#----------------
+# tri bpm
+# à partir d'un tableau de BPMs (extraits des objets), création d'un nouveau tableau "resultat" avec les BPMs triés
+# Avec cette méthode, il est possible d'inclure le tri harmonique et de le comparer au tri BPM avec des poids,
+# ce qui était impossible avec un tri "classique" à 1 entrée.
+# Remarque, ici BPM moyen seulement
 def tribpm (tableaucool):
     resultat = []
     resultat.append(BPMmini(tableaucool))
@@ -102,7 +119,6 @@ def tribpm (tableaucool):
     j=0
     i=0
     compteur = 100000
-    print resultat
     for j in range (len(tableaucool)-1):
         while i<(len(tableaucool)):
             if abs(resultat[j]-tableaucool[i])<=compteur and tableaucool[i]>resultat[j]:
@@ -115,10 +131,12 @@ def tribpm (tableaucool):
         i=0
     return resultat
 
-
+#test
 tableaucool=[130,138,124,112]
 print(tribpm(tableaucool))
 
+# Si 2 bpms sont identiques, il les ajouter les uns à la suite des autres et cibler le tri en fonction de l'harmonique
+#(à venir)
 
     
     
