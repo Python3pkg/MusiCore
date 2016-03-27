@@ -34,17 +34,18 @@ def conversion(chaine):
 
 # -----------------------
 
-class Musique:  # def classe musique
-    '''
-    expliquer ce que fait la classe
-    '''
-
-    # titre, BPM_debut, BPM_fin, pitch
-    def _init_(self, titre, BPM_debut, BPM_fin, pitch):  # methode constructeur
-        self.titre = titre  # il faut extraire les données du csv
-        self.BPM_debut = BPM_debut
-        self.BPM_fin = BPM_fin
-        self.pitch = pitch
+#-----------------------
+#classe musique
+"""expliquer ce que c'est"""
+class Musique:#def classe musique
+    #titre, BPM_debut, BPM_fin, pitch
+    def _init_(self, titre, emplacement, BPM_moy, BPM_debut, BPM_fin, pitch):#methode constructeur
+       self.titre = titre #il faut extraire les données du csv
+       self.emplacement = emplacement
+       self.BPM_moy = BPM_moy
+       self.BPM_debut = BPM_debut
+       self.BPM_fin = BPM_fin
+       self.pitch = pitch
 
 
 # --------------------------------------------
