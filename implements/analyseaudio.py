@@ -30,10 +30,10 @@ class analyse:
     classe définissant l'analyse d'une musique. On a l'analyse bpm et l'analyse de la tonalité
     '''
 
-    def __init__(self, PathToFile, NomFichierCsv):  # méthode constructeur
-        self.NomCsv = NomFichierCsv  # chemin du fichier csv donnant
+    def __init__(self, PathToFile, NomFichierCsv, PathToCsv):  # méthode constructeur
         self.PathToFile = PathToFile  # chemin du fichier audio
-        self.PathToCsv = '/home/bettini/PycharmProjects/MusiCore/BDDMusic/BDDMusic'  # chemin par défaut du fichier csv étant la base de donnée
+        self.NomFichierCsv = NomFichierCsv  # chemin du fichier csv qui va être crée pour cette analyse
+        self.PathToCsv = PathToCsv  # chemin du fichier csv étant la base de donnée: par défaut '~/MusiCore/BDDMusic/BDDMusic'
 
     def extraire_path(self):
         """
@@ -49,23 +49,19 @@ class analyse:
         return [self.PathToFile[len(self.PathToFile) - k:],
                 self.PathToFile[:len(self.PathToFile) - k - 1]]  # path to directory , file name
 
-    def ecrirecsv(self, list):
+    def ecrirecsv(self, pathtocsv, list):
+        '''
 
-        # verifie si on peut ouvrir le fichier
-        try:
-            with open(self.PathToCsv):
-                pass
-        except IOError:
-            print("Erreur! Le fichier n'a pas pu etre ouvert")
-            sys.exit(0)
+        :param list: liste dont les élements vont être ajoutés à un fichier csv
 
-        fname = self.PathToCsv
-        # l'option 'a' permet de ne pas ecraser le fichier
-        if os.path.isfile(self.PathToCsv) == True:  # si le fichier existe:
+        '''
+
+        fname = pathtocsv
+        if os.path.isfile(pathtocsv) == True:  # si le fichier existe:
             try:  # rajoute seulement les lignes voulu
-                print('le fichier csv existe, rajout des donnees dans le csv')
-                file = open(fname, "a")
-                # Creation de l'ecrivain'' CSV
+                print('ecrirecsv: le fichier ' + pathtocsv + ' existe, rajout des donnees dans le csv')
+                file = open(fname, "a")  # l'option 'a' permet de ne pas ecraser le fichier
+                # Creation de l'ecrivain CSV
                 writer = csv.writer(file)
 
                 # Ecriture des donnees.
@@ -77,33 +73,37 @@ class analyse:
 
         else:  # si le fichier n'existe pas
             try:  # rajoute une entete
-                print("le fichier csv n'existe pas, creation d'un nouveau fichier csv")
-                file = open(fname, "wb")
+                print("ecrirecsv: le fichier " + pathtocsv + " n'existe pas, creation d'un nouveau fichier csv")
+                file = open(fname, 'w')
                 # Creation de l'ecrivain'' CSV
                 writer = csv.writer(file)
 
                 # Ecriture de la ligne d'en-tete avec le titre des colonnes.
+                writer.writerow(['Emplacement', 'NomFichier', 'BpmMoyen', 'BpmDebut', 'BpmFin'])
 
-                writer.writerow(('Emplacement', 'NomFichier', 'BpmMoyen', 'BpmDebut', 'BpmFin'))
-                #
                 # Ecriture des quelques donnees.
                 writer.writerow(list)
             finally:
                 # Fermeture du fichier source
                 file.close()
 
+
     def islineincsc(self, titre):
+        '''
+
+        :param titre: le titre du fichier audio dont on veut vérifier si il existe dans le fichier csv
+        :return: True si le fichier audio à deja été analysé
+        Afin de vérifier si un fichier audio à deja été analysé, on compare les titres audio deja analysés dans la base de donnée avec le titre du fichier que l'on veut analyser
+        '''
 
         fname = self.PathToCsv
-        # file = open(fname, "rb") python 2.7
-        file = open(fname, "rt")
+        file = open(fname, "rt")  # file = open(fname, "rb") python 2.7
         try:
             reader = csv.reader(file)
             for row in (reader):
                 #
                 # N'affiche que certaines colonnes
                 #
-                print(len(row))
                 if (len(row) != 5):
                     return False
 
@@ -112,13 +112,15 @@ class analyse:
                     # print("row = " + row[1])
                     # print("titre = " + titre)
                     if (row[1] == titre):
-                        print('le fichier existe deja dans la base de donnée')
-                        # TODO: mettre le fichier de la base de donnée dans le fichier csv en cour d'écriture
+                        print('Le fichier existe deja dans la base de donnée')
+                        print('Ecriture des données existantes de la bdd dans le fichier ' + self.NomFichierCsv)
+                        self.ecrirecsv(self.NomFichierCsv, row)
                         return True
         finally:
             file.close()
 
         return False
+
 
     def extrairedatamusic(self):
         '''
@@ -132,43 +134,31 @@ class analyse:
         # On l'emplacement courant a dossier ou se situe la musique
         os.chdir(self.extraire_path()[1])
 
-        # on load le fichier de musique
+        # on charge le fichier de musique
         return librosa.load(filename)
+
 
     def analyse_bpm(self, y, sr):
         """
         :param pathtofile: chemin absolue du fichier audio dont on veut analyser le bpm
         :param fichier_csv: fichier csv dans lequel sera enregistre les bpms du morceau (nom de la playlist en cours)
-        Comment:ecrit dans le fichier csv a la fin
-
-        === exemple de tests ===
+        :Comment ecrit dans le fichier csv a la fin
+        :exemple de test
         analyse1 = analyse("/home/bettini/Musique/Deorro.wav", "fichier_csv")
         y, sr = analyse1.extrairedatamusic()
         analyse1.analyse_bpm(y, sr)
-
         """
 
-        # back: path=self.extraire_path()[1]
-        # back: filename = self.extraire_path()[0]    #filename le fichier qui va etre analyse
-
-        # On l'emplacement courant a dossier ou se situe la musique
-        # back: os.chdir(self.extraire_path()[1])
-
         # creation de la liste qui va etre exportee dans le csv
-
         ElemCsv = [self.PathToFile, self.extraire_path()[0]]
 
         # enregistrement du fichier audio comme une forme d'onde 'y' ; enrigistrement de taux d'echantillon en 'sr'
         # TODO: cette fonction est le goulot d'etranglement du programme, a ameliorer...
-        # back: y, sr = librosa.load(filename)
 
         # execution du tracker bpm par default
         tempo, beat_frames = librosa.beat.beat_track(y=y, sr=sr)
 
-        # affichage du bpm moyen
-        # print('tempo moyen: {:.2f} BPM'.format(tempo))
-
-        # Converti les sequences d'indice de beat en un chronogramme
+        # Converti les sequences d'indice de beat en un chronogramme correspondant aux impulsions d'énergie au cours de la musique
         beat_times = librosa.frames_to_time(beat_frames, sr=sr)
 
         # calcul du bpm du debut et de la fin de la musique dans le cas d'un changement au cours de la musique
@@ -177,21 +167,22 @@ class analyse:
         for i in range(100):
             bpm_d = bpm_d + (beat_times[i + 1] - beat_times[i])
             bpm_f = bpm_f + (beat_times[len(beat_times) - i - 1] - beat_times[len(beat_times) - i - 2])
-        # print("BPM_debut = %s" %(60/(bpm_d/100)))
 
         # on complete la lste qui va etre mis dans le csv
         ElemCsv.append(tempo)
         ElemCsv.append(60 / (bpm_d / 100))
         ElemCsv.append(60 / (bpm_f / 100))
-        print(ElemCsv)
+        print("la liste qui va etre implementé est: ", ElemCsv)
 
-        # ecriture des donnees dans le fichier csv
-        self.ecrirecsv(ElemCsv)
+        # ecriture des donnees dans la base de donnée et le fichier de playlist
+        self.ecrirecsv(self.PathToCsv, ElemCsv)
+        self.ecrirecsv(self.NomFichierCsv, ElemCsv)
+
 
     def analysefft(self, y=None, Fs=None):
 
         if y is None or Fs is None:
-            raise ValueError("largument y ou Fs est manquant")
+            raise ValueError("Les arguments y ou Fs sont manquants")
 
 
         n = len(y)  # lungime semnal
@@ -226,4 +217,6 @@ class analyse:
 
         return
 
-
+# ======================================================
+# Fonctions annexes
+# ======================================================
