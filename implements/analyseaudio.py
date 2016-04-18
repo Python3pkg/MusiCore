@@ -18,22 +18,40 @@ from numpy import sin, linspace, pi
 from scipy.io.wavfile import read, write
 import numpy
 
-# ----------------------------- Analyse Musique -------------------------------
+###############################################################################
+# class `analyse`
+###############################################################################
 '''
 Permet d'effectuer des analyses de musiques
 fonctionne pour le mp3, wav
 '''
-
 
 class analyse:
     '''
     classe définissant l'analyse d'une musique. On a l'analyse bpm et l'analyse de la tonalité
     '''
 
-    def __init__(self, PathToFile, NomFichierCsv, PathToCsv):  # méthode constructeur
-        self.PathToFile = PathToFile  # chemin du fichier audio
-        self.NomFichierCsv = NomFichierCsv  # chemin du fichier csv qui va être crée pour cette analyse
-        self.PathToCsv = PathToCsv  # chemin du fichier csv étant la base de donnée: par défaut '~/MusiCore/BDDMusic/BDDMusic'
+    def __init__(self, PathToFile=None, NomFichierCsv=None, pathtobdd=None):  # méthode constructeur
+        '''
+
+        :param PathToFile: chemin jusqu'au fichier audio
+        :param NomFichierCsv: chemin jusqu'au fichier csv qui être crée par l'analyse
+        :param pathtobdd: chemin jusqu'au fichier de la bdd
+        :return: None
+        '''
+        if PathToFile is None:
+            raise ValueError('Error: PathToFile is emplty')
+        else:
+            self.PathToFile = PathToFile  # chemin du fichier audio
+        if NomFichierCsv is None:
+            raise ValueError('Error: NomFichierCsv is empty')
+        else:
+            self.NomFichierCsv = NomFichierCsv  # chemin du fichier csv qui va être crée pour cette analyse
+        if pathtobdd is None:
+            self.pathtobdd = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + "/BDDMusic/BDDMusic"
+        else:
+            self.pathtobdd = pathtobdd  # chemin du fichier csv étant la base de donnée: par défaut '~/MusiCore/BDDMusic/BDDMusic'
+
 
     def extraire_path(self):
         """
@@ -49,17 +67,16 @@ class analyse:
         return [self.PathToFile[len(self.PathToFile) - k:],
                 self.PathToFile[:len(self.PathToFile) - k - 1]]  # path to directory , file name
 
-    def ecrirecsv(self, pathtocsv, list):
+    def ecrirecsv(self, pathtobdd, list):
         '''
-
         :param list: liste dont les élements vont être ajoutés à un fichier csv
 
         '''
 
-        fname = pathtocsv
-        if os.path.isfile(pathtocsv) == True:  # si le fichier existe:
+        fname = pathtobdd
+        if os.path.isfile(pathtobdd) == True:  # si le fichier existe:
             try:  # rajoute seulement les lignes voulu
-                print('ecrirecsv: le fichier ' + pathtocsv + ' existe, rajout des donnees dans le csv')
+                print('ecrirecsv: le fichier ' + pathtobdd + ' existe, rajout des donnees dans le csv')
                 file = open(fname, "a")  # l'option 'a' permet de ne pas ecraser le fichier
                 # Creation de l'ecrivain CSV
                 writer = csv.writer(file)
@@ -73,7 +90,7 @@ class analyse:
 
         else:  # si le fichier n'existe pas
             try:  # rajoute une entete
-                print("ecrirecsv: le fichier " + pathtocsv + " n'existe pas, creation d'un nouveau fichier csv")
+                print("ecrirecsv: le fichier " + pathtobdd + " n'existe pas, creation d'un nouveau fichier csv")
                 file = open(fname, 'w')
                 # Creation de l'ecrivain'' CSV
                 writer = csv.writer(file)
@@ -96,7 +113,7 @@ class analyse:
         Afin de vérifier si un fichier audio à deja été analysé, on compare les titres audio deja analysés dans la base de donnée avec le titre du fichier que l'on veut analyser
         '''
 
-        fname = self.PathToCsv
+        fname = self.pathtobdd
         file = open(fname, "rt")  # file = open(fname, "rb") python 2.7
         try:
             reader = csv.reader(file)
@@ -175,38 +192,32 @@ class analyse:
         print("la liste qui va etre implementé est: ", ElemCsv)
 
         # ecriture des donnees dans la base de donnée et le fichier de playlist
-        self.ecrirecsv(self.PathToCsv, ElemCsv)
+        self.ecrirecsv(self.pathtobdd, ElemCsv)  # fichier
         self.ecrirecsv(self.NomFichierCsv, ElemCsv)
 
 
     def analysefft(self, y=None, Fs=None):
+        '''
 
+        :param y: l'amplitude su signal audio
+        :param Fs: la fréquence d'échantillonnage
+        :return: retourne la fft du fichier audio
+        '''
         if y is None or Fs is None:
             raise ValueError("Les arguments y ou Fs sont manquants")
 
-
-        n = len(y)  # lungime semnal
-        k = arange(n)
+        n = len(y)  # longueur du signal
+        k = arange(n) #
         T = n / Fs
         frq = k / T  # two sides frequency range
+        print(frq)
         frq = frq[range(n / 2)]  # one side frequency range
 
-        Y = fft(y) / n  # fft computing and normalization
+        Y = fft(y) / n  # réalisation de la fft et normalisation
         Y = Y[range(n / 2)]
 
-        '''
-        plot(frq, abs(Y), 'r')  # plotting the spectrum
-        xlabel('Freq (Hz)')
-        ylabel('|Y(freq)|')
-        Fs = 44100;  # sampling rate
-        # rate,data=read('Deorro.wav')
-        y = data[: 441000]
-        lungime = len(y)
-        timp = len(y) / 44100
-        t = linspace(0, timp, len(y))
-        print(len(y))
-        print(len(t))
-        '''
+        return abs(Y)  #retour de la fft
+
 
     def recherchenote(self):
         '''
@@ -220,3 +231,23 @@ class analyse:
 # ======================================================
 # Fonctions annexes
 # ======================================================
+
+# plot(frq, abs(Y), 'r')  # plotting the spectrum
+# xlabel('Freq (Hz)')
+# ylabel('|Y(freq)|')
+
+# exemple fft
+'''Fs = 44100;  # sampling rate
+#rate,data=read('/home/bettini/Musique/Deorro.wav')
+#y = data[: 441000]
+analyse1 = analyse("/home/gerox/Musique/Deorro.wav", "fichier_csv",'bdd')
+y = analyse1.extrairedatamusic()
+Y = analyse1.analysefft(y,Fs)
+print(Y)
+
+lungime = len(y)
+timp = len(y) / 44100
+t = linspace(0, timp, len(y))
+print(len(y))
+print(len(t))
+'''
