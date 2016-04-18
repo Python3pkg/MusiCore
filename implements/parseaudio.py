@@ -20,7 +20,7 @@ def getdirpath():
     return os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-def parseaudio(nomanalyse):
+def parseaudio(nomanalyse=None):
     '''
     exemple de test :
     analyse1 = implements.analyseaudio.analyse("/home/gerox/Musique/Deorro.wav", "fichier_csv")
@@ -29,7 +29,10 @@ def parseaudio(nomanalyse):
         analyse1.analyse_bpm(y, sr)
     '''
 
-    # on determine les chemins des fichiers necessaire à l'analyse des musiques
+    if nomanalyse is None:
+        raise ValueError("Error: il manque le nom de l'analyse")
+
+    # On determine les chemins des fichiers necessaire à l'analyse des musiques
     bddfilepath = getdirpath() + "/BDDMusic/BDDMusic"
     print("La base de données de musique ce situe: " + bddfilepath)
 
@@ -39,7 +42,7 @@ def parseaudio(nomanalyse):
     pathfichiercsv = getdirpath() + "/BDDMusic/" + nomanalyse
     print("Le fichier de la playlist est " + pathfichiercsv)
 
-    # verifie si on peut ouvrir le fichier
+    # Verifie si on peut ouvrir le fichier
     try:
         with open(output_ui):
             pass
