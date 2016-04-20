@@ -67,8 +67,8 @@ def parseaudio(nomanalyse=None):
             analyse = implements.analyseaudio.analyse(row[0], pathfichiercsv, bddfilepath, )
 
             if (analyse.islineincsc(analyse.extraire_path()[0]) == False):
-                y, sr = analyse.extrairedatamusic()
-                analyse.analyse_bpm(y, sr)
+                y, sr = analyse.extrairedatamusic()  # extraction des données des musiques
+                analyse.analyse_bpm(y, sr)  # analyse bpm
 
             k += 1
 

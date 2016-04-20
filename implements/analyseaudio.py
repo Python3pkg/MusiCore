@@ -206,7 +206,7 @@ class analyse:
         self.ecrirecsv(self.pathtobdd, ElemCsv)  # fichier
         self.ecrirecsv(self.NomFichierCsv, ElemCsv)
 
-    def analysefft(self, y=None, Fs=None, k=None):
+    def analysefft(self, y=None, Fs=None, k=None, afficher=False):
         '''
         Analyse fft d'un signal
 
@@ -227,10 +227,9 @@ class analyse:
 
         for i in range(k):
             print("nb d'éléments dans la liste y: %s" % len(y))
-            y1 = None
-            y1 = y[tfft + 33000 * (k - 1):tfft + 33000 * (k)]
+            y2 = y[tfft + 33000 * (i - 1):tfft + 33000 * (i)]
 
-            n = len(y1)  # longueur du signal
+            n = len(y2)  # longueur du signal
             print('Calcul de n')
             print(n)
             k = arange(n)
@@ -241,14 +240,30 @@ class analyse:
             freq = frq[range(int(n / 2))]  # one side frequency range
             print('calcul de freq')
 
-            Y = fft(y1) / n  # réalisation de la fft et normalisation
+            Y = fft(y2) / n  # réalisation de la fft et normalisation
             Y = abs(Y[range(int(n / 2))])
 
-            plt.plot(freq, abs(Y))
-            plt.show()
+            if afficher == True:
+                plt.plot(freq, abs(Y))
+                plt.show()
 
-            plt.plot(list1, y1)
-            plt.show()
+                plt.plot(list1, y2)
+                plt.show()
+
+            # on cherche les pics dans la fft afin de déterminer les fréquences des notes dans le morceaux
+
+            notes = []
+            for j in range(5):
+                # max1=max(Y[500+400*j:900+400*(j+1)])
+                maximumY = Y[500 + 400 * j]
+                maximumX = freq[500 + 400 * j]
+                for w in range(400):
+                    if Y[500 + w + 400 * j] > maximumY:
+                        maximumY = Y[500 + w + 400 * j]
+                        maximumX = freq[500 + w + 400 * j]
+                notes.append(maximumX)
+
+            print(notes)
 
         return abs(Y), freq  # retour de la fft Y et de la fréquence qui va être l'abscisse de la fft
 
@@ -285,4 +300,4 @@ for i in range(33000):
     list1.append(i / 44100)
 
 Fs = 44100  # sampling rate
-Y, freq = analyse.analysefft(y, Fs, 2)
+Y, freq = analyse.analysefft(y, Fs, 2, True)
