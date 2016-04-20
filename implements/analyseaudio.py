@@ -166,7 +166,7 @@ class analyse:
     def analyse_bpm(self, y, sr):
         """
         blabla
-                :exemple de test
+        :exemple de test
         analyse1 = analyse("/home/bettini/Musique/Deorro.wav", "fichier_csv")
         y, sr = analyse1.extrairedatamusic()
         analyse1.analyse_bpm(y, sr)
@@ -206,32 +206,49 @@ class analyse:
         self.ecrirecsv(self.pathtobdd, ElemCsv)  # fichier
         self.ecrirecsv(self.NomFichierCsv, ElemCsv)
 
-
-    def analysefft(self, y=None, Fs=None):
+    def analysefft(self, y=None, Fs=None, k=None):
         '''
         Analyse fft d'un signal
 
         :param y: l'amplitude su signal audio
         :param Fs: la fréquence d'échantillonnage
+        :param k: le nombre d'échantillon que l'on veut analyser dans la musique
         :return: retourne la fft du fichier audio
 
         '''
-
+        if k is None:
+            raise ValueError("il manque la valeur k")
         if y is None or Fs is None:
             raise ValueError("Les arguments y ou Fs sont manquants")
 
-        n = len(y)  # longueur du signal
-        print('Calcul de n')
-        k = arange(n)
-        print('calcul de k')
-        T = n / Fs
-        print('calcul de T')
-        frq = k / T  # two sides frequency range
-        freq = frq[range(int(n / 2))]  # one side frequency range
-        print('calcul de freq')
+        tempsmusique = (2 * (len(y) / 44100))  # calcul de la durée de la musique
+        print("la musique à une durée de: %s secondes" % tempsmusique)
+        tfft = int(len(y) / 2)  # on commence l'analyse des echantillons au milieu de la musique
 
-        Y = fft(y) / n  # réalisation de la fft et normalisation
-        Y = Y[range(int(n / 2))]
+        for i in range(k):
+            print("nb d'éléments dans la liste y: %s" % len(y))
+            y1 = None
+            y1 = y[tfft + 33000 * (k - 1):tfft + 33000 * (k)]
+
+            n = len(y1)  # longueur du signal
+            print('Calcul de n')
+            print(n)
+            k = arange(n)
+            print('calcul de k')
+            T = n / Fs
+            print('calcul de T')
+            frq = k / T  # two sides frequency range
+            freq = frq[range(int(n / 2))]  # one side frequency range
+            print('calcul de freq')
+
+            Y = fft(y1) / n  # réalisation de la fft et normalisation
+            Y = abs(Y[range(int(n / 2))])
+
+            plt.plot(freq, abs(Y))
+            plt.show()
+
+            plt.plot(list1, y1)
+            plt.show()
 
         return abs(Y), freq  # retour de la fft Y et de la fréquence qui va être l'abscisse de la fft
 
@@ -259,20 +276,13 @@ class analyse:
 # rate,data=read('/home/bettini/Musique/Deorro.wav')
 # x = numpy.arange(0,2000,100)
 
-Fs = 44100  # sampling rate
+
 analyse = analyse("/home/gerox/Musique/Deorro.wav", "fichier_csv", 'bdd')
 y, s = analyse.extrairedatamusic()
 
-print("la musique à une durée de: %s secondes" % (2 * (len(y) / 44100)))
-y = y[4000000:4020000]  # on choisit la portion de musique qui est au milieu de la musique
-Y, freq = analyse.analysefft(y, Fs)
-
 list1 = []  # création de la liste contenant les intervalles de temps pour afficher le signal temporel
-for i in range(20000):
+for i in range(33000):
     list1.append(i / 44100)
 
-plt.plot(freq, abs(Y))
-plt.show()
-
-plt.plot(list1, y)
-plt.show()
+Fs = 44100  # sampling rate
+Y, freq = analyse.analysefft(y, Fs, 2)
