@@ -1,4 +1,15 @@
+'''creation de playlist
+'''
+
 def CreationPlaylist(resultat):
+    '''
+    fonction de creation de playlist
+
+    :param resultat: blabla
+    :return: blabla
+
+    '''
+
     pl = open("pl.m3u","w")
     pl.write("#EXTM3U")
     for i in range(len(resultat)):
