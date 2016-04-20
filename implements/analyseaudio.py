@@ -12,9 +12,10 @@ import csv
 import sys
 
 # Analyse Tonale
-from pylab import plot, show, title, xlabel, ylabel, subplot, savefig
+# from pylab import plot, show, title, xlabel, ylabel, subplot, savefig
 from scipy import fft, arange, ifft
-from numpy import sin, linspace, pi
+import matplotlib.pyplot as plt
+# from numpy import sin, linspace, pi
 from scipy.io.wavfile import read, write
 import numpy
 
@@ -27,8 +28,7 @@ fonctionne pour le mp3, wav
 '''
 
 class analyse:
-    '''
-    classe définissant l'analyse d'une musique. On a l'analyse bpm et l'analyse de la tonalité
+    '''Classe définissant l'analyse d'une musique. On a l'analyse bpm et l'analyse de la tonalité
     '''
 
     def __init__(self, PathToFile=None, NomFichierCsv=None, pathtobdd=None):  # méthode constructeur
@@ -38,7 +38,9 @@ class analyse:
         :param NomFichierCsv: chemin jusqu'au fichier csv qui être crée par l'analyse
         :param pathtobdd: chemin jusqu'au fichier de la bdd
         :return: None
+
         '''
+
         if PathToFile is None:
             raise ValueError('Error: PathToFile is emplty')
         else:
@@ -55,9 +57,11 @@ class analyse:
 
     def extraire_path(self):
         """
+        permet d'extraire d'un chemin absolu le nom du fichier une list
+
         :param path: chemin absolue d'une fichier audio
         :return: list =[nom fichier, chemin du repertoire du dossier contenant le fichier audio]
-        Comment: permet d'extraire d'un chemin absolu le nom du fichier une list:
+
         """
 
         # path1=path[::-1]
@@ -107,10 +111,12 @@ class analyse:
 
     def islineincsc(self, titre):
         '''
+        blabla
 
         :param titre: le titre du fichier audio dont on veut vérifier si il existe dans le fichier csv
         :return: True si le fichier audio à deja été analysé
         Afin de vérifier si un fichier audio à deja été analysé, on compare les titres audio deja analysés dans la base de donnée avec le titre du fichier que l'on veut analyser
+
         '''
 
         fname = self.pathtobdd
@@ -142,7 +148,9 @@ class analyse:
     def extrairedatamusic(self):
         '''
         extrait les données de n'importe quel format de fichier supporté par l'api audioread
+
         :return: données de la musique sous forme de liste
+
         '''
 
         path = self.extraire_path()[1]
@@ -157,13 +165,16 @@ class analyse:
 
     def analyse_bpm(self, y, sr):
         """
-        :param pathtofile: chemin absolue du fichier audio dont on veut analyser le bpm
-        :param fichier_csv: fichier csv dans lequel sera enregistre les bpms du morceau (nom de la playlist en cours)
-        :Comment ecrit dans le fichier csv a la fin
-        :exemple de test
+        blabla
+                :exemple de test
         analyse1 = analyse("/home/bettini/Musique/Deorro.wav", "fichier_csv")
         y, sr = analyse1.extrairedatamusic()
         analyse1.analyse_bpm(y, sr)
+
+        :param pathtofile: chemin absolue du fichier audio dont on veut analyser le bpm
+        :param fichier_csv: fichier csv dans lequel sera enregistre les bpms du morceau (nom de la playlist en cours)
+        :Comment ecrit dans le fichier csv a la fin
+
         """
 
         # creation de la liste qui va etre exportee dans le csv
@@ -198,32 +209,40 @@ class analyse:
 
     def analysefft(self, y=None, Fs=None):
         '''
+        Analyse fft d'un signal
 
         :param y: l'amplitude su signal audio
         :param Fs: la fréquence d'échantillonnage
         :return: retourne la fft du fichier audio
+
         '''
+
         if y is None or Fs is None:
             raise ValueError("Les arguments y ou Fs sont manquants")
 
         n = len(y)  # longueur du signal
-        k = arange(n) #
+        print('Calcul de n')
+        k = arange(n)
+        print('calcul de k')
         T = n / Fs
+        print('calcul de T')
         frq = k / T  # two sides frequency range
-        print(frq)
-        frq = frq[range(n / 2)]  # one side frequency range
+        freq = frq[range(int(n / 2))]  # one side frequency range
+        print('calcul de freq')
 
         Y = fft(y) / n  # réalisation de la fft et normalisation
-        Y = Y[range(n / 2)]
+        Y = Y[range(int(n / 2))]
 
-        return abs(Y)  #retour de la fft
+        return abs(Y), freq  # retour de la fft Y et de la fréquence qui va être l'abscisse de la fft
 
 
     def recherchenote(self):
         '''
+        blabla
 
         :param self:
         :return:
+
         '''
 
         return
@@ -235,19 +254,25 @@ class analyse:
 # plot(frq, abs(Y), 'r')  # plotting the spectrum
 # xlabel('Freq (Hz)')
 # ylabel('|Y(freq)|')
-
+# y = y[: 441000]
 # exemple fft
-'''Fs = 44100;  # sampling rate
-#rate,data=read('/home/bettini/Musique/Deorro.wav')
-#y = data[: 441000]
-analyse1 = analyse("/home/gerox/Musique/Deorro.wav", "fichier_csv",'bdd')
-y = analyse1.extrairedatamusic()
-Y = analyse1.analysefft(y,Fs)
-print(Y)
+# rate,data=read('/home/bettini/Musique/Deorro.wav')
+# x = numpy.arange(0,2000,100)
 
-lungime = len(y)
-timp = len(y) / 44100
-t = linspace(0, timp, len(y))
-print(len(y))
-print(len(t))
-'''
+Fs = 44100  # sampling rate
+analyse = analyse("/home/gerox/Musique/Deorro.wav", "fichier_csv", 'bdd')
+y, s = analyse.extrairedatamusic()
+
+print("la musique à une durée de: %s secondes" % (2 * (len(y) / 44100)))
+y = y[4000000:4020000]  # on choisit la portion de musique qui est au milieu de la musique
+Y, freq = analyse.analysefft(y, Fs)
+
+list1 = []  # création de la liste contenant les intervalles de temps pour afficher le signal temporel
+for i in range(20000):
+    list1.append(i / 44100)
+
+plt.plot(freq, abs(Y))
+plt.show()
+
+plt.plot(list1, y)
+plt.show()
