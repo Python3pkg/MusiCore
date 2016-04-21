@@ -287,7 +287,6 @@ class analyse:
         :return: les notes correspondants à la matrices des fréquences
 
         '''
-
         # fréquences des notes dans la gamme tempérée
         f0 = 32, 70  # do ou si#
         f1 = 34, 6444  # do# ou ré(b)
@@ -302,7 +301,17 @@ class analyse:
         f10 = 58, 2647  # la♯ ou si♭
         f11 = 61, 7293  # si ou do♭
 
+        f0n = '8A'
 
+        for i in freq:
+            mult2 = 0
+            while i / (2 ** mult2) > 62:
+                mult2 += 1
+
+        note = i / (2 ** mult2)  # la note fait partie de l'intervalles des fréquences fondamentales
+
+        if note >= (f0 - (f1 - f2) / 2) and note < (f0 + (f1 - f2) / 2):
+            i = 'coucou'
 
         return
 
@@ -318,7 +327,7 @@ class analyse:
 # rate,data=read('/home/bettini/Musique/Deorro.wav')
 # x = numpy.arange(0,2000,100)
 
-
+'''
 analyse = analyse("/home/gerox/Musique/Deorro.wav", "fichier_csv", 'bdd')
 y, s = analyse.extrairedatamusic()
 
@@ -327,4 +336,4 @@ for i in range(33000):
     list1.append(i / 44100)
 
 Fs = 44100  # sampling rate
-analyse.analysefft(y, Fs, 2, False)
+analyse.analysefft(y, Fs, 2, False)'''
