@@ -4,12 +4,15 @@ Created on 23 mars 2016
 '''
 
 
-API installés: numpy, librosa, matplotlib
+API installés: numpy, librosa, matplotlib
         #pour installer ces api, vous pouvez utiliser les paquets presents sur PyPI ou le paquets pip
         
 Probleme rencontré avec python3: 
 #Could not import scikits.samplerate. Falling back to scipy.signal#
 Solution: 
 -installer le paquet samplerate
+
+Pour l'interface graphique
+        -sudo pacman install python-gobject
 
 IDE: Pycharm
