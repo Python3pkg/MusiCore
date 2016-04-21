@@ -165,11 +165,11 @@ class analyse:
 
     def analyse_bpm(self, y, sr):
         """
-        blabla
-        :exemple de test
-        analyse1 = analyse("/home/bettini/Musique/Deorro.wav", "fichier_csv")
-        y, sr = analyse1.extrairedatamusic()
-        analyse1.analyse_bpm(y, sr)
+        determine le bpm d'une musique
+        exemple de test:
+                        analyse1 = analyse("/home/bettini/Musique/Deorro.wav", "fichier_csv")
+                        y, sr = analyse1.extrairedatamusic()
+                        analyse1.analyse_bpm(y, sr)
 
         :param pathtofile: chemin absolue du fichier audio dont on veut analyser le bpm
         :param fichier_csv: fichier csv dans lequel sera enregistre les bpms du morceau (nom de la playlist en cours)
@@ -276,8 +276,6 @@ class analyse:
                 if notesampli[i, i2] < sommeY:
                     notesampli[i, i2] = 0
                     notesfreq[i, i2] = 0
-        # print(notesampli)
-        # print(notesfreq)
 
         return notesfreq  # retour de la fft Y et de la fréquence qui va être l'abscisse de la fft
 
@@ -289,6 +287,22 @@ class analyse:
         :return: les notes correspondants à la matrices des fréquences
 
         '''
+
+        # fréquences des notes dans la gamme tempérée
+        f0 = 32, 70  # do ou si#
+        f1 = 34, 6444  # do# ou ré(b)
+        f2 = 36, 7045  # ré
+        f3 = 38, 8870  # ré# ou mi♭
+        f4 = 41, 1994  # mi ou fa♭
+        f5 = 43, 6492  # fa ou mi♯
+        f6 = 46, 2447  # fa♯ ou sol♭
+        f7 = 48, 9946  # sol
+        f8 = 51, 9080  # sol♯ ou la♭
+        f9 = 54, 9946  # la
+        f10 = 58, 2647  # la♯ ou si♭
+        f11 = 61, 7293  # si ou do♭
+
+
 
         return
 
