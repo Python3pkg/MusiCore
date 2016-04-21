@@ -224,24 +224,25 @@ class analyse:
         tempsmusique = (2 * (len(y) / 44100))  # calcul de la durée de la musique
         print("la musique à une durée de: %s secondes" % tempsmusique)
         tfft = int(len(y) / 2)  # on commence l'analyse des echantillons au milieu de la musique
+        notesfreq = numpy.zeros((k, 10))
+        notesampli = numpy.zeros((k, 10))
 
         for i in range(k):
             print("nb d'éléments dans la liste y: %s" % len(y))
             y2 = y[tfft + 33000 * (i - 1):tfft + 33000 * (i)]
 
             n = len(y2)  # longueur du signal
-            print('Calcul de n')
-            print(n)
-            k = arange(n)
-            print('calcul de k')
+            k2 = arange(n)
             T = n / Fs
-            print('calcul de T')
-            frq = k / T  # two sides frequency range
+            frq = k2 / T  # two sides frequency range
             freq = frq[range(int(n / 2))]  # one side frequency range
-            print('calcul de freq')
 
-            Y = fft(y2) / n  # réalisation de la fft et normalisation
+            # réalisation de la fft et normalisation
+
+            Y = fft(y2) / n
             Y = abs(Y[range(int(n / 2))])
+
+            # affichage des samples analysées sous matplotlib dans le cas ou afficher = True
 
             if afficher == True:
                 plt.plot(freq, abs(Y))
@@ -250,22 +251,27 @@ class analyse:
                 plt.plot(list1, y2)
                 plt.show()
 
-            # on cherche les pics dans la fft afin de déterminer les fréquences des notes dans le morceaux
+            for j in range(10):
 
-            notes = []
-            for j in range(5):
-                # max1=max(Y[500+400*j:900+400*(j+1)])
-                maximumY = Y[500 + 400 * j]
-                maximumX = freq[500 + 400 * j]
-                for w in range(400):
-                    if Y[500 + w + 400 * j] > maximumY:
-                        maximumY = Y[500 + w + 400 * j]
-                        maximumX = freq[500 + w + 400 * j]
-                notes.append(maximumX)
+                # on cherche les pics dans la fft afin de déterminer les fréquences des notes dans le morceaux
 
-            print(notes)
+                maximumY = Y[500 + 200 * j]
+                maximumX = freq[500 + 200 * j]
+                for w in range(200):
+                    if Y[500 + w + 200 * j] > maximumY:
+                        maximumY = Y[500 + w + 200 * j]
+                        maximumX = freq[500 + w + 200 * j]
 
-        return abs(Y), freq  # retour de la fft Y et de la fréquence qui va être l'abscisse de la fft
+                # print("j= %s" % j)
+                # print("i= %s" % i)
+                notesfreq[i, j] = maximumX
+                notesampli[i, j] = maximumY
+
+                # On discrimine par rapport aux fréquences qui n'ont pas des amplitudes assez élevées
+
+        print(notesfreq)
+
+        return  # retour de la fft Y et de la fréquence qui va être l'abscisse de la fft
 
 
     def recherchenote(self):
@@ -300,4 +306,4 @@ for i in range(33000):
     list1.append(i / 44100)
 
 Fs = 44100  # sampling rate
-Y, freq = analyse.analysefft(y, Fs, 2, True)
+analyse.analysefft(y, Fs, 10, False)
