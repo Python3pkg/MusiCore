@@ -226,6 +226,7 @@ class analyse:
         tfft = int(len(y) / 2)  # on commence l'analyse des echantillons au milieu de la musique
         notesfreq = numpy.zeros((k, 10))
         notesampli = numpy.zeros((k, 10))
+        sommeY = 0
 
         for i in range(k):
             print("nb d'éléments dans la liste y: %s" % len(y))
@@ -261,25 +262,31 @@ class analyse:
                     if Y[500 + w + 200 * j] > maximumY:
                         maximumY = Y[500 + w + 200 * j]
                         maximumX = freq[500 + w + 200 * j]
-
                 # print("j= %s" % j)
                 # print("i= %s" % i)
                 notesfreq[i, j] = maximumX
                 notesampli[i, j] = maximumY
+                sommeY = sommeY + maximumY
+                print(sommeY)
 
-                # On discrimine par rapport aux fréquences qui n'ont pas des amplitudes assez élevées
+            # On discrimine par rapport aux fréquences qui n'ont pas des amplitudes assez élevées
 
-        print(notesfreq)
+            sommeY = sommeY / 10
+            for i2 in range(10):
+                if notesampli[i, i2] < sommeY:
+                    notesampli[i, i2] = 0
+                    notesfreq[i, i2] = 0
+        # print(notesampli)
+        # print(notesfreq)
 
-        return  # retour de la fft Y et de la fréquence qui va être l'abscisse de la fft
+        return notesfreq  # retour de la fft Y et de la fréquence qui va être l'abscisse de la fft
 
-
-    def recherchenote(self):
+    def recherchenote(self, freq):
         '''
-        blabla
+        permet de recercher les notes correspondantes aux fréquences présentent dans la matrice fred
 
-        :param self:
-        :return:
+        :param freq: matrice à 2 dim qui permet contenant les fréquences de plusieurs samples
+        :return: les notes correspondants à la matrices des fréquences
 
         '''
 
@@ -306,4 +313,4 @@ for i in range(33000):
     list1.append(i / 44100)
 
 Fs = 44100  # sampling rate
-analyse.analysefft(y, Fs, 10, False)
+analyse.analysefft(y, Fs, 2, False)
