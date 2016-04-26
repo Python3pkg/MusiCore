@@ -1,17 +1,14 @@
 # -*- coding: utf-8 -*-
-# fonction de test de l'analyse bpm
+# fonction de test de l'analyse de la tonalité
 
-import implements.analyseaudio
-from pylab import plot, show, title, xlabel, ylabel, subplot, savefig
-from scipy import fft, arange, ifft
-from numpy import sin, linspace, pi
-from scipy.io.wavfile import read, write
-import numpy
+import implements.analyseaudio as analyseaudio
 
-Fs = 44100;  # sampling rate
-rate, data = read('/home/gerox/Musique/Deorro.wav')
-y = data[: 441000]
-analyse1 = implements.analyseaudio.analyse("fichier_csv", 'bdd')
-y = analyse1.extrairedatamusic()
-Y = analyse1.analysefft(y, Fs)
-print(Y)
+# test numéro 1
+
+analyse = analyseaudio.analyse("/home/gerox/Musique/Deorro.wav", "fichier_csv", 'bdd')
+y, s = analyse.extrairedatamusic()
+
+Fs = 44100  # sampling rate
+notefreq = analyse.analysefft(y, Fs, 3,
+                              False)  # notesfreq est la matrice contenant les fréquences significatives des k samples analysés
+analyse.rechercheaccords(notefreq)
