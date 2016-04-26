@@ -305,57 +305,57 @@ class analyse:
         f11 = 61.7293  # si ou do♭
 
         # equivalent notes en notation américaines
-        f0note = 'C'
-        f1note = 'C#'
-        f2note = 'D'
-        f3note = 'D#'
-        f4note = 'E'
-        f5note = 'F'
-        f6note = 'F#'
-        f7note = 'G'
-        f8note = 'G#'
-        f9note = 'A'
-        f10note = 'A#'
-        f11note = 'G'
+        f0note = 1  # 'C'
+        f1note = 2  # 'C#'
+        f2note = 3  # 'D'
+        f3note = 4  # 'D#'
+        f4note = 5  # 'E'
+        f5note = 6  # 'F'
+        f6note = 7  # 'F#'
+        f7note = 8  # 'G'
+        f8note = 9  # 'G#'
+        f9note = 10  # 'A'
+        f10note = 11  # 'A#'
+        f11note = 12  # 'G'
 
-        # matricenote = numpy.zeros((5, 10))
+        matricenote = numpy.zeros((len(freq), 10))
 
-        for i in freq:
-            for j in i:
+        for i in range(len(freq)):
+            for j in range(10):
 
-                print(j)
+                print(freq[i, j])
                 mult2 = 0
-                while j / (2 ** mult2) > 62:
+                while freq[i, j] / (2 ** mult2) > 62:
                     mult2 += 1
 
-                note = j / (2 ** mult2)  # la note fait partie de l'intervalles des fréquences fondamentales
+                note = freq[i, j] / (2 ** mult2)  # la note fait partie de l'intervalles des fréquences fondamentales
 
                 if note >= (f0 - (f1 - f0) / 2) and note < (f0 + (f1 - f0) / 2):
-                    j = f0note
+                    matricenote[i, j] = f0note
                 if note >= (f1 - (f2 - f1) / 2) and note < (f1 + (f2 - f1) / 2):
-                    j = f1note
+                    matricenote[i, j] = f1note
                 if note >= (f2 - (f3 - f2) / 2) and note < (f2 + (f3 - f2) / 2):
-                    j = f2note
+                    matricenote[i, j] = f2note
                 if note >= (f3 - (f4 - f5) / 2) and note < (f3 + (f4 - f3) / 2):
-                    j = f3note
+                    matricenote[i, j] = f3note
                 if note >= (f4 - (f5 - f4) / 2) and note < (f4 + (f5 - f4) / 2):
-                    j = f4note
+                    matricenote[i, j] = f4note
                 if note >= (f5 - (f6 - f5) / 2) and note < (f6 + (f6 - f5) / 2):
-                    j = f5note
+                    matricenote[i, j] = f5note
                 if note >= (f6 - (f7 - f6) / 2) and note < (f6 + (f7 - f6) / 2):
-                    j = f6note
+                    matricenote[i, j] = f6note
                 if note >= (f7 - (f8 - f7) / 2) and note < (f7 + (f8 - f7) / 2):
-                    j = f7note
+                    matricenote[i, j] = f7note
                 if note >= (f8 - (f9 - f8) / 2) and note < (f8 + (f9 - f8) / 2):
-                    j = f8note
+                    matricenote[i, j] = f8note
                 if note >= (f9 - (f10 - f9) / 2) and note < (f9 + (f10 - f9) / 2):
-                    j = f9note
+                    matricenote[i, j] = f9note
                 if note >= (f10 - (f11 - f10) / 2) and note < (f10 + (f11 - f10) / 2):
-                    j = f10note
+                    matricenote[i, j] = f10note
                 if note >= (f11 - (f11 - f10) / 2) and note < (f11 + (f11 - f10) / 2):
-                    j = f11note
+                    matricenote[i, j] = f11note
 
-        print(freq)
+        print(matricenote)
 
         return 0
 
