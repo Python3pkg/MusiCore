@@ -246,6 +246,10 @@ class analyse:
             # affichage des samples analysées sous matplotlib dans le cas ou afficher = True
 
             if afficher == True:
+                list1 = []  # création de la liste contenant les intervalles de temps pour afficher le signal temporel
+                for z in range(33000):
+                    list1.append(z / 44100)
+
                 plt.plot(freq, abs(Y))
                 plt.show()
 
@@ -267,7 +271,6 @@ class analyse:
                 notesfreq[i, j] = maximumX
                 notesampli[i, j] = maximumY
                 sommeY = sommeY + maximumY
-                print(sommeY)
 
             # On discrimine par rapport aux fréquences qui n'ont pas des amplitudes assez élevées
 
@@ -279,41 +282,82 @@ class analyse:
 
         return notesfreq  # retour de la fft Y et de la fréquence qui va être l'abscisse de la fft
 
-    def recherchenote(self, freq):
+    def rechercheaccords(self, freq):
         '''
-        permet de recercher les notes correspondantes aux fréquences présentent dans la matrice fred
+        permet de recercher les accords ou notes correspondantes aux fréquences présentent dans la matrice fred
 
         :param freq: matrice à 2 dim qui permet contenant les fréquences de plusieurs samples
         :return: les notes correspondants à la matrices des fréquences
 
         '''
         # fréquences des notes dans la gamme tempérée
-        f0 = 32, 70  # do ou si#
-        f1 = 34, 6444  # do# ou ré(b)
-        f2 = 36, 7045  # ré
-        f3 = 38, 8870  # ré# ou mi♭
-        f4 = 41, 1994  # mi ou fa♭
-        f5 = 43, 6492  # fa ou mi♯
-        f6 = 46, 2447  # fa♯ ou sol♭
-        f7 = 48, 9946  # sol
-        f8 = 51, 9080  # sol♯ ou la♭
-        f9 = 54, 9946  # la
-        f10 = 58, 2647  # la♯ ou si♭
-        f11 = 61, 7293  # si ou do♭
+        f0 = 32.70  # do ou si#
+        f1 = 34.6444  # do# ou ré(b)
+        f2 = 36.7045  # ré
+        f3 = 38.8870  # ré# ou mi♭
+        f4 = 41.1994  # mi ou fa♭
+        f5 = 43.6492  # fa ou mi♯
+        f6 = 46.2447  # fa♯ ou sol♭
+        f7 = 48.9946  # sol
+        f8 = 51.9080  # sol♯ ou la♭
+        f9 = 54.9946  # la
+        f10 = 58.2647  # la♯ ou si♭
+        f11 = 61.7293  # si ou do♭
 
-        f0n = '8A'
+        # equivalent notes en notation américaines
+        f0note = 'C'
+        f1note = 'C#'
+        f2note = 'D'
+        f3note = 'D#'
+        f4note = 'E'
+        f5note = 'F'
+        f6note = 'F#'
+        f7note = 'G'
+        f8note = 'G#'
+        f9note = 'A'
+        f10note = 'A#'
+        f11note = 'G'
+
+        # matricenote = numpy.zeros((5, 10))
 
         for i in freq:
-            mult2 = 0
-            while i / (2 ** mult2) > 62:
-                mult2 += 1
+            for j in i:
 
-        note = i / (2 ** mult2)  # la note fait partie de l'intervalles des fréquences fondamentales
+                print(j)
+                mult2 = 0
+                while j / (2 ** mult2) > 62:
+                    mult2 += 1
 
-        if note >= (f0 - (f1 - f2) / 2) and note < (f0 + (f1 - f2) / 2):
-            i = 'coucou'
+                note = j / (2 ** mult2)  # la note fait partie de l'intervalles des fréquences fondamentales
 
-        return
+                if note >= (f0 - (f1 - f0) / 2) and note < (f0 + (f1 - f0) / 2):
+                    j = f0note
+                if note >= (f1 - (f2 - f1) / 2) and note < (f1 + (f2 - f1) / 2):
+                    j = f1note
+                if note >= (f2 - (f3 - f2) / 2) and note < (f2 + (f3 - f2) / 2):
+                    j = f2note
+                if note >= (f3 - (f4 - f5) / 2) and note < (f3 + (f4 - f3) / 2):
+                    j = f3note
+                if note >= (f4 - (f5 - f4) / 2) and note < (f4 + (f5 - f4) / 2):
+                    j = f4note
+                if note >= (f5 - (f6 - f5) / 2) and note < (f6 + (f6 - f5) / 2):
+                    j = f5note
+                if note >= (f6 - (f7 - f6) / 2) and note < (f6 + (f7 - f6) / 2):
+                    j = f6note
+                if note >= (f7 - (f8 - f7) / 2) and note < (f7 + (f8 - f7) / 2):
+                    j = f7note
+                if note >= (f8 - (f9 - f8) / 2) and note < (f8 + (f9 - f8) / 2):
+                    j = f8note
+                if note >= (f9 - (f10 - f9) / 2) and note < (f9 + (f10 - f9) / 2):
+                    j = f9note
+                if note >= (f10 - (f11 - f10) / 2) and note < (f10 + (f11 - f10) / 2):
+                    j = f10note
+                if note >= (f11 - (f11 - f10) / 2) and note < (f11 + (f11 - f10) / 2):
+                    j = f11note
+
+        print(freq)
+
+        return 0
 
 # ======================================================
 # Fonctions annexes
