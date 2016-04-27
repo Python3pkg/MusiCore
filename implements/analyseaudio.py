@@ -305,25 +305,28 @@ class analyse:
         f11 = 61.7293  # si ou do♭
 
         # equivalent notes en notation américaines
-        f0note = 1  # 'C'
-        f1note = 2  # 'C#'
-        f2note = 3  # 'D'
-        f3note = 4  # 'D#'
-        f4note = 5  # 'E'
-        f5note = 6  # 'F'
-        f6note = 7  # 'F#'
-        f7note = 8  # 'G'
-        f8note = 9  # 'G#'
-        f9note = 10  # 'A'
-        f10note = 11  # 'A#'
-        f11note = 12  # 'G'
+        f0note = 'C'
+        f1note = 'C#'
+        f2note = 'D'
+        f3note = 'D#'
+        f4note = 'E'
+        f5note = 'F'
+        f6note = 'F#'
+        f7note = 'G'
+        f8note = 'G#'
+        f9note = 'A'
+        f10note = 'A#'
+        f11note = 'G'
 
-        matricenote = numpy.zeros((len(freq), 10))
+        matricenote = []  # numpy.zeros((len(freq), 10))
 
         for i in range(len(freq)):
+
+            matricetemporelle = []
+
             for j in range(10):
 
-                print(freq[i, j])
+                # print(freq[i, j])
                 mult2 = 0
                 while freq[i, j] / (2 ** mult2) > 62:
                     mult2 += 1
@@ -331,33 +334,33 @@ class analyse:
                 note = freq[i, j] / (2 ** mult2)  # la note fait partie de l'intervalles des fréquences fondamentales
 
                 if note >= (f0 - (f1 - f0) / 2) and note < (f0 + (f1 - f0) / 2):
-                    matricenote[i, j] = f0note
+                    matricetemporelle.append(f0note)
                 if note >= (f1 - (f2 - f1) / 2) and note < (f1 + (f2 - f1) / 2):
-                    matricenote[i, j] = f1note
+                    matricetemporelle.append(f1note)
                 if note >= (f2 - (f3 - f2) / 2) and note < (f2 + (f3 - f2) / 2):
-                    matricenote[i, j] = f2note
+                    matricetemporelle.append(f2note)
                 if note >= (f3 - (f4 - f5) / 2) and note < (f3 + (f4 - f3) / 2):
-                    matricenote[i, j] = f3note
+                    matricetemporelle.append(f3note)
                 if note >= (f4 - (f5 - f4) / 2) and note < (f4 + (f5 - f4) / 2):
-                    matricenote[i, j] = f4note
+                    matricetemporelle.append(f4note)
                 if note >= (f5 - (f6 - f5) / 2) and note < (f6 + (f6 - f5) / 2):
-                    matricenote[i, j] = f5note
+                    matricetemporelle.append(f5note)
                 if note >= (f6 - (f7 - f6) / 2) and note < (f6 + (f7 - f6) / 2):
-                    matricenote[i, j] = f6note
+                    matricetemporelle.append(f6note)
                 if note >= (f7 - (f8 - f7) / 2) and note < (f7 + (f8 - f7) / 2):
-                    matricenote[i, j] = f7note
+                    matricetemporelle.append(f7note)
                 if note >= (f8 - (f9 - f8) / 2) and note < (f8 + (f9 - f8) / 2):
-                    matricenote[i, j] = f8note
+                    matricetemporelle.append(f8note)
                 if note >= (f9 - (f10 - f9) / 2) and note < (f9 + (f10 - f9) / 2):
-                    matricenote[i, j] = f9note
+                    matricetemporelle.append(f9note)
                 if note >= (f10 - (f11 - f10) / 2) and note < (f10 + (f11 - f10) / 2):
-                    matricenote[i, j] = f10note
+                    matricetemporelle.append(f10note)
                 if note >= (f11 - (f11 - f10) / 2) and note < (f11 + (f11 - f10) / 2):
-                    matricenote[i, j] = f11note
+                    matricetemporelle.append(f11note)
 
-        print(matricenote)
+            matricenote.append(matricetemporelle)
 
-        return 0
+        return matricenote
 
 # ======================================================
 # Fonctions annexes
