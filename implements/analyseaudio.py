@@ -229,7 +229,7 @@ class analyse:
         sommeY = 0
 
         for i in range(k):
-            print("nb d'éléments dans la liste y: %s" % len(y))
+            # print("nb d'éléments dans la liste y: %s" % len(y))
             y2 = y[tfft + 33000 * (i - 1):tfft + 33000 * (i)]
 
             n = len(y2)  # longueur du signal
@@ -316,8 +316,9 @@ class analyse:
         f8note = 'G#'
         f9note = 'A'
         f10note = 'A#'
-        f11note = 'G'
+        f11note = 'B'
 
+        #recherche des notes tempérées équivalentes aux fréquences obtenu par l'analyse fft
         matricenote = []  # numpy.zeros((len(freq), 10))
 
         for i in range(len(freq)):
@@ -359,6 +360,25 @@ class analyse:
                     matricetemporelle.append(f11note)
 
             matricenote.append(matricetemporelle)
+        # print(matricenote)
+        # recherche des possibles accords
+        matriceaccords = []
+        matricepoidsnotes = []
+
+        a = [['C', 'F', 'G', 'A']['F', 'C', 'A#', 'D']['A#', 'F', 'G', 'D#']['D#', 'A#', 'C', 'G#'][
+                 'G#', 'D#', 'F', 'C#']['C#', 'G#', 'A#', 'F#']  # disque extérieur de la circle od fifth
+             ['F#', 'C#', 'D#', 'B']['B', 'F#', 'G#', 'E']['E', 'B', 'C#', 'A']['A', 'E', 'F#', 'D'][
+                 'D', 'A', 'B', 'G']['G', 'D', 'E', 'C']  # major keys
+             ['A', 'E', 'C', 'D']['D', 'A', 'F', 'G']['G', 'D', 'A#', 'C']['C', 'G', 'D#', 'F']['F', 'C', 'A#', 'G#'][
+                 'A#', 'F', 'D#', 'C#']  # disque intérieur de la circle of fifth
+             ['D#', 'A#', 'F#', 'G#']['G#', 'D#', 'B', 'C#']['C#', 'G#', 'E', 'F#']['F#', 'C#', 'A', 'B'][
+                 'B', 'F#', 'D', 'E']['E', 'B', 'G', 'A']]  # minor keys
+
+        for i in matricenote:
+
+            for j in i:
+
+
 
         return matricenote
 
