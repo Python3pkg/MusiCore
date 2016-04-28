@@ -422,9 +422,6 @@ class analyse:
 
         for i in range(12):
             print(numpy.corrcoef(DurationPitch, MajorProfil))
-            temporel = DurationPitch[1:]
-            temporel.append(DurationPitch[0])
-            DurationPitch = temporel
             print(numpy.corrcoef(DurationPitch, MinorProfil))
             temporel = DurationPitch[1:]
             temporel.append(DurationPitch[0])
