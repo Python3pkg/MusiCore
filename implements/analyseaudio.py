@@ -404,19 +404,31 @@ class analyse:
         # Krumhansl-Schmuckler key-finding algorithm
         DurationPitch = []
         DurationPitch.append(matriceaccords.count('C'))
-        DurationPitch.append(matriceaccords.count('C'))
-        DurationPitch.append(matriceaccords.count('C'))
-        DurationPitch.append(matriceaccords.count('C'))
-        DurationPitch.append(matriceaccords.count('C'))
-        DurationPitch.append(matriceaccords.count('C'))
-        DurationPitch.append(matriceaccords.count('C'))
-        DurationPitch.append(matriceaccords.count('C'))
-        DurationPitch.append(matriceaccords.count('C'))
-        DurationPitch.append(matriceaccords.count('C'))
+        DurationPitch.append(matriceaccords.count('C#'))
+        DurationPitch.append(matriceaccords.count('D'))
+        DurationPitch.append(matriceaccords.count('D#'))
+        DurationPitch.append(matriceaccords.count('E'))
+        DurationPitch.append(matriceaccords.count('F'))
+        DurationPitch.append(matriceaccords.count('F#'))
+        DurationPitch.append(matriceaccords.count('G'))
+        DurationPitch.append(matriceaccords.count('G#'))
+        DurationPitch.append(matriceaccords.count('A'))
+        DurationPitch.append(matriceaccords.count('A#'))
+        DurationPitch.append(matriceaccords.count('B'))
+        print(DurationPitch)
 
+        MajorProfil = [6.35, 2.23, 3.48, 2.33, 4.38, 4.09, 2.52, 5.19, 2.39, 3.66, 2.29, 2.88]
+        MinorProfil = [6.33, 2.68, 3.52, 5.38, 2.60, 3.53, 2.54, 4.75, 3.98, 2.69, 3.34, 3.17]
 
-
-
+        for i in range(12):
+            print(numpy.corrcoef(DurationPitch, MajorProfil))
+            temporel = DurationPitch[1:]
+            temporel.append(DurationPitch[0])
+            DurationPitch = temporel
+            print(numpy.corrcoef(DurationPitch, MinorProfil))
+            temporel = DurationPitch[1:]
+            temporel.append(DurationPitch[0])
+            DurationPitch = temporel
 
         return matricenote
 
