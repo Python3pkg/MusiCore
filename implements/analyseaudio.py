@@ -363,7 +363,6 @@ class analyse:
         print(matricenote)
         # recherche des possibles accords
         matriceaccords = []
-        matricepoidsnotes = []
 
         a = [['C', 'F', 'G', 'A'], ['F', 'C', 'A#', 'D'], ['A#', 'F', 'G', 'D#'], ['D#', 'A#', 'C', 'G#'],
              ['G#', 'D#', 'F', 'C#'], ['C#', 'G#', 'A#', 'F#'], ['F#', 'C#', 'D#', 'B'], ['B', 'F#', 'G#', 'E'],
@@ -376,6 +375,7 @@ class analyse:
         for i in matricenote:
             # for j in range(len(matricenote[i])):
             poidsmax =0
+            accord = False
             for j in i:
                 # on a toutes les informations pour selectionner les éléments de matricenote
                 for w in a:
@@ -421,8 +421,15 @@ class analyse:
         MinorProfil = [6.33, 2.68, 3.52, 5.38, 2.60, 3.53, 2.54, 4.75, 3.98, 2.69, 3.34, 3.17]
 
         for i in range(12):
-            print(numpy.corrcoef(DurationPitch, MajorProfil))
-            print(numpy.corrcoef(DurationPitch, MinorProfil))
+            '''Major = numpy.corrcoef(DurationPitch, MajorProfil)[0,1]
+            Minor = numpy.corrcoef(DurationPitch, MinorProfil)[0,1]
+            if Major > 0.5:
+                print(Major)
+            if Minor > 0.5:
+                print(Minor)'''
+            print(i + 1)
+            print(numpy.corrcoef(DurationPitch, MajorProfil)[0, 1])
+            print(numpy.corrcoef(DurationPitch, MinorProfil)[0, 1])
             temporel = DurationPitch[1:]
             temporel.append(DurationPitch[0])
             DurationPitch = temporel
