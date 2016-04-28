@@ -360,7 +360,7 @@ class analyse:
                     matricetemporelle.append(f11note)
 
             matricenote.append(matricetemporelle)
-        # print(matricenote)
+        print(matricenote)
         # recherche des possibles accords
         matriceaccords = []
         matricepoidsnotes = []
@@ -372,9 +372,34 @@ class analyse:
              ['F', 'C', 'A#', 'G#'], ['A#', 'F', 'D#', 'C#'], ['D#', 'A#', 'F#', 'G#'], ['G#', 'D#', 'B', 'C#'],
              ['C#', 'G#', 'E', 'F#'], ['F#', 'C#', 'A', 'B'], ['B', 'F#', 'D', 'E'], ['E', 'B', 'G', 'A']]  # minor keys
 
+        # for i in range(len(matricenote)):
         for i in matricenote:
-
+            # for j in range(len(matricenote[i])):
+            poidsmax =0
             for j in i:
+                # on a toutes les informations pour selectionner les éléments de matricenote
+                poids = 0
+                for w in a:
+                    if j == w[0]:
+                        # print(j+" = "+w[0])
+                        accord = j
+                        for z in range(len(w) - 1):
+                            # print("z = %s" %z)
+                            for i1 in range(len(i) - 1):
+                                # print("i1 = %s" %i1)
+                                # print("w[z+1] = %s" %w[z+1])
+                                if w[z + 1] == i[i1 + 1]:
+                                    poids = + 1  # on calcul le poids de chaque notes dans l'accord
+                                    # print("+1 pour : %s" %j)
+                if poids > poidsmax:
+                    accord = j
+            if accord != False:
+                matriceaccords.append(accord)
+
+        print(matriceaccords)
+
+
+
 
 
 
