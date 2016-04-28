@@ -378,26 +378,41 @@ class analyse:
             poidsmax =0
             for j in i:
                 # on a toutes les informations pour selectionner les éléments de matricenote
-                poids = 0
                 for w in a:
+                    poids = 0
                     if j == w[0]:
                         # print(j+" = "+w[0])
-                        accord = j
-                        for z in range(len(w) - 1):
+                        for z in range(len(w)):
                             # print("z = %s" %z)
-                            for i1 in range(len(i) - 1):
+                            for i1 in range(len(i)):
                                 # print("i1 = %s" %i1)
                                 # print("w[z+1] = %s" %w[z+1])
-                                if w[z + 1] == i[i1 + 1]:
-                                    poids = + 1  # on calcul le poids de chaque notes dans l'accord
+                                if w[z] == i[i1] and w[z] != j:
+                                    poids += 1  # on calcul le poids de chaque notes dans l'accord
                                     # print("+1 pour : %s" %j)
-                if poids > poidsmax:
-                    accord = j
+                    if poids != 0:
+                        print("poids = %s et note: " % poids + j)
+                        # print(poidsmax)
+                    if poids > poidsmax:
+                        accord = j
+                        poidsmax = poids
             if accord != False:
                 matriceaccords.append(accord)
 
-        print(matriceaccords)
+        # print(matriceaccords)
 
+        # Krumhansl-Schmuckler key-finding algorithm
+        DurationPitch = []
+        DurationPitch.append(matriceaccords.count('C'))
+        DurationPitch.append(matriceaccords.count('C'))
+        DurationPitch.append(matriceaccords.count('C'))
+        DurationPitch.append(matriceaccords.count('C'))
+        DurationPitch.append(matriceaccords.count('C'))
+        DurationPitch.append(matriceaccords.count('C'))
+        DurationPitch.append(matriceaccords.count('C'))
+        DurationPitch.append(matriceaccords.count('C'))
+        DurationPitch.append(matriceaccords.count('C'))
+        DurationPitch.append(matriceaccords.count('C'))
 
 
 
