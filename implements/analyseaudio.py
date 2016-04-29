@@ -364,42 +364,57 @@ class analyse:
         # recherche des possibles accords
         matriceaccords = []
 
-        a = [['C', 'F', 'G', 'A'], ['F', 'C', 'A#', 'D'], ['A#', 'F', 'G', 'D#'], ['D#', 'A#', 'C', 'G#'],
-             ['G#', 'D#', 'F', 'C#'], ['C#', 'G#', 'A#', 'F#'], ['F#', 'C#', 'D#', 'B'], ['B', 'F#', 'G#', 'E'],
-             ['E', 'B', 'C#', 'A'], ['A', 'E', 'F#', 'D'], ['D', 'A', 'B', 'G'], ['G', 'D', 'E', 'C'],  # major keys
-             ['A', 'E', 'C', 'D'], ['D', 'A', 'F', 'G'], ['G', 'D', 'A#', 'C'], ['C', 'G', 'D#', 'F'],
-             ['F', 'C', 'A#', 'G#'], ['A#', 'F', 'D#', 'C#'], ['D#', 'A#', 'F#', 'G#'], ['G#', 'D#', 'B', 'C#'],
-             ['C#', 'G#', 'E', 'F#'], ['F#', 'C#', 'A', 'B'], ['B', 'F#', 'D', 'E'], ['E', 'B', 'G', 'A']]  # minor keys
+        a = [['C', 'F', 'G', 'A', 'Maj'], ['F', 'C', 'A#', 'D', 'Maj'], ['A#', 'F', 'G', 'D#', 'Maj'],
+             ['D#', 'A#', 'C', 'G#', 'Maj'],
+             ['G#', 'D#', 'F', 'C#', 'Maj'], ['C#', 'G#', 'A#', 'F#', 'Maj'], ['F#', 'C#', 'D#', 'B', 'Maj'],
+             ['B', 'F#', 'G#', 'E', 'Maj'],
+             ['E', 'B', 'C#', 'A', 'Maj'], ['A', 'E', 'F#', 'D', 'Maj'], ['D', 'A', 'B', 'G', 'Maj'],
+             ['G', 'D', 'E', 'C', 'Maj'],  # major keys
+             ['A', 'E', 'C', 'D', 'Min'], ['D', 'A', 'F', 'G', 'Min'], ['G', 'D', 'A#', 'C', 'Min'],
+             ['C', 'G', 'D#', 'F', 'Min'],
+             ['F', 'C', 'A#', 'G#', 'Min'], ['A#', 'F', 'D#', 'C#', 'Min'], ['D#', 'A#', 'F#', 'G#', 'Min'],
+             ['G#', 'D#', 'B', 'C#', 'Min'],
+             ['C#', 'G#', 'E', 'F#', 'Min'], ['F#', 'C#', 'A', 'B', 'Min'], ['B', 'F#', 'D', 'E', 'Min'],
+             ['E', 'B', 'G', 'A', 'Min']]  # minor keys
 
+        Min = 0
+        Maj = 0
         # for i in range(len(matricenote)):
         for i in matricenote:
             # for j in range(len(matricenote[i])):
-            poidsmax =0
+            poidsmax = 0
             accord = False
             for j in i:
                 # on a toutes les informations pour selectionner les éléments de matricenote
                 for w in a:
                     poids = 0
                     if j == w[0]:
-                        # print(j+" = "+w[0])
-                        for z in range(len(w)):
-                            # print("z = %s" %z)
+                        for z in range(len(w) - 1):
                             for i1 in range(len(i)):
                                 # print("i1 = %s" %i1)
                                 # print("w[z+1] = %s" %w[z+1])
-                                if w[z] == i[i1] and w[z] != j:
+                                if w[z] == i[i1] and w[z] != j and w[z] != 'Min' and w[z] != 'Maj':
                                     poids += 1  # on calcul le poids de chaque notes dans l'accord
-                                    # print("+1 pour : %s" %j)
-                    if poids != 0:
-                        print("poids = %s et note: " % poids + j)
-                        # print(poidsmax)
+
+                    ''' if poids != 0:
+                        # print("poids = %s et note: " % poids + j)
+                    if poids == 2 and poidsmax != 0:
+                        matriceaccords.append(j)'''
                     if poids > poidsmax:
                         accord = j
                         poidsmax = poids
+                        M = w[4]
+
             if accord != False:
                 matriceaccords.append(accord)
+                if M == 'Maj':
+                    Maj += 1
+                if M == 'Min':
+                    Min += 1
 
         # print(matriceaccords)
+        print("Maj = %s" % Maj)
+        print("Min = %s" % Min)
 
         # Krumhansl-Schmuckler key-finding algorithm
         DurationPitch = []
@@ -419,14 +434,15 @@ class analyse:
 
         MajorProfil = [6.35, 2.23, 3.48, 2.33, 4.38, 4.09, 2.52, 5.19, 2.39, 3.66, 2.29, 2.88]
         MinorProfil = [6.33, 2.68, 3.52, 5.38, 2.60, 3.53, 2.54, 4.75, 3.98, 2.69, 3.34, 3.17]
+        Note = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
 
         for i in range(12):
-            '''Major = numpy.corrcoef(DurationPitch, MajorProfil)[0,1]
+            Major = numpy.corrcoef(DurationPitch, MajorProfil)[0, 1]
             Minor = numpy.corrcoef(DurationPitch, MinorProfil)[0,1]
             if Major > 0.5:
                 print(Major)
             if Minor > 0.5:
-                print(Minor)'''
+                print(Minor)
             print(i + 1)
             print(numpy.corrcoef(DurationPitch, MajorProfil)[0, 1])
             print(numpy.corrcoef(DurationPitch, MinorProfil)[0, 1])
