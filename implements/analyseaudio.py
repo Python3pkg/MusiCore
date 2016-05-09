@@ -9,13 +9,10 @@ from __future__ import print_function
 import librosa
 import os
 import csv
-import sys
 
 # Analyse Tonale
-# from pylab import plot, show, title, xlabel, ylabel, subplot, savefig
 from scipy import fft, arange, ifft
 import matplotlib.pyplot as plt
-# from numpy import sin, linspace, pi
 from scipy.io.wavfile import read, write
 import numpy
 
@@ -102,7 +99,7 @@ class analyse:
                 writer = csv.writer(file)
 
                 # Ecriture de la ligne d'en-tete avec le titre des colonnes.
-                writer.writerow(['NomFichier', 'BpmMoyen', 'BpmDebut', 'BpmFin', 'Tonalité'])
+                writer.writerow(['NomFichier', 'BpmMoyen', 'BpmDebut', 'BpmFin'])  # il faudra rajouter la tonalité
 
                 # Ecriture des quelques donnees.
                 writer.writerow(list)
@@ -110,6 +107,13 @@ class analyse:
                 # Fermeture du fichier source
                 file.close()
 
+    def clean_analyses(self):
+        for element in os.listdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/database'):
+            print(element)
+            '''if element == 'database' or element == 'output_ui':
+                return
+            else:
+                os.rmdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))+'/database'+element)'''
 
     def islineincsc(self, titre):
         '''
@@ -131,7 +135,6 @@ class analyse:
                     # N'affiche que certaines colonnes
                     #
                     if (len(row) != 4):
-                        print(len(row))
                         return False
 
                     else:
@@ -139,13 +142,15 @@ class analyse:
                         if (row[0] == titre):
                             print('Le fichier existe deja dans la base de donnée')
                             print('Ecriture des données existantes de la bdd dans le fichier ' + self.NomFichierCsv)
-                            self.ecrirecsv(self.NomFichierCsv, row)
                             return True
             finally:
                 file.close()
         else:
             return False
 
+    def rajout_colonne_csv(self, fichier_csv, element_a_rajouter):
+
+        return
 
     def extrairedatamusic(self):
         '''
