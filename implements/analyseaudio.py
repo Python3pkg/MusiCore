@@ -50,9 +50,9 @@ class analyse:
         else:
             self.NomFichierCsv = NomFichierCsv  # chemin du fichier csv qui va être crée pour cette analyse
         if pathtobdd is None:
-            self.pathtobdd = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + "/BDDMusic/BDDMusic"
+            self.pathtobdd = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + "/database/database"
         else:
-            self.pathtobdd = pathtobdd  # chemin du fichier csv étant la base de donnée: par défaut '~/MusiCore/BDDMusic/BDDMusic'
+            self.pathtobdd = pathtobdd  # chemin du fichier csv étant la base de donnée: par défaut '~/MusiCore/database/database'
 
 
     def extraire_path(self):
@@ -71,6 +71,7 @@ class analyse:
         return [self.PathToFile[len(self.PathToFile) - k:],
                 self.PathToFile[:len(self.PathToFile) - k - 1]]  # path to directory , file name
 
+
     def ecrirecsv(self, pathtobdd, list):
         '''
         :param list: liste dont les élements vont être ajoutés à un fichier csv
@@ -84,7 +85,6 @@ class analyse:
                 file = open(fname, "a")  # l'option 'a' permet de ne pas ecraser le fichier
                 # Creation de l'ecrivain CSV
                 writer = csv.writer(file)
-
                 # Ecriture des donnees.
                 writer.writerow(list)
 
@@ -93,14 +93,16 @@ class analyse:
                 file.close()
 
         else:  # si le fichier n'existe pas
-            try:  # rajoute une entete
+            try:
+                # rajoute une entete
                 print("ecrirecsv: le fichier " + pathtobdd + " n'existe pas, creation d'un nouveau fichier csv")
                 file = open(fname, 'w')
+
                 # Creation de l'ecrivain'' CSV
                 writer = csv.writer(file)
 
                 # Ecriture de la ligne d'en-tete avec le titre des colonnes.
-                writer.writerow(['Emplacement', 'NomFichier', 'BpmMoyen', 'BpmDebut', 'BpmFin'])
+                writer.writerow(['Emplacement', 'NomFichier', 'BpmMoyen', 'BpmDebut', 'BpmFin', 'Tonalité'])
 
                 # Ecriture des quelques donnees.
                 writer.writerow(list)
@@ -111,7 +113,7 @@ class analyse:
 
     def islineincsc(self, titre):
         '''
-        blabla
+        regarde si le titre de la musique existe deja dans la base de données
 
         :param titre: le titre du fichier audio dont on veut vérifier si il existe dans le fichier csv
         :return: True si le fichier audio à deja été analysé
@@ -132,8 +134,6 @@ class analyse:
 
                 else:
 
-                    # print("row = " + row[1])
-                    # print("titre = " + titre)
                     if (row[1] == titre):
                         print('Le fichier existe deja dans la base de donnée')
                         print('Ecriture des données existantes de la bdd dans le fichier ' + self.NomFichierCsv)
@@ -180,9 +180,6 @@ class analyse:
         # creation de la liste qui va etre exportee dans le csv
         ElemCsv = [self.PathToFile, self.extraire_path()[0]]
 
-        # enregistrement du fichier audio comme une forme d'onde 'y' ; enrigistrement de taux d'echantillon en 'sr'
-        # TODO: cette fonction est le goulot d'etranglement du programme, a ameliorer...
-
         # execution du tracker bpm par default
         tempo, beat_frames = librosa.beat.beat_track(y=y, sr=sr)
 
@@ -196,15 +193,17 @@ class analyse:
             bpm_d = bpm_d + (beat_times[i + 1] - beat_times[i])
             bpm_f = bpm_f + (beat_times[len(beat_times) - i - 1] - beat_times[len(beat_times) - i - 2])
 
-        # on complete la lste qui va etre mis dans le csv
+        # on complete la lste qui va etre mis dans le de la base de donnée
         ElemCsv.append(tempo)
         ElemCsv.append(60 / (bpm_d / 100))
         ElemCsv.append(60 / (bpm_f / 100))
-        print("la liste qui va etre implementé est: ", ElemCsv)
 
+        # print("la liste qui va etre implementé est: ", ElemCsv)
         # ecriture des donnees dans la base de donnée et le fichier de playlist
-        self.ecrirecsv(self.pathtobdd, ElemCsv)  # fichier
-        self.ecrirecsv(self.NomFichierCsv, ElemCsv)
+        # self.ecrirecsv(self.pathtobdd, ElemCsv)  # fichier
+        # self.ecrirecsv(self.NomFichierCsv, ElemCsv)
+
+        return ElemCsv  #bpm debut, bpm fin , bpm fin
 
     def analysefft(self, y=None, Fs=None, k=None, afficher=False):
         '''
@@ -473,13 +472,3 @@ class analyse:
 # rate,data=read('/home/bettini/Musique/Deorro.wav')
 # x = numpy.arange(0,2000,100)
 
-'''
-analyse = analyse("/home/gerox/Musique/Deorro.wav", "fichier_csv", 'bdd')
-y, s = analyse.extrairedatamusic()
-
-list1 = []  # création de la liste contenant les intervalles de temps pour afficher le signal temporel
-for i in range(33000):
-    list1.append(i / 44100)
-
-Fs = 44100  # sampling rate
-analyse.analysefft(y, Fs, 2, False)'''
