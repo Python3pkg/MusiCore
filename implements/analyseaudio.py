@@ -435,22 +435,31 @@ class analyse:
         MajorProfil = [6.35, 2.23, 3.48, 2.33, 4.38, 4.09, 2.52, 5.19, 2.39, 3.66, 2.29, 2.88]
         MinorProfil = [6.33, 2.68, 3.52, 5.38, 2.60, 3.53, 2.54, 4.75, 3.98, 2.69, 3.34, 3.17]
         Note = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
+        Tonalite = []
 
         for i in range(12):
             Major = numpy.corrcoef(DurationPitch, MajorProfil)[0, 1]
             Minor = numpy.corrcoef(DurationPitch, MinorProfil)[0,1]
             if Major > 0.5:
+                print("%sM avec un coef de corr: " % (Note[i]))
                 print(Major)
+                Tonalite.append(Note[i] + "M")
+                Tonalite.append(Major)
             if Minor > 0.5:
+                print("%sm avec un coef de corr: " % (Note[i]))
                 print(Minor)
-            print(i + 1)
-            print(numpy.corrcoef(DurationPitch, MajorProfil)[0, 1])
-            print(numpy.corrcoef(DurationPitch, MinorProfil)[0, 1])
-            temporel = DurationPitch[1:]
+                Tonalite.append(Note[i] + "m")
+                Tonalite.append(Minor)
+
+            temporel = DurationPitch[1:]  # on effectue une translation de la liste DurationPitch
             temporel.append(DurationPitch[0])
             DurationPitch = temporel
 
-        return matricenote
+        # écriture des résultats dans la base de donnée
+
+
+        return Tonalite
+
 
 # ======================================================
 # Fonctions annexes
