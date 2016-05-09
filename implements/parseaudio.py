@@ -33,13 +33,13 @@ def parseaudio(nomanalyse=None):
         raise ValueError("Error: il manque le nom de l'analyse")
 
     # On determine les chemins des fichiers necessaire à l'analyse des musiques
-    bddfilepath = getdirpath() + "/BDDMusic/BDDMusic"
+    bddfilepath = getdirpath() + "/database/database"
     print("La base de données de musique ce situe: " + bddfilepath)
 
-    output_ui = getdirpath() + "/BDDMusic/output_ui"
+    output_ui = getdirpath() + "/database/output_ui"
     print("Le fichier à analyser ce situe: " + output_ui)
 
-    pathfichiercsv = getdirpath() + "/BDDMusic/" + nomanalyse
+    pathfichiercsv = getdirpath() + "/database/" + nomanalyse
     print("Le fichier de la playlist est " + pathfichiercsv)
 
     # Verifie si on peut ouvrir le fichier
@@ -64,22 +64,15 @@ def parseaudio(nomanalyse=None):
             numanalyse = str(k)
             analyse = "analyse" + numanalyse
             print(analyse + " : fichier " + row[0])
-            analyse = implements.analyseaudio.analyse(row[0], pathfichiercsv, bddfilepath, )
+            analyse = implements.analyseaudio.analyse(row[0], pathfichiercsv, bddfilepath)
 
             if (analyse.islineincsc(analyse.extraire_path()[0]) == False):
                 y, sr = analyse.extrairedatamusic()  # extraction des données des musiques
-                analyse.analyse_bpm(y, sr)  # analyse bpm
+                bpm = analyse.analyse_bpm(y, sr)  # analyse bpm
+                analyse.ecrirecsv(analyse.pathtobdd, bpm)  # écriture du fichier csv
+                analyse.ecrirecsv(analyse.NomFichierCsv, bpm)
 
             k += 1
 
     finally:
         file.close()
-
-
-'''
-    analyse1 = implements.analyseaudio.analyse("/home/bettini/Musique/Deorro.wav", "fichier_csv")
-    # print(analyse1.extraire_path())
-    if (analyse1.islineincsc(analyse1.extraire_path()[0]) == False):
-        y, sr = analyse1.extrairedatamusic()
-        analyse1.analyse_bpm(y, sr)
-'''

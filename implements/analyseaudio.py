@@ -102,7 +102,7 @@ class analyse:
                 writer = csv.writer(file)
 
                 # Ecriture de la ligne d'en-tete avec le titre des colonnes.
-                writer.writerow(['Emplacement', 'NomFichier', 'BpmMoyen', 'BpmDebut', 'BpmFin', 'Tonalité'])
+                writer.writerow(['NomFichier', 'BpmMoyen', 'BpmDebut', 'BpmFin', 'Tonalité'])
 
                 # Ecriture des quelques donnees.
                 writer.writerow(list)
@@ -113,7 +113,7 @@ class analyse:
 
     def islineincsc(self, titre):
         '''
-        regarde si le titre de la musique existe deja dans la base de données
+        regarde si le titre de la muif os.path.isfile(pathtobdd) == True:sique existe deja dans la base de données
 
         :param titre: le titre du fichier audio dont on veut vérifier si il existe dans le fichier csv
         :return: True si le fichier audio à deja été analysé
@@ -121,28 +121,30 @@ class analyse:
 
         '''
 
-        fname = self.pathtobdd
-        file = open(fname, "rt")  # file = open(fname, "rb") python 2.7
-        try:
-            reader = csv.reader(file)
-            for row in (reader):
-                #
-                # N'affiche que certaines colonnes
-                #
-                if (len(row) != 5):
-                    return False
+        if os.path.isfile(self.pathtobdd) == True:
+            fname = self.pathtobdd
+            file = open(fname, "rt")  # file = open(fname, "rb") python 2.7
+            try:
+                reader = csv.reader(file)
+                for row in (reader):
+                    #
+                    # N'affiche que certaines colonnes
+                    #
+                    if (len(row) != 4):
+                        print(len(row))
+                        return False
 
-                else:
+                    else:
 
-                    if (row[1] == titre):
-                        print('Le fichier existe deja dans la base de donnée')
-                        print('Ecriture des données existantes de la bdd dans le fichier ' + self.NomFichierCsv)
-                        self.ecrirecsv(self.NomFichierCsv, row)
-                        return True
-        finally:
-            file.close()
-
-        return False
+                        if (row[0] == titre):
+                            print('Le fichier existe deja dans la base de donnée')
+                            print('Ecriture des données existantes de la bdd dans le fichier ' + self.NomFichierCsv)
+                            self.ecrirecsv(self.NomFichierCsv, row)
+                            return True
+            finally:
+                file.close()
+        else:
+            return False
 
 
     def extrairedatamusic(self):
@@ -178,7 +180,7 @@ class analyse:
         """
 
         # creation de la liste qui va etre exportee dans le csv
-        ElemCsv = [self.PathToFile, self.extraire_path()[0]]
+        ElemCsv = [self.extraire_path()[0]]
 
         # execution du tracker bpm par default
         tempo, beat_frames = librosa.beat.beat_track(y=y, sr=sr)
