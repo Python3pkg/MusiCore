@@ -17,12 +17,135 @@ from scipy.io.wavfile import read, write
 import numpy
 
 ###############################################################################
-# class `analyse`
+# class `csv`
 ###############################################################################
 '''
 Permet d'effectuer des analyses de musiques
 fonctionne pour le mp3, wav
 '''
+
+
+class csv_musicore:
+    '''Classe permettant la manipuation de fichiers cvs
+    '''
+
+    def __init__(self, nom_fichier_csv):
+        '''
+
+        :param nom_fichier_csv: nom du fichier csv qui sera enregistré dans le dossier database
+        :return: None
+        '''
+
+        if nom_fichier_csv is None:
+            raise ValueError('Error csv: nom_fichier_csv is empty')
+        else:
+            rootfolder = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+            self.path_to_csv_file = rootfolder + '/database/' + nom_fichier_csv  # chemin vers le fichier csv
+            self.path_to_database = rootfolder + '/database/database'  # chemin vers la base de données
+
+    def is_file(self, path_to_file):
+        '''
+
+        :param path_to_file: chemin du fichier csv qui va être ouvert
+        :return: retour True si le fichier existe, False sinon
+        '''
+        if os.path.isfile(path_to_file) == True:
+            return True
+        else:
+            return False
+
+    def add_list(self, list):
+        '''
+        permet de rajouter une liste dans un fichier csv
+
+        :param list: liste dont les élements vont être ajoutés à un fichier csv
+
+        '''
+
+        fname = self.path_to_csv_file
+        if os.path.isfile(self.path_to_csv_file) == True:  # si le fichier existe:
+            try:  # rajoute seulement les lignes voulu
+                print('ecrirecsv: le fichier ' + self.path_to_csv_file + ' existe, rajout des donnees dans le csv')
+                file = open(fname, "a")  # l'option 'a' permet de ne pas ecraser le fichier
+                # Creation de l'ecrivain CSV
+                writer = csv.writer(file)
+                # Ecriture des donnees.
+                writer.writerow(list)
+
+            finally:
+                # Fermeture du fichier source
+                file.close()
+
+        else:  # si le fichier n'existe pas
+            try:
+                # ouverture du fichier
+                print(
+                    "ecrirecsv: le fichier " + self.path_to_csv_file + " n'existe pas, creation d'un nouveau fichier csv")
+                file = open(fname, 'w')
+
+                # Creation de l'ecrivain'' CSV
+                writer = csv.writer(file)
+
+                # Ecriture de la ligne d'en-tete avec le titre des colonnes.
+                # writer.writerow(['NomFichier', 'BpmMoyen', 'BpmDebut', 'BpmFin'])  # il faudra rajouter la tonalité
+
+                # Ecriture des donnees.
+                writer.writerow(list)
+            finally:
+                # Fermeture du fichier source
+                file.close()
+
+    def is_title_in_csv(self, titre):
+        '''
+        regarde si le titre de la muif os.path.isfile(pathtobdd) == True:sique existe deja dans la base de données
+
+        :param titre: le titre du fichier audio dont on veut vérifier si il existe dans le fichier csv
+        :return: True si le fichier audio à deja été analysé
+        Afin de vérifier si un fichier audio à deja été analysé, on compare les titres audio deja analysés dans la base de donnée avec le titre du fichier que l'on veut analyser
+
+        '''
+
+        fname = self.path_to_database
+        file = open(fname, "rt")  # file = open(fname, "rb") python 2.7
+        try:
+            reader = csv.reader(file)
+            for row in (reader):
+                #
+                # N'affiche que certaines colonnes
+                #
+                if (len(row) != 4):
+                    return False
+                else:
+                    if (row[0] == titre):
+                        print('Le fichier existe deja dans la base de donnée')
+                        print('Ecriture des données existantes de la bdd dans le fichier ' + self.path_to_csv_file)
+                        return True
+        finally:
+            file.close()
+
+    def add_column(self, path_to_csv_file, list_a_rajouter):
+        with open(path_to_csv_file, 'rt') as input, open('temp.csv', 'wt') as output:
+            reader = csv.reader(input, delimiter=',')
+            writer = csv.writer(output, delimiter=',')
+
+            all = []
+            row = next(reader)
+            # row.insert(3, 'ID')
+            row.append('ID')
+            all.append(row)
+            count = 0
+            for row in reader:
+                # row.insert(3, list_a_rajouter[count])
+                row.append(list_a_rajouter[count])
+                all.append(row)
+                count += 1
+            writer.writerows(all)
+        return
+
+
+###############################################################################
+# class `analyse`
+###############################################################################
 
 class analyse:
     '''Classe définissant l'analyse d'une musique. On a l'analyse bpm et l'analyse de la tonalité
@@ -148,8 +271,22 @@ class analyse:
         else:
             return False
 
-    def rajout_colonne_csv(self, fichier_csv, element_a_rajouter):
+    def rajout_colonne_csv(self, path_to_csv_file, titre, element_a_rajouter):
+        with open(path_to_csv_file, 'r') as csvinput:
+            with open(path_to_csv_file, 'w') as csvoutput:
+                writer = csv.writer(csvoutput, lineterminator='\n')
+                reader = csv.reader(csvinput)
 
+                all = []
+                row = next(reader)
+                row.append(titre)
+                all.append(row)
+
+                for row in reader:
+                    row.append(row[0])
+                    all.append(row)
+
+                writer.writerows(all)
         return
 
     def extrairedatamusic(self):
@@ -465,7 +602,6 @@ class analyse:
 
 
         return Tonalite
-
 
 # ======================================================
 # Fonctions annexes
