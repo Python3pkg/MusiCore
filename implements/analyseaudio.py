@@ -39,9 +39,9 @@ class csv_musicore:
         if nom_fichier_csv is None:
             raise ValueError('Error csv: nom_fichier_csv is empty')
         else:
-            rootfolder = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-            self.path_to_csv_file = rootfolder + '/database/' + nom_fichier_csv  # chemin vers le fichier csv
-            self.path_to_database = rootfolder + '/database/database'  # chemin vers la base de données
+            self.rootfolder = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+            self.path_to_csv_file = self.rootfolder + '/database/' + nom_fichier_csv  # chemin vers le fichier csv
+            self.path_to_database = self.rootfolder + '/database/database'  # chemin vers la base de données
 
     def is_file(self, path_to_file):
         '''
@@ -123,25 +123,40 @@ class csv_musicore:
         finally:
             file.close()
 
-    def add_column(self, path_to_csv_file, list_a_rajouter):
-        with open(path_to_csv_file, 'rt') as input, open('temp.csv', 'wt') as output:
+    def add_column(self, path_to_csv_file, list_a_rajouter, col=None):
+        with open(path_to_csv_file, 'rt') as input, open(self.rootfolder + '/database/temp.csv', 'wt') as output:
             reader = csv.reader(input, delimiter=',')
             writer = csv.writer(output, delimiter=',')
 
             all = []
-            row = next(reader)
-            # row.insert(3, 'ID')
-            row.append('ID')
-            all.append(row)
+            # row = next(reader)
+            # row.insert(0, 'ID')
+            # row.append('ID')
+            # all.append(row)
             count = 0
             for row in reader:
-                # row.insert(3, list_a_rajouter[count])
-                row.append(list_a_rajouter[count])
+                if col == None:
+                    row.append(list_a_rajouter[count])
+                else:
+                    row.insert(col, list_a_rajouter[count])
                 all.append(row)
                 count += 1
             writer.writerows(all)
+            os.remove(path_to_csv_file)
+            os.rename(self.rootfolder + '/database/temp.csv', path_to_csv_file)
         return
 
+    def get_column(self):
+        return
+
+    def get_row(self):
+        return
+
+    def get_column_database(self):
+        return
+
+    def get_row_database(self):
+        return
 
 ###############################################################################
 # class `analyse`
