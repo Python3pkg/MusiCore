@@ -147,15 +147,88 @@ class csv_musicore:
         return
 
     def get_column(self):
+        fname = self.path_to_csv_file
+        file = open(fname, "rt")  # on ouvre le fichier csv de la base de donnée
+        colonne = []
+        try:
+            reader = csv.reader(file)  # on initialise le reader csv
+            for row in (reader):
+                colonne.append(row[num_col])
+        finally:
+            file.close()
+        return colonne
+
+    def get_row(self, num_row):
+        fname = self.path_to_csv_file
+        file = open(fname, "rt")  # on ouvre le fichier csv de la base de donnée
+        flag_row = 0
+        try:
+            reader = csv.reader(file)  # on initialise le reader csv
+            for row in (reader):
+                if flag_row == num_row:
+                    return row
+                flag_row += 1
+        finally:
+            file.close()
+        return False
+
+    def get_column_database(self, num_col):
+        fname = self.path_to_database
+        file = open(fname, "rt")  # on ouvre le fichier csv de la base de donnée
+        colonne = []
+        try:
+            reader = csv.reader(file)  # on initialise le reader csv
+            for row in (reader):
+                colonne.append(row[num_col])
+        finally:
+            file.close()
+        return colonne
+
+    def get_row_database(self, num_row):
+        fname = self.path_to_database
+        file = open(fname, "rt")  # on ouvre le fichier csv de la base de donnée
+        flag_row = 0
+        try:
+            reader = csv.reader(file)  # on initialise le reader csv
+            for row in (reader):
+                if flag_row == num_row:
+                    return row
+                flag_row += 1
+        finally:
+            file.close()
+        return False
+
+    def delete_row(self, num_row):
+        with open(self.path_to_csv_file, 'rt') as input, open(self.rootfolder + '/database/temp.csv', 'wt') as output:
+            reader = csv.reader(input, delimiter=',')
+            writer = csv.writer(output, delimiter=',')
+            all = []
+            count = 0
+            for row in reader:
+                if count != num_row:
+                    all.append(row)
+                print(count)
+                count += 1
+            writer.writerows(all)
+            os.remove(self.path_to_csv_file)
+            os.rename(self.rootfolder + '/database/temp.csv', self.path_to_csv_file)
+
         return
 
-    def get_row(self):
-        return
-
-    def get_column_database(self):
-        return
-
-    def get_row_database(self):
+    def delete_column(self, num_col):
+        with open(self.path_to_csv_file, 'rt') as input, open(self.rootfolder + '/database/temp.csv', 'wt') as output:
+            reader = csv.reader(input, delimiter=',')
+            writer = csv.writer(output, delimiter=',')
+            all = []
+            count = 0
+            for row in reader:
+                if count != num_row:
+                    all.append(row)
+                print(count)
+                count += 1
+            writer.writerows(all)
+            os.remove(self.path_to_csv_file)
+            os.rename(self.rootfolder + '/database/temp.csv', self.path_to_csv_file)
         return
 
 ###############################################################################
@@ -280,6 +353,7 @@ class analyse:
                         if (row[0] == titre):
                             print('Le fichier existe deja dans la base de donnée')
                             print('Ecriture des données existantes de la bdd dans le fichier ' + self.NomFichierCsv)
+                            self.ecrirecsv(self.NomFichierCsv, row)
                             return True
             finally:
                 file.close()
