@@ -7,6 +7,7 @@
 
 import csv
 from random import randint
+import numpy as np
 
 #--------------------
 #Calcule le nombre de ligne du csv
@@ -177,40 +178,53 @@ mus2 = Musique("titre2","coucou2",110,78,130,6)
 mus3 = Musique("titre3","coucou3",102,90,129,8)
 mus4 = Musique("titre4","coucou4",105,28,85,15)
 tableaudobjets = [mus1,mus2,mus3,mus4]
+print tableaudobjets[1].titre
 
-
+"""
 def voyageur_genetique(tableaudobjets):
 
 
     #titre, BPM_debut, BPM_fin,BPM_moy, pitch
-    """
-    titre = ""
-    emplacement = ""
-    BPM_moy = 0
-    BPM_debut = 0
-    BPM_fin = 0
-    pitch = ""
-    """
+    #titre = ""
+    #emplacement = ""
+    #BPM_moy = 0
+    #BPM_debut = 0
+    #BPM_fin = 0
+    #pitch = ""
 
-    #for i in range (100):  #100 solutions init, arbitraire
-     #   solution"i" = []
-    solution1 = []
-    solution2 = []
-    solution3 = []
+    j = 1
+    num_solution = str(j)
+    #for j in range (100):  #100 solutions init, arbitraire
+     #  "solution" + num_solution = []
+      #  j+=1
+    solution1 = [1]
+    solution2 =[]
+    solution3 =[]
     solution4 = []
 
+    print solution1
     #création de la population initiale de solutions
     #la solution doit passer par tous les points ET ne pas comporter de doublons
-    for i in range (len(tableaudobjets)):
-        #for j in range (len(tableaudobjets)):
-         #   if tableaudobjets[i] != tableaudobjets[j]:
-                solution1.append(tableaudobjets[randint(2,len(tableaudobjets))])
-                solution2.append(tableaudobjets[randint(2,len(tableaudobjets))])
-                solution3.append(tableaudobjets[randint(2,len(tableaudobjets))])
-                solution4.append(tableaudobjets[randint(2,len(tableaudobjets))])
+    j = 1
+    num_solution = str(j)
+    solution = "solution" + num_solution
+    nbre_solution = 0
 
-    solution1 = [mus1,mus2,mus3,mus4]
-    print (solution1[1].titre)  #?????? non fonctionnel
+    #Détermination du nombre de solutions
+    if len(tableaudobjets)<=100:
+        nbre_solution = len(tableaudobjets)
+    else:
+        nbre_solution = 100
+
+
+    for j in range (nbre_solution):
+        for i in range (len(tableaudobjets)):
+            if tableaudobjets[i-1] != tableaudobjets[i]:
+                solution.append(tableaudobjets[randint(2,len(tableaudobjets))])
+                j += 1
+
+    print (solution1)  #?????? non fonctionnel
+
 
     #Evaluation des individus
     #1. évaluation des écarts
@@ -285,3 +299,44 @@ def voyageur_genetique(tableaudobjets):
             compteur=100000
             i=0
         return resultat
+
+    return()
+"""
+
+
+
+"""
+dictOfStuff = {}
+j = 1
+num_solution = str(j)
+solution = "solution" + num_solution
+for j in range (100):  #100 solutions init, arbitraire
+    dictOfStuff["solution"+str(j)] = []
+
+"""
+
+    #création de la population initiale de solutions
+    #la solution doit passer par tous les points ET ne pas comporter de doublons
+j = 1
+num_solution = str(j)
+solution = "solution" + num_solution
+nbre_solution = 0
+
+    #Détermination du nombre de solutions
+if len(tableaudobjets)<=100:
+    nbre_solution = len(tableaudobjets)
+else:
+    nbre_solution = 100
+
+matrice_solutions = np.zeros((nbre_solution,len(tableaudobjets)))
+#tabl_BPM = [ RECOPIER BPMS]
+j=0
+i=0
+for j in range (nbre_solution):
+    #pour chaque ligne on ajoute toutes les musiques -> solution
+    #il faut prendre un chiffre de tabl_bpm, le recopier et supprimer le bpm traité pr pas doublon)
+    for i in range (len(tableaudobjets)):
+        matrice_solutions[i,j] = tableaudobjets[randint(0 ,len(tableaudobjets))]
+        i += 1
+    j += 1
+print matrice_solutions
