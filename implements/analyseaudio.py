@@ -110,17 +110,14 @@ class csv_musicore:
                 #
                 # N'affiche que certaines colonnes
                 #
-                if (len(row) != 4):
-                    return False
-                else:
+                if len(row) != 0:
                     if (row[0] == titre):
                         print('Le fichier existe deja dans la base de donnée')
-                        # print('Ecriture des données existantes de la bdd dans le fichier ' + self.path_to_csv_file)
-                        return num_row
-                num_row += 1
+                        return [True, num_row, row[1], len(row)]
+                    num_row += 1
         finally:
             file.close()
-        return False
+        return [False]
 
     def add_column(self, path_to_csv_file, list_a_rajouter, col=None):
         with open(path_to_csv_file, 'rt') as input, open(self.rootfolder + '/database/temp.csv', 'wt') as output:
@@ -226,6 +223,37 @@ class csv_musicore:
             writer.writerows(all)
             os.remove(self.path_to_csv_file)
             os.rename(self.rootfolder + '/database/temp.csv', self.path_to_csv_file)
+        return
+
+    def delete_row_database(self, num_row):
+        with open(self.path_to_database, 'rt') as input, open(self.rootfolder + '/database/temp.csv', 'wt') as output:
+            reader = csv.reader(input, delimiter=',')
+            writer = csv.writer(output, delimiter=',')
+            all = []
+            count = 0
+            for row in reader:
+                if count != num_row:
+                    all.append(row)
+                print(count)
+                count += 1
+            writer.writerows(all)
+            os.remove(self.path_to_database)
+            os.rename(self.rootfolder + '/database/temp.csv', self.path_to_database)
+
+        return
+
+    def delete_column_database(self, num_col):
+        with open(self.path_to_database, 'rt') as input, open(self.rootfolder + '/database/temp.csv', 'wt') as output:
+            reader = csv.reader(input, delimiter=',')
+            writer = csv.writer(output, delimiter=',')
+            all = []
+            count = 0
+            for row in reader:
+                all.append(row[0:num_col] + row[num_col + 1:])
+                count += 1
+            writer.writerows(all)
+            os.remove(self.path_to_database)
+            os.rename(self.rootfolder + '/database/temp.csv', self.path_to_database)
         return
 
     def nombre_ligne_csv(self):
@@ -611,7 +639,7 @@ class analyse:
         MajorProfil = [6.35, 2.23, 3.48, 2.33, 4.38, 4.09, 2.52, 5.19, 2.39, 3.66, 2.29, 2.88]
         MinorProfil = [6.33, 2.68, 3.52, 5.38, 2.60, 3.53, 2.54, 4.75, 3.98, 2.69, 3.34, 3.17]
         Note = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
-        Tonalite = []
+        Tonalite = ['//']
 
         for i in range(12):
             Major = numpy.corrcoef(DurationPitch, MajorProfil)[0, 1]
