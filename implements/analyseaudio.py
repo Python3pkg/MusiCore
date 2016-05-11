@@ -16,14 +16,10 @@ import matplotlib.pyplot as plt
 from scipy.io.wavfile import read, write
 import numpy
 
+
 ###############################################################################
 # class `csv`
 ###############################################################################
-'''
-Permet d'effectuer des analyses de musiques
-fonctionne pour le mp3, wav
-'''
-
 
 class csv_musicore:
     '''Classe permettant la manipuation de fichiers cvs
@@ -54,7 +50,7 @@ class csv_musicore:
         else:
             return False
 
-    def add_list(self, list):
+    def add_list(self, csv_file, list):
         '''
         permet de rajouter une liste dans un fichier csv
 
@@ -62,10 +58,10 @@ class csv_musicore:
 
         '''
 
-        fname = self.path_to_csv_file
-        if os.path.isfile(self.path_to_csv_file) == True:  # si le fichier existe:
+        fname = csv_file
+        if os.path.isfile(csv_file) == True:  # si le fichier existe:
             try:  # rajoute seulement les lignes voulu
-                print('ecrirecsv: le fichier ' + self.path_to_csv_file + ' existe, rajout des donnees dans le csv')
+                print('add_list: le fichier ' + self.path_to_csv_file + ' existe, rajout des donnees dans le csv')
                 file = open(fname, "a")  # l'option 'a' permet de ne pas ecraser le fichier
                 # Creation de l'ecrivain CSV
                 writer = csv.writer(file)
@@ -80,7 +76,7 @@ class csv_musicore:
             try:
                 # ouverture du fichier
                 print(
-                    "ecrirecsv: le fichier " + self.path_to_csv_file + " n'existe pas, creation d'un nouveau fichier csv")
+                    "add_list: le fichier " + csv_file + " n'existe pas, creation d'un nouveau fichier csv")
                 file = open(fname, 'w')
 
                 # Creation de l'ecrivain'' CSV
@@ -95,7 +91,7 @@ class csv_musicore:
                 # Fermeture du fichier source
                 file.close()
 
-    def is_title_in_csv(self, titre):
+    def find_title_in_database(self, titre):
         '''
         regarde si le titre de la muif os.path.isfile(pathtobdd) == True:sique existe deja dans la base de données
 
@@ -107,6 +103,7 @@ class csv_musicore:
 
         fname = self.path_to_database
         file = open(fname, "rt")  # file = open(fname, "rb") python 2.7
+        num_row = 0
         try:
             reader = csv.reader(file)
             for row in (reader):
@@ -118,10 +115,12 @@ class csv_musicore:
                 else:
                     if (row[0] == titre):
                         print('Le fichier existe deja dans la base de donnée')
-                        print('Ecriture des données existantes de la bdd dans le fichier ' + self.path_to_csv_file)
-                        return True
+                        # print('Ecriture des données existantes de la bdd dans le fichier ' + self.path_to_csv_file)
+                        return num_row
+                num_row += 1
         finally:
             file.close()
+        return False
 
     def add_column(self, path_to_csv_file, list_a_rajouter, col=None):
         with open(path_to_csv_file, 'rt') as input, open(self.rootfolder + '/database/temp.csv', 'wt') as output:
@@ -146,7 +145,7 @@ class csv_musicore:
             os.rename(self.rootfolder + '/database/temp.csv', path_to_csv_file)
         return
 
-    def get_column(self):
+    def get_column(self, num_col):
         fname = self.path_to_csv_file
         file = open(fname, "rt")  # on ouvre le fichier csv de la base de donnée
         colonne = []
@@ -222,14 +221,31 @@ class csv_musicore:
             all = []
             count = 0
             for row in reader:
-                if count != num_row:
-                    all.append(row)
-                print(count)
+                all.append(row[0:num_col] + row[num_col + 1:])
                 count += 1
             writer.writerows(all)
             os.remove(self.path_to_csv_file)
             os.rename(self.rootfolder + '/database/temp.csv', self.path_to_csv_file)
         return
+
+    def nombre_ligne_csv(self):
+        with open(self.path_to_csv_file, 'rt') as input:
+            reader = csv.reader(input, delimiter=',')
+            count = 0
+            for row in reader:
+                count += 1
+        return count
+
+    def clear(self):
+        if self.is_file(self.path_to_csv_file) == True:
+            os.remove(self.path_to_csv_file)
+            print('fichier :' + self.path_to_csv_file + ' supprimé')
+        else:
+            print("le fichier n'existe pas")
+
+
+            # vérifie que l'on peut ouvrir lereader = csv.reader(input, delimiter=',') fichier
+
 
 ###############################################################################
 # class `analyse`
@@ -272,51 +288,12 @@ class analyse:
 
         """
 
-        # path1=path[::-1]
         k = 0
         while self.PathToFile[len(self.PathToFile) - k - 1] != "/":
             k = k + 1
         return [self.PathToFile[len(self.PathToFile) - k:],
                 self.PathToFile[:len(self.PathToFile) - k - 1]]  # path to directory , file name
 
-
-    def ecrirecsv(self, pathtobdd, list):
-        '''
-        :param list: liste dont les élements vont être ajoutés à un fichier csv
-
-        '''
-
-        fname = pathtobdd
-        if os.path.isfile(pathtobdd) == True:  # si le fichier existe:
-            try:  # rajoute seulement les lignes voulu
-                print('ecrirecsv: le fichier ' + pathtobdd + ' existe, rajout des donnees dans le csv')
-                file = open(fname, "a")  # l'option 'a' permet de ne pas ecraser le fichier
-                # Creation de l'ecrivain CSV
-                writer = csv.writer(file)
-                # Ecriture des donnees.
-                writer.writerow(list)
-
-            finally:
-                # Fermeture du fichier source
-                file.close()
-
-        else:  # si le fichier n'existe pas
-            try:
-                # rajoute une entete
-                print("ecrirecsv: le fichier " + pathtobdd + " n'existe pas, creation d'un nouveau fichier csv")
-                file = open(fname, 'w')
-
-                # Creation de l'ecrivain'' CSV
-                writer = csv.writer(file)
-
-                # Ecriture de la ligne d'en-tete avec le titre des colonnes.
-                writer.writerow(['NomFichier', 'BpmMoyen', 'BpmDebut', 'BpmFin'])  # il faudra rajouter la tonalité
-
-                # Ecriture des quelques donnees.
-                writer.writerow(list)
-            finally:
-                # Fermeture du fichier source
-                file.close()
 
     def clean_analyses(self):
         for element in os.listdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/database'):
@@ -326,39 +303,6 @@ class analyse:
             else:
                 os.rmdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))+'/database'+element)'''
 
-    def islineincsc(self, titre):
-        '''
-        regarde si le titre de la muif os.path.isfile(pathtobdd) == True:sique existe deja dans la base de données
-
-        :param titre: le titre du fichier audio dont on veut vérifier si il existe dans le fichier csv
-        :return: True si le fichier audio à deja été analysé
-        Afin de vérifier si un fichier audio à deja été analysé, on compare les titres audio deja analysés dans la base de donnée avec le titre du fichier que l'on veut analyser
-
-        '''
-
-        if os.path.isfile(self.pathtobdd) == True:
-            fname = self.pathtobdd
-            file = open(fname, "rt")  # file = open(fname, "rb") python 2.7
-            try:
-                reader = csv.reader(file)
-                for row in (reader):
-                    #
-                    # N'affiche que certaines colonnes
-                    #
-                    if (len(row) != 4):
-                        return False
-
-                    else:
-
-                        if (row[0] == titre):
-                            print('Le fichier existe deja dans la base de donnée')
-                            print('Ecriture des données existantes de la bdd dans le fichier ' + self.NomFichierCsv)
-                            self.ecrirecsv(self.NomFichierCsv, row)
-                            return True
-            finally:
-                file.close()
-        else:
-            return False
 
     def rajout_colonne_csv(self, path_to_csv_file, titre, element_a_rajouter):
         with open(path_to_csv_file, 'r') as csvinput:
