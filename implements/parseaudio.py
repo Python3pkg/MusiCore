@@ -70,6 +70,7 @@ def parseaudio(nomanalyse=None, flag_bpm=False, flag_tonalite=False):
                                                   False)  # notesfreq est la matrice contenant les fréquences significatives des k samples analysés
                     tonalite = analyse.rechercheaccords(notefreq)
                     output_csv = output_csv + tonalite
+
                 nom_analyse.delete_row_database(research[1])  # on remove la ligne de la base de données
                 nom_analyse.add_list(nom_analyse.path_to_database,
                                      output_csv)  # rajout des données dans la base de données
