@@ -20,8 +20,9 @@ def getdirpath():
     return os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-def parseaudio(nomanalyse=None):
+def parseaudio(nomanalyse=None, flag_bpm=False, flag_tonalite=False):
     '''
+
     exemple de test :
     analyse1 = implements.analyseaudio.analyse("/home/gerox/Musique/Deorro.wav", "fichier_csv")
     if (analyse1.islineincsc(analyse1.extraire_path()[0]) == False):
@@ -31,48 +32,75 @@ def parseaudio(nomanalyse=None):
 
     if nomanalyse is None:
         raise ValueError("Error: il manque le nom de l'analyse")
-
-    # On determine les chemins des fichiers necessaire à l'analyse des musiques
-    bddfilepath = getdirpath() + "/database/database"
-    print("La base de données de musique ce situe: " + bddfilepath)
-
-    output_ui = getdirpath() + "/database/output_ui"
-    print("Le fichier à analyser ce situe: " + output_ui)
-
-    pathfichiercsv = getdirpath() + "/database/" + nomanalyse
-    print("Le fichier de la playlist est " + pathfichiercsv)
-
-    # Verifie si on peut ouvrir le fichier
-    try:
-        with open(output_ui):
-            pass
-    except IOError:
-        print("parseaudio: Erreur! Le fichier output_ui n'a pas pu etre ouvert ou n'existe pas")
-        sys.exit(0)
-
-    # ouverture du fichier csv
-    fname = output_ui
-    file = open(fname, "rt")  # file = open(fname, "rb") python 2.7
+    output = implements.analyseaudio.csv_musicore('output_ui')
+    nom_analyse = implements.analyseaudio.csv_musicore(nomanalyse)
+    nom_analyse.clear()
+    path_to_music = output.get_column(0)
+    print(path_to_music)
     k = 1
 
-    try:
-        reader = csv.reader(file)
-        for row in (reader):
+    for i in path_to_music:
+        numanalyse = str(k)
+        analyse = "analyse" + numanalyse
+        print(analyse + " : fichier " + i)
+        analyse = implements.analyseaudio.analyse(i, output.path_to_csv_file, output.path_to_database)
+        output_csv = []
 
-            pathtoaudiofile = row[0]  # emplecement du fichier audio
+        research = output.find_title_in_database(analyse.extraire_path()[0])
 
-            numanalyse = str(k)
-            analyse = "analyse" + numanalyse
-            print(analyse + " : fichier " + row[0])
-            analyse = implements.analyseaudio.analyse(row[0], pathfichiercsv, bddfilepath)
+        # Distinction des différentes analyses, bpm ou tonalité suivant les choix de l'utilisateur
 
-            if (analyse.islineincsc(analyse.extraire_path()[0]) == False):
+        if research[0] == True:
+            print(research[3])
+            if research[2] != '//' and research[3] > 4:  # toutes les données de l'anaylse sont dans la base de données
+                print('tout y est')
+                print(research[1])
+                output_csv = nom_analyse.get_row_database(research[1])
+                nom_analyse.add_list(nom_analyse.path_to_csv_file,
+                                     output_csv)  # rajout des données dans le csv de l'analyse
+
+            if research[2] != '//' and research[3] < 5:  # il n'y a que le bpm dans la base de données
+                print("il n'y a que le bpm")
+                if flag_bpm == True:  # l'utilisateur veut analyser le bpm
+                    output_csv = nom_analyse.get_row_database(research[0])[:4]
+                if flag_tonalite == True:
+                    y, s = analyse.extrairedatamusic()
+                    Fs = 44100  # sampling rate
+                    notefreq = analyse.analysefft(y, Fs, 50,
+                                                  False)  # notesfreq est la matrice contenant les fréquences significatives des k samples analysés
+                    tonalite = analyse.rechercheaccords(notefreq)
+                    output_csv = output_csv + tonalite
+                nom_analyse.delete_row_database(research[1])  # on remove la ligne de la base de données
+                nom_analyse.add_list(nom_analyse.path_to_database,
+                                     output_csv)  # rajout des données dans la base de données
+                nom_analyse.add_list(nom_analyse.path_to_csv_file,
+                                     output_csv)  # rajout des données dans le csv de l'analyse
+
+            if research[2] == '//':  # il y seulement l'analyse de la tonalité
+                print("il n'y a que l'analyse de la tonalité")
+                if flag_bpm == True:
+                    y, sr = analyse.extrairedatamusic()  # extraction des données des musiques
+                    output_csv = analyse.analyse_bpm(y, sr)  # analyse bpm
+                if flag_tonalite == True:
+                    output_csv = output_csv + nom_analyse.get_row_database(research[0])[1:]
+                nom_analyse.delete_row_database(research[1])  # on remove la ligne de la base de données
+                nom_analyse.add_list(nom_analyse.path_to_database,
+                                     output_csv)  # rajout des données dans la base de données
+                nom_analyse.add_list(nom_analyse.path_to_csv_file,
+                                     output_csv)  # rajout des données dans le csv de l'analyse
+
+        else:
+            bpm = []
+            tonalite = []
+            if flag_tonalite != False or flag_bpm != False:
                 y, sr = analyse.extrairedatamusic()  # extraction des données des musiques
-                bpm = analyse.analyse_bpm(y, sr)  # analyse bpm
-                analyse.ecrirecsv(analyse.pathtobdd, bpm)  # écriture du fichier csv
-                analyse.ecrirecsv(analyse.NomFichierCsv, bpm)
-
-            k += 1
-
-    finally:
-        file.close()
+                if flag_bpm == True:
+                    bpm = analyse.analyse_bpm(y, sr)  # analyse bpm
+                if flag_tonalite == True:
+                    Fs = 44100  # sampling rate
+                    notefreq = analyse.analysefft(y, Fs, 50,
+                                                  False)  # notesfreq est la matrice contenant les fréquences significatives des k samples analysés
+                    tonalite = analyse.rechercheaccords(notefreq)
+                nom_analyse.add_list(nom_analyse.path_to_database, bpm + tonalite)
+                nom_analyse.add_list(nom_analyse.path_to_csv_file, bpm + tonalite)
+        k += 1
