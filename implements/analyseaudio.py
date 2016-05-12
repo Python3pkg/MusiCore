@@ -659,10 +659,31 @@ class analyse:
             temporel.append(DurationPitch[0])
             DurationPitch = temporel
 
-        # écriture des résultats dans la base de donnée
-
-
         return Tonalite
+
+    def is_music_harmonic(self, tonalite):
+        '''
+
+        :param tonalite: liste des tonalités trouvées dans la musique
+        :return: renvoie si la musique est tonale ou atonale selon le critère que le coeff de correlation le plus élevé trouvé est plus faible que 0,7
+        '''
+        # on determine le coeff de correlation maximal
+        tonalite_max = 0
+        for i in len(tonalite):
+            key = tonalite[2 * i]
+            coef_corr = tonalite[2 * (i + 1)]
+            if coef_corr > tonalite_max:
+                tonalite_max = coef_corr
+
+        # on effectue une regression selon le fait que le taux de correlation est plus faible que 0.7
+        if tonalite_max < 0.7:
+            print('la musique est atonale')
+            return False
+        else:
+            return True
+        return analyse_tonalite(tonalite)
+
+
 
 # ======================================================
 # Fonctions annexes
