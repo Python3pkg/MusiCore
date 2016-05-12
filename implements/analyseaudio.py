@@ -113,7 +113,7 @@ class csv_musicore:
                 if len(row) != 0:
                     if (row[0] == titre):
                         print('Le fichier existe deja dans la base de donnée')
-                        return [True, num_row, row[1], len(row)]
+                        return [True, num_row, row[1], len(row), row[4]]
                     num_row += 1
         finally:
             file.close()
@@ -234,7 +234,6 @@ class csv_musicore:
             for row in reader:
                 if count != num_row:
                     all.append(row)
-                print(count)
                 count += 1
             writer.writerows(all)
             os.remove(self.path_to_database)
@@ -271,9 +270,38 @@ class csv_musicore:
         else:
             print("le fichier n'existe pas")
 
+    def safe_state(self):
+        '''
+        vérifie que le fichier csv n'a pas de problème c'est à dire des sauts de lignes blanc
+        :return: boolean
+        '''
+        with open(self.path_to_csv_file, 'rt') as input:
+            reader = csv.reader(input, delimiter=',')
+            count = 1
+            for row in reader:
+                print(len(row))
+                if len(row) == 0:
+                    self.delete_row(count - 1)
+                    count -= 1
+                count += 1
+        return list
 
-            # vérifie que l'on peut ouvrir lereader = csv.reader(input, delimiter=',') fichier
-
+    def safe_state_database(self):
+        '''
+        vérifie que la fichier csv de la base de donné est dans un bon état
+        :return: boolean
+        '''
+        with open(self.path_to_database, 'rt') as input:
+            reader = csv.reader(input, delimiter=',')
+            count = 1
+            list = []
+            for row in reader:
+                print(len(row))
+                if len(row) == 0:
+                    self.delete_row_database(count - 1)
+                    count -= 1
+                count += 1
+        return list
 
 ###############################################################################
 # class `analyse`
@@ -659,6 +687,12 @@ class analyse:
             temporel.append(DurationPitch[0])
             DurationPitch = temporel
 
+        if self.is_music_harmonic(Tonalite) == False:
+            print("l'algo estime que la musique est atonale")
+            Tonalite = ['**Musique atonale**']
+        else:
+            print("l'algorithme estime que la musique est tonale")
+
         return Tonalite
 
     def is_music_harmonic(self, tonalite):
@@ -669,8 +703,8 @@ class analyse:
         '''
         # on determine le coeff de correlation maximal
         tonalite_max = 0
-        for i in len(tonalite):
-            key = tonalite[2 * i]
+        for i in range(len(tonalite) // 2):
+            key = tonalite[2 * (i)]
             coef_corr = tonalite[2 * (i + 1)]
             if coef_corr > tonalite_max:
                 tonalite_max = coef_corr
@@ -681,7 +715,6 @@ class analyse:
             return False
         else:
             return True
-        return analyse_tonalite(tonalite)
 
 
 
