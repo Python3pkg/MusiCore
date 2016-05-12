@@ -333,14 +333,14 @@ class analyse:
             self.pathtobdd = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + "/database/database"
         else:
             self.pathtobdd = pathtobdd  # chemin du fichier csv étant la base de donnée: par défaut '~/MusiCore/database/database'
-
+        self.time = 0
 
     def extraire_path(self):
         """
         permet d'extraire d'un chemin absolu le nom du fichier une list
 
         :param path: chemin absolue d'une fichier audio
-        :return: list =[nom fichier, chemin du repertoire du dossier contenant le fichier audio]
+        :return: list =[nom fichi   er, chemin du repertoire du dossier contenant le fichier audio]
 
         """
 
@@ -392,8 +392,10 @@ class analyse:
         # On l'emplacement courant a dossier ou se situe la musique
         os.chdir(self.extraire_path()[1])
 
-        # on charge le fichier de musique
-        return librosa.load(filename)
+        y, s = librosa.load(filename)  # on charge le fichier de musique
+
+        self.time = (2 * (len(y) / 44100))  # calcul de la durée de la musique en seconde
+        return y, s
 
 
     def analyse_bpm(self, y, sr):
