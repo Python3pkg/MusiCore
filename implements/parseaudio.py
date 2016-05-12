@@ -53,14 +53,15 @@ def parseaudio(nomanalyse=None, flag_bpm=False, flag_tonalite=False):
         if research[0] == True:
             print(research[3])
             if research[2] != '//' and research[3] > 4:  # toutes les données de l'anaylse sont dans la base de données
-                print('tout y est')
+                print('toutes les infomations sur la musique sont présentes')
                 print(research[1])
                 output_csv = nom_analyse.get_row_database(research[1])
                 nom_analyse.add_list(nom_analyse.path_to_csv_file,
                                      output_csv)  # rajout des données dans le csv de l'analyse
 
-            if research[2] != '//' and research[3] < 5:  # il n'y a que le bpm dans la base de données
-                print("il n'y a que le bpm")
+            if (research[2] != '//' or research[4] == '**Musique atonale**') and research[
+                3] < 5:  # il n'y a que le bpm dans la base de données
+                print("il n'y a que les informations sur l'analyse bpm")
                 if flag_bpm == True:  # l'utilisateur veut analyser le bpm
                     output_csv = nom_analyse.get_row_database(research[0])[:4]
                 if flag_tonalite == True:
@@ -77,8 +78,8 @@ def parseaudio(nomanalyse=None, flag_bpm=False, flag_tonalite=False):
                 nom_analyse.add_list(nom_analyse.path_to_csv_file,
                                      output_csv)  # rajout des données dans le csv de l'analyse
 
-            if research[2] == '//':  # il y seulement l'analyse de la tonalité
-                print("il n'y a que l'analyse de la tonalité")
+            if research[2] == '//' or research[2] == '**Musique atonale**':  # il y seulement l'analyse de la tonalité
+                print("il n'y a que les informations sur l'analyse de la tonalité")
                 if flag_bpm == True:
                     y, sr = analyse.extrairedatamusic()  # extraction des données des musiques
                     output_csv = analyse.analyse_bpm(y, sr)  # analyse bpm
