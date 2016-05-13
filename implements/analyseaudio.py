@@ -113,7 +113,10 @@ class csv_musicore:
                 if len(row) != 0:
                     if (row[0] == titre):
                         print('Le fichier existe deja dans la base de donnée')
-                        return [True, num_row, row[1], len(row), row[4]]
+                        if len(row) < 5:
+                            return [True, num_row, row[1], len(row), None]
+                        else:
+                            return [True, num_row, row[1], len(row), row[4]]
                     num_row += 1
         finally:
             file.close()
