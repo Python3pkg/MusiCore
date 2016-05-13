@@ -32,14 +32,16 @@ def parseaudio(nomanalyse=None, flag_bpm=False, flag_tonalite=False):
 
     if nomanalyse is None:
         raise ValueError("Error: il manque le nom de l'analyse")
-    output = implements.analyseaudio.csv_musicore('output_ui')
+    # output = implements.analyseaudio.csv_musicore('output_ui')
+
+    # on itnitialise l'analyse
     nom_analyse = implements.analyseaudio.csv_musicore(nomanalyse)
     nom_analyse.clear()
-    path_to_music = output.get_column(0)
-    print(path_to_music)
+    # path_to_music = output.get_column(0)
+    # print(path_to_music)
     k = 1
 
-    for i in path_to_music:
+    for i in path_to_files:
         numanalyse = str(k)
         analyse = "analyse" + numanalyse
         print(analyse + " : fichier " + i)
