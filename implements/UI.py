@@ -3,6 +3,7 @@
 import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
+# import Gdk
 import implements.analyseaudio
 import implements.parse_audio_2
 
@@ -64,6 +65,7 @@ class Handler:
 
             get_bpm = implements.parse_audio_2.parser(nom_analyse, analyse, True, False)
             print(get_bpm)
+            playlist[k - 1][2] = float(get_bpm[3])
             k += 1
 #        implements.parseaudio.parseaudio(exportPaths(), True, False)
 #        actualize()'''
@@ -87,6 +89,10 @@ class Handler:
 
             get_tonalite = implements.parse_audio_2.parser(nom_analyse, analyse, False, True)
             print(get_tonalite)
+            if get_tonalite[4] == '**Musique atonale**':
+                playlist[k - 1][3] = get_tonalite[4]
+            else:
+                playlist[k - 1][3] = get_tonalite[5]
             k += 1
 #        implements.parseaudio.parseaudio(exportPaths(), False, True)
 #        actualize()
@@ -111,16 +117,24 @@ class Handler:
 
             get_bpm = implements.parse_audio_2.parser(nom_analyse, analyse, True, True)
             print(get_bpm)
+            playlist[k - 1][2] = float(get_bpm[3])
+            if get_bpm[4] == '**Musique atonale**':
+                playlist[k - 1][3] = get_bpm[4]
+            else:
+                playlist[k - 1][3] = get_bpm[5]
             k += 1
 
     def onLaunch(self, button):
         print('test')
         # print(exportPlaylist())
-        for i in playlist:
-            print(i)
+        playlist[0][1] = '3'
+
 #        implements.tri()
 #        actualize()
 
+    def on_selection_button_clicked(self, widget):
+        """Called on any of the button clicks"""
+        print('coucou')
 
 ###Importation du fichier Glade
 
