@@ -441,7 +441,7 @@ class analyse:
         # self.ecrirecsv(self.pathtobdd, ElemCsv)  # fichier
         # self.ecrirecsv(self.NomFichierCsv, ElemCsv)
 
-        return ElemCsv  #bpm debut, bpm fin , bpm fin
+        return ElemCsv  # bpm debut, bpm fin , bpm moyen
 
     def analysefft(self, y=None, Fs=None, k=None, afficher=False):
         '''
@@ -673,6 +673,8 @@ class analyse:
         MinorProfil = [6.33, 2.68, 3.52, 5.38, 2.60, 3.53, 2.54, 4.75, 3.98, 2.69, 3.34, 3.17]
         Note = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
         Tonalite = ['//']
+        max_tonalite = 0
+        max_note = ''
 
         for i in range(12):
             Major = numpy.corrcoef(DurationPitch, MajorProfil)[0, 1]
@@ -682,6 +684,7 @@ class analyse:
                 print(Major)
                 Tonalite.append(Note[i] + "M")
                 Tonalite.append(Major)
+
             if Minor > 0.5:
                 print("%sm avec un coef de corr: " % (Note[i]))
                 print(Minor)
