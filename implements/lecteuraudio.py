@@ -31,7 +31,7 @@ class lecteur_audio():
         nom_instance.play()
 
     def pause(self):
+        return
 
     def stop(self):
-
-    def
+        return
