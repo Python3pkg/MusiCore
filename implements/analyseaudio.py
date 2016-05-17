@@ -397,7 +397,9 @@ class analyse:
 
         y, s = librosa.load(filename)  # on charge le fichier de musique
 
-        self.time = (2 * (len(y) / 44100))  # calcul de la durée de la musique en seconde
+        # self.time = str(float("{0:.2f}".format(2 * (len(y) / 44100))))  # calcul de la durée de la musique en seconde
+        self.time = str(int(2 * (len(y) / 44100)))
+
         return y, s
 
 
@@ -718,7 +720,7 @@ class analyse:
                 tonalite_max = coef_corr
 
         # on effectue une regression selon le fait que le taux de correlation est plus faible que 0.7
-        if tonalite_max < 0.7:
+        if tonalite_max < 0.65:
             print('la musique est atonale')
             return False
         else:
