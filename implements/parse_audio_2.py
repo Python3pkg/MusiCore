@@ -82,7 +82,7 @@ def parser(nom_analyse, analyse, flag_bpm, flag_tonalite):
         bpm = []
         tonalite = []
         if flag_tonalite != False or flag_bpm != False:
-            y, sr = analyse.extrairedatamusic()  # extraction des données des musiques
+            y, sr = analyse.extrairedatamusic()  # extraction des données des
             if flag_bpm == True:
                 bpm = analyse.analyse_bpm(y, sr)  # analyse bpm
             if flag_tonalite == True:
@@ -90,7 +90,7 @@ def parser(nom_analyse, analyse, flag_bpm, flag_tonalite):
                 notefreq = analyse.analysefft(y, Fs, 50,
                                               False)  # notesfreq est la matrice contenant les fréquences significatives des k samples analysés
                 tonalite = analyse.rechercheaccords(notefreq)
-            nom_analyse.add_list(nom_analyse.path_to_database, bpm + tonalite)
+            nom_analyse.add_list(nom_analyse.path_to_database, bpm + tonalite + [str(analyse.time)])
             # nom_analyse.add_list(nom_analyse.path_to_csv_file, bpm + tonalite)
-            return bpm + tonalite
+            return bpm + tonalite + [analyse.time]
     k += 1
