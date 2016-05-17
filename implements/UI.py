@@ -65,7 +65,7 @@ class Handler:
 
             get_bpm = implements.parse_audio_2.parser(nom_analyse, analyse, True, False)
             print(get_bpm)
-            playlist[k - 1][2] = float(get_bpm[3])
+            playlist[k - 1][1] = float(get_bpm[3])
             k += 1
 #        implements.parseaudio.parseaudio(exportPaths(), True, False)
 #        actualize()'''
@@ -122,6 +122,7 @@ class Handler:
                 playlist[k - 1][3] = get_bpm[4]
             else:
                 playlist[k - 1][3] = get_bpm[5]
+            playlist[k - 1][1] = get_bpm[-1]
             k += 1
 
     def onLaunch(self, button):
