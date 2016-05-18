@@ -122,7 +122,7 @@ class Handler:
             if get_bpm[4] == '**Musique atonale**':
                 playlist[k - 1][3] = get_bpm[4]
             else:
-                playlist[k - 1][3] = get_bpm[5]
+                playlist[k - 1][3] = get_bpm[-2]
             playlist[k - 1][1] = get_bpm[-1]
             k += 1
 
