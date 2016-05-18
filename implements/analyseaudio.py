@@ -398,7 +398,10 @@ class analyse:
         y, s = librosa.load(filename)  # on charge le fichier de musique
 
         # self.time = str(float("{0:.2f}".format(2 * (len(y) / 44100))))  # calcul de la durée de la musique en seconde
-        self.time = str(int(2 * (len(y) / 44100)))
+        seconds = int(2 * (len(y) / 44100))
+        minutes = str(seconds // 60)
+        seconds = str(seconds % 60)
+        self.time = minutes + ':' + seconds
 
         return y, s
 
@@ -676,8 +679,7 @@ class analyse:
         MinorProfil = [6.33, 2.68, 3.52, 5.38, 2.60, 3.53, 2.54, 4.75, 3.98, 2.69, 3.34, 3.17]
         Note = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
         Tonalite = ['//']
-        max_tonalite = 0
-        max_note = ''
+        list_tonalite = ''
 
         for i in range(12):
             Major = numpy.corrcoef(DurationPitch, MajorProfil)[0, 1]
@@ -687,24 +689,28 @@ class analyse:
                 print(Major)
                 Tonalite.append(Note[i] + "M")
                 Tonalite.append(Major)
+                list_tonalite = list_tonalite + Note[i] + "M" + '/'
 
             if Minor > 0.5:
                 print("%sm avec un coef de corr: " % (Note[i]))
                 print(Minor)
                 Tonalite.append(Note[i] + "m")
                 Tonalite.append(Minor)
+                list_tonalite = list_tonalite + Note[i] + "m" + '/'
 
             temporel = DurationPitch[1:]  # on effectue une translation de la liste DurationPitch
             temporel.append(DurationPitch[0])
             DurationPitch = temporel
 
+        # On regarde si la musique est harmonique
         if self.is_music_harmonic(Tonalite) == False:
             print("l'algo estime que la musique est atonale")
             Tonalite = ['**Musique atonale**']
         else:
             print("l'algorithme estime que la musique est tonale")
 
-        return Tonalite
+        return Tonalite + [list_tonalite]
+
 
     def is_music_harmonic(self, tonalite):
         '''
