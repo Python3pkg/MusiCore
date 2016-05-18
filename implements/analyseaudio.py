@@ -418,7 +418,8 @@ class analyse:
         """
 
         # creation de la liste qui va etre exportee dans le csv
-        ElemCsv = [self.extraire_path()[0]]
+        # ElemCsv = [self.extraire_path()[0]]
+        ElemCsv = []
 
         # execution du tracker bpm par default
         tempo, beat_frames = librosa.beat.beat_track(y=y, sr=sr)
