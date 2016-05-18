@@ -709,6 +709,10 @@ class analyse:
         else:
             print("l'algorithme estime que la musique est tonale")
 
+        if self.major_plus_minor(Tonalite) != False:
+            list_tonalite = self.major_plus_minor(Tonalite)
+
+
         return Tonalite + [list_tonalite]
 
 
@@ -733,6 +737,37 @@ class analyse:
         else:
             return True
 
+    def major_plus_minor(self, tonalite):
+        '''
+        On regarde si la musique possède des tonalités majeurs et mineurs
+        une même clé. Dans ce cas on prend le nom de la clé sans tenir
+        compte des mineur et majeur
+
+        :param tonalite: liste des tonalités trouvées dans la musique
+        :return: renvoie si la musique est tonale ou atonale selon le critère que le coeff de correlation le plus élevé trouvé est plus faible que 0,7
+        '''
+        note_mineur = ['Cm', 'C#m', 'Dm', 'D#m', 'Em', 'Fm', 'F#m', 'Gm', 'G#m', 'Am', 'A#m', 'Bm']
+        note_majeur = ['CM', 'C#M', 'DM', 'D#M', 'EM', 'FM', 'F#M', 'GM', 'G#M', 'AM', 'A#M', 'BM']
+        note = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
+        list_key = []
+
+        for i in range(len(tonalite) // 2):
+            key = tonalite[2 * (i) + 1]
+            coef_corr = tonalite[2 * (i)]
+            list_key.append(key)
+
+        for i in list_key:
+            for j in range(len(note_mineur)):
+                print('coucou')
+                print(i)
+                print(note_mineur[j - 1])
+                if i == note_mineur[j - 1]:
+                    print('coucou')
+                    for w in list_key:
+                        if w == note_majeur[j - 1] and w != i:
+                            return note[j - 1]
+
+        return False
 
 
 # ======================================================
