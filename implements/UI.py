@@ -47,7 +47,7 @@ class Handler:
         return None
 
     def onBPM(self, button):
-        print("vous avez cliqué sur le bouton d'anlyse du bpm")
+        print("vous avez cliqué sur le bouton d'analyse du bpm")
         flag_bpm = True
         flag_tonalite = False
         nomanalyse = 'test'
@@ -62,10 +62,10 @@ class Handler:
             analyse = "analyse" + numanalyse
             print(analyse + " : fichier " + i)
             analyse = implements.analyseaudio.analyse(i, nom_analyse.path_to_csv_file, nom_analyse.path_to_database)
-
             get_bpm = implements.parse_audio_2.parser(nom_analyse, analyse, True, False)
             print(get_bpm)
-            playlist[k - 1][1] = float(get_bpm[3])
+            playlist[k - 1][2] = float(get_bpm[3])
+            playlist[k - 1][1] = str(get_bpm[-1])
             k += 1
 #        implements.parseaudio.parseaudio(exportPaths(), True, False)
 #        actualize()'''
@@ -92,7 +92,8 @@ class Handler:
             if get_tonalite[4] == '**Musique atonale**':
                 playlist[k - 1][3] = get_tonalite[4]
             else:
-                playlist[k - 1][3] = get_tonalite[5]
+                playlist[k - 1][3] = str(get_tonalite[5])
+            playlist[k - 1][1] = get_tonalite[-1]
             k += 1
 #        implements.parseaudio.parseaudio(exportPaths(), False, True)
 #        actualize()
