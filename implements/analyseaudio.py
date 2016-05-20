@@ -758,11 +758,7 @@ class analyse:
 
         for i in list_key:
             for j in range(len(note_mineur)):
-                print('coucou')
-                print(i)
-                print(note_mineur[j - 1])
                 if i == note_mineur[j - 1]:
-                    print('coucou')
                     for w in list_key:
                         if w == note_majeur[j - 1] and w != i:
                             return note[j - 1]
