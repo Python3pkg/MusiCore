@@ -487,3 +487,21 @@ flag_analyse = 0
        - la tonalité attendu est F#
  commentaire: '''
 ######################################################
+
+######################################################
+# Musique 13
+# Analyse à l'aide de l'interface graphique
+''' résultat:
+fichier /home/gerox/Téléchargements/Maroon 5 - Animals (Lyric Video).mp3
+       - le test est correct
+       - on trouve:
+            EM avec un coef de corr:
+            0.592502540854
+            Em avec un coef de corr:
+            0.744238329757
+            BM avec un coef de corr:
+            0.644929571144
+            Bm avec un coef de corr:
+            0.761439653742
+       - la tonalité attendu est F#
+ commentaire: '''
