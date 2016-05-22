@@ -4,6 +4,7 @@ import implements.analyseaudio
 import os
 
 # Test de l'analyse du BPM
+# Il faut mettre le chemin des fichiers à analyser dans l'instanciation des objets analyse
 #
 # Commenaires: L'analyse du BPM est correct dans la majorité des cas
 # seul les musiques avec beaucoup de batteries peuvent engendrer un problème

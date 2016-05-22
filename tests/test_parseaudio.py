@@ -30,3 +30,5 @@ finally:
 
 # test de parse audio (le fait de mettre True et True permet de lancer l'analyse bpm et harmonique)
 implements.parseaudio.parseaudio("playlistbob", True, True)
+
+############################################################################################
