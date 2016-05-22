@@ -6,6 +6,8 @@ from gi.repository import Gtk
 import analyseaudio
 import parse_audio_2
 import Exportation
+from pydub import AudioSegment
+import os
 
 ###Fonctions internes au GUI
 
@@ -168,27 +170,46 @@ True)
         if loc != " " :
           pl = open(loc,"w")
           pl.write("#EXTM3U")
-          resultat = exportTitleandpath()
-          for i in range(len(resultat)):
-            j=resultat[i]
-            pl.write("\nEXTINF:")
-            pl.write(str(i))
-            pl.write(", ")
-            pl.write(j[0])
+          resultat = exportPaths()
+          for i in resultat:
             pl.write("\n")
-            pl.write(j[1])
+            pl.write(i)
           pl.close()
+          os.system("echo " + loc + ">../database/save")
         return None
 
-    def onOpen(self, button):
-        selected=dialog.get_filenames()
-        for row in selected:
-            playlist.append([getpath(row), None,  None, None, row])
+    def onMp3(self, widget):
+        saver = Gtk.FileChooserDialog("Please choose a file", self,
+            Gtk.FileChooserAction.SAVE,
+            (Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
+             Gtk.STOCK_OPEN, Gtk.ResponseType.OK))
+
+        response = saver.run()
+        if response == Gtk.ResponseType.OK:
+            print("Open clicked")
+            loc=saver.get_filename()
+        elif response == Gtk.ResponseType.CANCEL:
+            print("Cancel clicked")
+            loc=" "
+        saver.destroy()
+        if loc != " " :
+          resultat = exportPaths()
+          song = AudioSegment.from_mp3(resultat[0])
+          playlist = song
+          for i in range (1,len(resultat)):
+             song = AudioSegment.from_mp3(resultat[i])
+             playlist = playlist.append(song, crossfade=(10 * 1000))
+          playlist = playlist.fade_out(10)
+          out_f = open(loc,'wb')
+          playlist.export(out_f, format='mp3')
+          os.system("echo " + loc + ">../database/save")
+
+    def onVLC(self, button):
+        file = open("../database/save")
+        loc = "vlc "+ file.read()
+        file.close()
+        os.system(loc)
         return None
-
-
-
-
 
 
 
@@ -205,7 +226,6 @@ waiter = builder.get_object("Waiter")
 dialog = builder.get_object("FileChooser")
 playlist = builder.get_object("Playlist")
 ponderation= builder.get_object("ponderation")
-
 
 
 ###Affichage et lancement du Main###
