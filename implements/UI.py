@@ -3,9 +3,8 @@
 import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
-# import Gdk
-import implements.analyseaudio
-import implements.parse_audio_2
+import analyseaudio
+import parse_audio_2
 
 ###Fonctions internes au GUI
 
@@ -52,8 +51,8 @@ class Handler:
         flag_tonalite = False
         nomanalyse = 'test'
 
-        # on itnitialise l'analyse
-        nom_analyse = implements.analyseaudio.csv_musicore(nomanalyse)
+        # on initialise l'analyse
+        nom_analyse = analyseaudio.csv_musicore(nomanalyse)
         nom_analyse.clear()
         k = 1
 
@@ -61,11 +60,13 @@ class Handler:
             numanalyse = str(k)
             analyse = "analyse" + numanalyse
             print(analyse + " : fichier " + i)
-            analyse = implements.analyseaudio.analyse(i, nom_analyse.path_to_csv_file, nom_analyse.path_to_database)
-            get_bpm = implements.parse_audio_2.parser(nom_analyse, analyse, True, False)
+            analyse = analyseaudio.analyse(i, nom_analyse.path_to_csv_file, nom_analyse.path_to_database)
+            get_bpm = parse_audio_2.parser(nom_analyse, analyse, True, False)
             print(get_bpm)
             playlist[k - 1][2] = float(get_bpm[3])
             playlist[k - 1][1] = str(get_bpm[-1])
+            while Gtk.events_pending():
+              Gtk.main_iteration()
             k += 1
 #        implements.parseaudio.parseaudio(exportPaths(), True, False)
 #        actualize()'''
@@ -77,7 +78,7 @@ class Handler:
         nomanalyse = 'test'
 
         # on itnitialise l'analyse
-        nom_analyse = implements.analyseaudio.csv_musicore(nomanalyse)
+        nom_analyse = analyseaudio.csv_musicore(nomanalyse)
         nom_analyse.clear()
         k = 1
 
@@ -85,15 +86,18 @@ class Handler:
             numanalyse = str(k)
             analyse = "analyse" + numanalyse
             print(analyse + " : fichier " + i)
-            analyse = implements.analyseaudio.analyse(i, nom_analyse.path_to_csv_file, nom_analyse.path_to_database)
+            analyse = analyseaudio.analyse(i, nom_analyse.path_to_csv_file, nom_analyse.path_to_database)
 
-            get_tonalite = implements.parse_audio_2.parser(nom_analyse, analyse, False, True)
+            get_tonalite = parse_audio_2.parser(nom_analyse, analyse, False, 
+True)
             print(get_tonalite)
             if get_tonalite[4] == '**Musique atonale**':
                 playlist[k - 1][3] = get_tonalite[4]
             else:
                 playlist[k - 1][3] = str(get_tonalite[5])
             playlist[k - 1][1] = get_tonalite[-1]
+            while Gtk.events_pending():
+              Gtk.main_iteration()
             k += 1
 #        implements.parseaudio.parseaudio(exportPaths(), False, True)
 #        actualize()
@@ -106,7 +110,7 @@ class Handler:
         nomanalyse = 'test'
 
         # on itnitialise l'analyse
-        nom_analyse = implements.analyseaudio.csv_musicore(nomanalyse)
+        nom_analyse = analyseaudio.csv_musicore(nomanalyse)
         nom_analyse.clear()
         k = 1
 
@@ -114,9 +118,9 @@ class Handler:
             numanalyse = str(k)
             analyse = "analyse" + numanalyse
             print(analyse + " : fichier " + i)
-            analyse = implements.analyseaudio.analyse(i, nom_analyse.path_to_csv_file, nom_analyse.path_to_database)
+            analyse = analyseaudio.analyse(i, nom_analyse.path_to_csv_file, nom_analyse.path_to_database)
 
-            get_bpm = implements.parse_audio_2.parser(nom_analyse, analyse, True, True)
+            get_bpm = parse_audio_2.parser(nom_analyse, analyse, True, True)
             print(get_bpm)
             playlist[k - 1][2] = float(get_bpm[3])
             if get_bpm[4] == '**Musique atonale**':
@@ -124,6 +128,8 @@ class Handler:
             else:
                 playlist[k - 1][3] = get_bpm[-2]
             playlist[k - 1][1] = get_bpm[-1]
+            while Gtk.events_pending():
+              Gtk.main_iteration()
             k += 1
 
     def onLaunch(self, button):

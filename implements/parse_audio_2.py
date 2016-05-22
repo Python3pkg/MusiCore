@@ -7,7 +7,7 @@ Ce module est initié par l'interface graphique
 
 ############################################################################################
 
-import implements.analyseaudio
+import analyseaudio
 import csv
 import os
 import sys
