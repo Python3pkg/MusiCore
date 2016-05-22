@@ -104,6 +104,9 @@ class csv_musicore:
 
         '''
 
+        if isinstance(titre, str) == False:
+            raise ValueError('le titre doit être un string (str)')
+
         fname = self.path_to_database
         file = open(fname, "rt")  # file = open(fname, "rb") python 2.7
         num_row = 0
@@ -126,6 +129,9 @@ class csv_musicore:
         return [False]
 
     def add_column(self, path_to_csv_file, list_a_rajouter, col=None):
+
+        if isinstance(list_a_rajouter, list) == False:
+            raise ValueError('la liste doit être un objet list')
         with open(path_to_csv_file, 'rt') as input, open(self.rootfolder + '/database/temp.csv', 'wt') as output:
             reader = csv.reader(input, delimiter=',')
             writer = csv.writer(output, delimiter=',')
@@ -152,6 +158,10 @@ class csv_musicore:
         fname = self.path_to_csv_file
         file = open(fname, "rt")  # on ouvre le fichier csv de la base de donnée
         colonne = []
+
+        if isinstance(num_col, int) == False:
+            raise ValueError('la liste doit être un entier')
+
         try:
             reader = csv.reader(file)  # on initialise le reader csv
             for row in (reader):
@@ -161,6 +171,10 @@ class csv_musicore:
         return colonne
 
     def get_row(self, num_row):
+
+        if isinstance(num_row, int) == False:
+            raise ValueError('la liste doit être un entier')
+
         fname = self.path_to_csv_file
         file = open(fname, "rt")  # on ouvre le fichier csv de la base de donnée
         flag_row = 0
@@ -175,6 +189,10 @@ class csv_musicore:
         return False
 
     def get_column_database(self, num_col):
+
+        if isinstance(num_col, int) == False:
+            raise ValueError('la liste doit être un entier')
+
         fname = self.path_to_database
         file = open(fname, "rt")  # on ouvre le fichier csv de la base de donnée
         colonne = []
@@ -187,6 +205,10 @@ class csv_musicore:
         return colonne
 
     def get_row_database(self, num_row):
+
+        if isinstance(num_row, int) == False:
+            raise ValueError('la liste doit être un entier')
+
         fname = self.path_to_database
         file = open(fname, "rt")  # on ouvre le fichier csv de la base de donnée
         flag_row = 0
@@ -201,6 +223,10 @@ class csv_musicore:
         return False
 
     def delete_row(self, num_row):
+
+        if isinstance(num_row, int) == False:
+            raise ValueError('la liste doit être un entier')
+
         with open(self.path_to_csv_file, 'rt') as input, open(self.rootfolder + '/database/temp.csv', 'wt') as output:
             reader = csv.reader(input, delimiter=',')
             writer = csv.writer(output, delimiter=',')
@@ -218,6 +244,10 @@ class csv_musicore:
         return
 
     def delete_column(self, num_col):
+
+        if isinstance(num_col, int) == False:
+            raise ValueError('la liste doit être un entier')
+
         with open(self.path_to_csv_file, 'rt') as input, open(self.rootfolder + '/database/temp.csv', 'wt') as output:
             reader = csv.reader(input, delimiter=',')
             writer = csv.writer(output, delimiter=',')
@@ -232,6 +262,10 @@ class csv_musicore:
         return
 
     def delete_row_database(self, num_row):
+
+        if isinstance(num_row, int) == False:
+            raise ValueError('la liste doit être un entier')
+
         with open(self.path_to_database, 'rt') as input, open(self.rootfolder + '/database/temp.csv', 'wt') as output:
             reader = csv.reader(input, delimiter=',')
             writer = csv.writer(output, delimiter=',')
@@ -248,6 +282,10 @@ class csv_musicore:
         return
 
     def delete_column_database(self, num_col):
+
+        if isinstance(num_col, int) == False:
+            raise ValueError('la liste doit être un entier')
+
         with open(self.path_to_database, 'rt') as input, open(self.rootfolder + '/database/temp.csv', 'wt') as output:
             reader = csv.reader(input, delimiter=',')
             writer = csv.writer(output, delimiter=',')
@@ -285,12 +323,12 @@ class csv_musicore:
             reader = csv.reader(input, delimiter=',')
             count = 1
             for row in reader:
-                print(len(row))
+                # print(len(row))
                 if len(row) == 0:
                     self.delete_row(count - 1)
                     count -= 1
                 count += 1
-        return list
+        return
 
     def safe_state_database(self):
         '''
@@ -773,6 +811,8 @@ class analyse:
 # Fonctions annexes
 # ======================================================
 
+def switch_harmonic(list_of_harmonique):
+    return
 # plot(frq, abs(Y), 'r')  # plotting the spectrum
 # xlabel('Freq (Hz)')
 # ylabel('|Y(freq)|')
