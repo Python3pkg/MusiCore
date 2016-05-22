@@ -457,7 +457,7 @@ flag_analyse = 0
 
 ######################################################
 # Musique 12
-flag_analyse = 1  # ce flag est mis à 1 si l'on veut analyser la musique
+flag_analyse = 0  # ce flag est mis à 1 si l'on veut analyser la musique
 if flag_analyse == 1:
     print('la musique n° %s est analysé' % k)
     analyse = implements.analyseaudio.analyse(
@@ -503,5 +503,250 @@ fichier /home/gerox/Téléchargements/Maroon 5 - Animals (Lyric Video).mp3
             0.644929571144
             Bm avec un coef de corr:
             0.761439653742
-       - la tonalité attendu est F#
+       - la tonalité attendu est Em
  commentaire: '''
+######################################################
+
+######################################################
+# Musique 14
+# Analyse à l'aide de l'interface graphique
+''' résultat:
+fichier /home/gerox/Téléchargements/Martin Garrix - Animals (Original Mix).mp3
+       - le test est exact
+       - on trouve:
+            FM avec un coef de corr:
+            0.75628135324
+            Fm avec un coef de corr:
+            0.887582754622
+       - la tonalité attendu est Fm
+ commentaire: '''
+######################################################
+
+######################################################
+# Musique 15
+flag_analyse = 0  # ce flag est mis à 1 si l'on veut analyser la musique
+if flag_analyse == 1:
+    print('la musique n° %s est analysé' % k)
+    analyse = implements.analyseaudio.analyse(
+        "/home/gerox/Téléchargements/DVBBS & Borgeous - Tsunami (Original Mix).mp3",
+        'bdd')
+    y, s = analyse.extrairedatamusic()
+    Fs = 44100  # sampling rate
+    notefreq = analyse.analysefft(y, Fs, 70,
+                                  False)  # notesfreq est la matrice contenant les fréquences significatives des k samples analysés
+    tonalite = analyse.rechercheaccords(notefreq)
+
+else:
+    print("la musique n° %s n'est pas analysé" % k)
+
+k += 1
+flag_analyse = 0
+
+''' résultat:
+       - le test est correct
+       - on trouve:
+            EM avec un coef de corr:
+            0.65910470368
+            Em avec un coef de corr:
+            0.643754723088
+            BM avec un coef de corr:
+            0.5710621592
+       - la tonalité attendu est EM
+ commentaire: ne converge pas vers la bonne tonalité pour un nombre de sample de 50 mais converge vers la bonne tonalité pour un nombre de sample de 70'''
+######################################################
+
+######################################################
+# Musique 16
+flag_analyse = 0  # ce flag est mis à 1 si l'on veut analyser la musique
+if flag_analyse == 1:
+    print('la musique n° %s est analysé' % k)
+    analyse = implements.analyseaudio.analyse(
+        "/home/gerox/Téléchargements/The Chainsmokers - Roses ft. ROZES.mp3",
+        'bdd')
+    y, s = analyse.extrairedatamusic()
+    Fs = 44100  # sampling rate
+    notefreq = analyse.analysefft(y, Fs, 75,
+                                  False)  # notesfreq est la matrice contenant les fréquences significatives des k samples analysés
+    tonalite = analyse.rechercheaccords(notefreq)
+
+else:
+    print("la musique n° %s n'est pas analysé" % k)
+
+k += 1
+flag_analyse = 0
+
+''' résultat:
+       - le test n'est pas exactement correct mais très proche
+       - on trouve:
+            EM avec un coef de corr:
+            0.646616765141
+            G#m avec un coef de corr:
+            0.596894593123
+            BM avec un coef de corr:
+            0.804560604125
+            Bm avec un coef de corr:
+            0.641488693253
+       - la tonalité attendu est EM
+ commentaire: ne converge pas vers la bonne tonalité pour un nombre de sample de 50 mais converge vers une des bonne tonalité pour r un nombre de sample de 70'''
+######################################################
+
+######################################################
+# Musique 17
+# Analyse à l'aide de l'interface graphique
+''' résultat:
+fichier /home/gerox/Téléchargements/DJ Snake - Middle (Audio) ft. Bipolar Sunshine.mp3
+       - le test est exact
+       - on trouve:
+            C#m avec un coef de corr:
+            0.838872692727
+            EM avec un coef de corr:
+            0.689721990147
+            AM avec un coef de corr:
+            0.751876373539
+       - la tonalité attendu est C#m
+ commentaire: '''
+######################################################
+
+######################################################
+# Musique 18
+# Analyse à l'aide de l'interface graphique
+''' résultat:
+fichier /home/gerox/Téléchargements/DJ Snake - Middle (Audio) ft. Bipolar Sunshine.mp3
+       - le test est exact
+       - on trouve:
+            C#m avec un coef de corr:
+            0.838872692727
+            EM avec un coef de corr:
+            0.689721990147
+            AM avec un coef de corr:
+            0.751876373539
+       - la tonalité attendu est C#m
+ commentaire: '''
+######################################################
+
+######################################################
+# Musique 19
+flag_analyse = 0  # ce flag est mis à 1 si l'on veut analyser la musique
+if flag_analyse == 1:
+    print('la musique n° %s est analysé' % k)
+    analyse = implements.analyseaudio.analyse(
+        "/home/gerox/Téléchargements/The Chainsmokers - Don't Let Me Down (Audio) ft. Daya.mp3",
+        'bdd')
+    y, s = analyse.extrairedatamusic()
+    Fs = 44100  # sampling rate
+    notefreq = analyse.analysefft(y, Fs, 70,
+                                  False)  # notesfreq est la matrice contenant les fréquences significatives des k samples analysés
+    tonalite = analyse.rechercheaccords(notefreq)
+
+else:
+    print("la musique n° %s n'est pas analysé" % k)
+
+k += 1
+flag_analyse = 0
+
+''' résultat:
+       - le test n'est pas correct
+       - on trouve:
+            F#M avec un coef de corr:
+            0.87070366969
+            BM avec un coef de corr:
+            0.633154344685
+       - la tonalité attendu est G#m
+ commentaire: '''
+######################################################
+
+######################################################
+# Musique 20
+# Analyse à l'aide de l'interface graphique
+''' résultat:
+fichier /home/gerox/Téléchargements/Skrillex & Diplo - Mind feat. Kai (Official Video).mp3
+       - le test est exact
+       - on trouve:
+            C#M avec un coef de corr:
+            0.720177779325
+            A#m avec un coef de corr:
+            0.938174825672
+       - la tonalité attendu est A#m
+ commentaire: '''
+######################################################
+
+######################################################
+# Musique 20
+# Analyse à l'aide de l'interface graphique
+''' résultat:
+fichier /home/gerox/Téléchargements/Skrillex & Diplo - Mind feat. Kai (Official Video).mp3
+       - le test est exact
+       - on trouve:
+            C#M avec un coef de corr:
+            0.720177779325
+            A#m avec un coef de corr:
+            0.938174825672
+       - la tonalité attendu est A#m
+ commentaire: '''
+######################################################
+
+######################################################
+# Musique 21
+# Analyse à l'aide de l'interface graphique
+''' résultat:
+fichier /home/gerox/Téléchargements/Ray Charles - Georgia On My Mind (The Orginal Song From The Albom).mp3
+       - le test ne converge pas
+       - on trouve:
+            l'algo estime que la musique est atonale
+            GM avec un coef de corr:
+            0.617640192354
+       - la chanson n'est pas tonale mais on trouve quelle peut être joué en Fm
+ commentaire: '''
+######################################################
+
+######################################################
+# Musique 22
+# Analyse à l'aide de l'interface graphique
+''' résultat:
+fichier /home/gerox/Téléchargements/Stand By Me, Ben E King, 1961.mp3
+       - le test est exact
+       - on trouve:
+            C#m avec un coef de corr:
+            0.557784243064
+            EM avec un coef de corr:
+            0.610182701334
+            F#m avec un coef de corr:
+            0.625252756297
+            AM avec un coef de corr:
+            0.766851232757
+       - la chanson doit avoir une tonalité de AM
+ commentaire: '''
+######################################################
+
+######################################################
+# Musique 23
+flag_analyse = 1  # ce flag est mis à 1 si l'on veut analyser la musique
+if flag_analyse == 1:
+    print('la musique n° %s est analysé' % k)
+    analyse = implements.analyseaudio.analyse(
+        "/home/gerox/Téléchargements/Louis Armstrong - What a wonderful world Lyrics.mp3",
+        'bdd')
+    y, s = analyse.extrairedatamusic()
+    Fs = 44100  # sampling rate
+    notefreq = analyse.analysefft(y, Fs, 45,
+                                  False)  # notesfreq est la matrice contenant les fréquences significatives des k samples analysés
+    tonalite = analyse.rechercheaccords(notefreq)
+
+else:
+    print("la musique n° %s n'est pas analysé" % k)
+
+k += 1
+flag_analyse = 0
+
+''' résultat:
+       - le test n'est pas correct
+       - on trouve:
+            CM avec un coef de corr:
+            0.751591252341
+            FM avec un coef de corr:
+            0.713845278532
+            Am avec un coef de corr:
+            0.767634137075
+       - la tonalité attendu est FM
+ commentaire: '''
+######################################################
