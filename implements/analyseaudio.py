@@ -708,7 +708,7 @@ class analyse:
         # On regarde si la musique est harmonique
         if self.is_music_harmonic(Tonalite) == False:
             print("l'algo estime que la musique est atonale")
-            Tonalite = ['**Musique atonale**']
+            Tonalite = ['??']
         else:
             print("l'algorithme estime que la musique est tonale")
 
