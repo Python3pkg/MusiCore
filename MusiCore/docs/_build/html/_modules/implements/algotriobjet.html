@@ -1,0 +1,294 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+    <title>implements.algotriobjet &mdash; implements documentation</title>
+
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css"/>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css"/>
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT: '../../',
+            VERSION: '',
+            COLLAPSE_INDEX: false,
+            FILE_SUFFIX: '.html',
+            HAS_SOURCE: true
+        };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="implements  documentation" href="../../index.html"/>
+    <link rel="up" title="Module code" href="../index.html"/>
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9"/>
+
+</head>
+<body role="document">
+
+<div class="document">
+    <div class="documentwrapper">
+        <div class="bodywrapper">
+            <div class="body" role="main">
+
+                <h1>Source code for implements.algotriobjet</h1>
+                <div class="highlight"><pre>
+<span></span><span class="c1"># coding: utf-8</span>
+<span class="c1">#test orienté_objet</span>
+<span class="c1">#classe Musique déf par titre, BPM_debut, BPM_fin, pitch</span>
+
+<span class="c1">#------------------------------</span>
+<span class="c1">#import des librairies nécessaires</span>
+
+<span class="kn">import</span> <span class="nn">csv</span>
+
+<span class="c1">#--------------------</span>
+<span class="c1">#Calcule le nombre de ligne du csv</span>
+<span class="k">def</span> <span class="nf">csvcount</span><span class="p">(</span><span class="n">filename</span><span
+                        class="p">):</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span
+                        class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span
+                        class="n">f</span><span class="p">:</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">ligne</span> <span class="ow">in</span> <span class="n">f</span><span
+                        class="p">:</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">i</span>
+
+<span class="c1">#-----------------------------------</span>
+<span class="c1">#transfo chaine de caractere &#39;140&#39; en 140 + nombre</span>
+
+<span class="k">def</span> <span class="nf">conversion</span><span class="p">(</span><span class="n">chaine</span><span
+                        class="p">):</span>
+    <span class="n">correc</span><span class="o">=</span><span class="n">chaine</span><span class="p">[</span><span
+                        class="mi">0</span><span class="p">:</span><span class="nb">len</span><span
+                        class="p">(</span><span class="n">chaine</span><span class="p">)]</span>
+    <span class="n">correcnombre</span><span class="o">=</span><span class="nb">float</span><span
+                        class="p">(</span><span class="n">correc</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">correcnombre</span>
+
+<span class="c1">#-----------------------</span>
+<span class="c1">#classe musique</span>
+<div class="viewcode-block" id="Musique"><a class="viewcode-back"
+                                            href="../../implements.html#implements.algotriobjet.Musique">[docs]</a><span
+        class="k">class</span> <span class="nc">Musique</span><span class="p">:</span><span class="c1">#def classe musique</span>
+    <span class="c1">#titre, BPM_debut, BPM_fin,BPM_moy, pitch</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+    <span class="sd">    titre = &quot;&quot;</span>
+    <span class="sd">    emplacement = &quot;&quot;</span>
+    <span class="sd">    BPM_moy = 0</span>
+    <span class="sd">    BPM_debut = 0</span>
+    <span class="sd">    BPM_fin = 0</span>
+    <span class="sd">    pitch = &quot;&quot;</span>
+    <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span
+            class="p">,</span> <span class="n">titre</span><span class="p">,</span> <span
+            class="n">emplacement</span><span class="p">,</span> <span class="n">BPM_moy</span><span class="p">,</span>
+    <span class="n">BPM_debut</span><span class="p">,</span> <span class="n">BPM_fin</span><span class="p">,</span>
+    <span class="n">pitch</span><span class="p">):</span><span class="c1">#methode constructeur</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">titre</span> <span class="o">=</span> <span
+            class="n">titre</span> <span class="c1">#il faut extraire les données du csv</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">emplacement</span> <span class="o">=</span>
+    <span class="n">emplacement</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">BPM_moy</span> <span class="o">=</span> <span
+            class="n">BPM_moy</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">BPM_debut</span> <span class="o">=</span> <span
+            class="n">BPM_debut</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">BPM_fin</span> <span class="o">=</span> <span
+            class="n">BPM_fin</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">pitch</span> <span class="o">=</span> <span
+            class="n">pitch</span></div>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">Musique</span><span class="p">(</span><span
+                        class="s2">&quot;a&quot;</span><span class="p">,</span><span
+                        class="s2">&quot;b&quot;</span><span class="p">,</span><span
+                        class="s2">&quot;c&quot;</span><span class="p">,</span><span
+                        class="s2">&quot;d&quot;</span><span class="p">,</span><span
+                        class="s2">&quot;e&quot;</span><span class="p">,</span><span
+                        class="s2">&quot;f&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">BPM_moy</span><span
+                        class="p">)</span>
+
+<span class="c1">#--------------------------------------------</span>
+<span class="c1">#extraction du csv et copie dans classe Musique</span>
+<span class="c1">#recuperation de la colonne BPM_debut dans le csv</span>
+<span class="c1">#tableauMus contient les objets Musiques extraits du  csv</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">tableauMus = []</span>
+<span class="sd">fname1 = &quot;testprojetinfo.csv&quot;</span>
+<span class="sd">file1 = open(fname1, &quot;rb&quot;)</span>
+<span class="sd">for i in range (csvcount(&quot;testprojetinfo.csv&quot;)):</span>
+<span class="sd">    try:</span>
+<span class="sd">        reader = csv.reader(file1)</span>
+<span class="sd">        for row in reader:</span>
+<span class="sd">            #</span>
+<span class="sd">            # N&#39;affiche que certaines colonnes</span>
+<span class="sd">            #</span>
+<span class="sd">            print row[0],row[1]</span>
+<span class="sd">            temp = Musique(row[0], row[1], conversion(row[2]), conversion(row[3]), conversion(row[4]), row[5])</span>
+<span class="sd">            i=i+1</span>
+<span class="sd">            tableauMus.append(temp)</span>
+
+<span class="sd">    finally:</span>
+<span class="sd">        file1.close()</span>
+<span class="sd">    #test daffichage</span>
+<span class="sd">    print tableauMus</span>
+<span class="sd">&quot;&quot;&quot;</span> <span class="c1">#erreur inconnue</span>
+<span class="c1">#----------------------------------------------------</span>
+<span class="c1">#test</span>
+
+<span class="sd">&quot;&quot;&quot;print tableaucool&quot;&quot;&quot;</span>
+
+<span class="c1">#------------------------------------------------------</span>
+<span class="c1">#------------------------------------------------------</span>
+<span class="c1"># TRI BPM AVEC METHODE DU PLUS COURT CHEMIN</span>
+<span class="c1"># #Idée : on calcule la différence de bpm entre chaque musique et on cherche le min de la somme des différences totales</span>
+
+<span class="c1">#---------------------------</span>
+<span class="c1">#Recherche du premier point</span>
+<span class="c1">#ie le BPMmini du tableau</span>
+
+<span class="k">def</span> <span class="nf">BPMmini</span> <span class="p">(</span><span
+                        class="n">tableaucool</span><span class="p">):</span>
+    <span class="n">BPM_min</span> <span class="o">=</span> <span class="mi">1000000</span> <span class="c1">#on part d&#39;un BPM de base &quot;infini&quot;</span>
+    <span class="n">i</span><span class="o">=</span><span class="mi">0</span>
+    <span class="k">while</span> <span class="n">i</span><span class="o">&lt;</span><span class="nb">len</span><span
+                        class="p">(</span><span class="n">tableaucool</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">tableaucool</span><span class="p">[</span><span
+                        class="n">i</span><span class="p">]</span><span class="o">&lt;=</span> <span
+                        class="n">BPM_min</span><span class="p">:</span>
+            <span class="n">BPM_min</span> <span class="o">=</span> <span class="n">tableaucool</span><span
+                        class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">i</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span
+                        class="mi">1</span>
+    <span class="k">return</span> <span class="n">BPM_min</span>
+
+<span class="c1">#inutilisé pour le moment, sera supprimé si non nécessaire</span>
+<span class="k">def</span> <span class="nf">BPMmaxi</span> <span class="p">(</span><span
+                        class="n">tableaucool</span><span class="p">):</span>
+    <span class="n">BPM_max</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">i</span><span class="o">=</span><span class="mi">0</span>
+    <span class="k">while</span> <span class="n">i</span><span class="o">&lt;</span><span class="nb">len</span><span
+                        class="p">(</span><span class="n">tableaucool</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">tableaucool</span><span class="p">[</span><span
+                        class="n">i</span><span class="p">]</span><span class="o">&gt;=</span> <span
+                        class="n">BPM_max</span><span class="p">:</span>
+            <span class="n">BPM_max</span> <span class="o">=</span> <span class="n">tableaucool</span><span
+                        class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">i</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span
+                        class="mi">1</span>
+    <span class="k">return</span> <span class="n">BPM_max</span>
+
+
+<span class="c1">#----------------</span>
+<span class="c1"># tri bpm</span>
+<span class="c1"># à partir d&#39;un tableau de BPMs (extraits des objets), création d&#39;un nouveau tableau &quot;resultat&quot; avec les BPMs triés</span>
+<span class="c1"># Avec cette méthode, il est possible d&#39;inclure le tri harmonique et de le comparer au tri BPM avec des poids,</span>
+<span class="c1"># ce qui était impossible avec un tri &quot;classique&quot; à 1 entrée.</span>
+<span class="c1"># Remarque, ici BPM moyen seulement</span>
+<span class="k">def</span> <span class="nf">tribpm</span> <span class="p">(</span><span
+                        class="n">tableaucool</span><span class="p">):</span>
+    <span class="n">resultat</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">resultat</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span
+                        class="n">BPMmini</span><span class="p">(</span><span class="n">tableaucool</span><span
+                        class="p">))</span>
+    <span class="n">sommet</span> <span class="o">=</span> <span class="p">(</span><span class="n">BPMmini</span><span
+                        class="p">(</span><span class="n">tableaucool</span><span class="p">))</span>
+    <span class="n">j</span><span class="o">=</span><span class="mi">0</span>
+    <span class="n">i</span><span class="o">=</span><span class="mi">0</span>
+    <span class="n">compteur</span> <span class="o">=</span> <span class="mi">100000</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span> <span
+                        class="p">(</span><span class="nb">len</span><span class="p">(</span><span
+                        class="n">tableaucool</span><span class="p">)</span><span class="o">-</span><span
+                        class="mi">1</span><span class="p">):</span>
+        <span class="k">while</span> <span class="n">i</span><span class="o">&lt;</span><span class="p">(</span><span
+                        class="nb">len</span><span class="p">(</span><span class="n">tableaucool</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">resultat</span><span
+                        class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">-</span><span
+                        class="n">tableaucool</span><span class="p">[</span><span class="n">i</span><span
+                        class="p">])</span><span class="o">&lt;=</span><span class="n">compteur</span> <span class="ow">and</span> <span
+                        class="n">tableaucool</span><span class="p">[</span><span class="n">i</span><span
+                        class="p">]</span><span class="o">&gt;</span><span class="n">resultat</span><span
+                        class="p">[</span><span class="n">j</span><span class="p">]:</span>
+                <span class="n">compteur</span> <span class="o">=</span> <span class="nb">abs</span><span
+                        class="p">(</span><span class="n">resultat</span><span class="p">[</span><span
+                        class="n">j</span><span class="p">]</span><span class="o">-</span><span
+                        class="n">tableaucool</span><span class="p">[</span><span class="n">i</span><span
+                        class="p">])</span>
+                <span class="n">sommet</span> <span class="o">=</span> <span class="n">tableaucool</span><span
+                        class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">i</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span
+                        class="mi">1</span>
+        <span class="n">resultat</span><span class="o">.</span><span class="n">append</span><span
+                        class="p">(</span><span class="n">sommet</span><span class="p">)</span>
+        <span class="n">j</span><span class="o">=</span><span class="n">j</span><span class="o">+</span><span
+                        class="mi">1</span>
+        <span class="n">compteur</span><span class="o">=</span><span class="mi">100000</span>
+        <span class="n">i</span><span class="o">=</span><span class="mi">0</span>
+    <span class="k">return</span> <span class="n">resultat</span>
+
+<span class="c1">#test</span>
+<span class="n">tableaucool</span><span class="o">=</span><span class="p">[</span><span class="mi">130</span><span
+                        class="p">,</span><span class="mi">138</span><span class="p">,</span><span class="mi">124</span><span
+                        class="p">,</span><span class="mi">112</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">tribpm</span><span class="p">(</span><span
+                        class="n">tableaucool</span><span class="p">))</span>
+
+<span class="c1"># Si 2 bpms sont identiques, il les ajouter les uns à la suite des autres et cibler le tri en fonction de l&#39;harmonique</span>
+<span class="c1">#(à venir)</span>
+
+    
+    
+</pre>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <div class="relations">
+                <h3>Related Topics</h3>
+                <ul>
+                    <li><a href="../../index.html">Documentation overview</a>
+                        <ul>
+                            <li><a href="../index.html">Module code</a>
+                                <ul>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div id="searchbox" style="display: none" role="search">
+                <h3>Quick search</h3>
+                <form class="search" action="../../search.html" method="get">
+                    <input type="text" name="q"/>
+                    <input type="submit" value="Go"/>
+                    <input type="hidden" name="check_keywords" value="yes"/>
+                    <input type="hidden" name="area" value="default"/>
+                </form>
+            </div>
+            <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+    </div>
+    <div class="clearer"></div>
+</div>
+<div class="footer">
+    &copy;2016, Author.
+
+    |
+    Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.1</a>
+    &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
+
+</div>
+
+
+</body>
+</html>

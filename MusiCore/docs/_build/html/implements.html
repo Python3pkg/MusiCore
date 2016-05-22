@@ -1,0 +1,528 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+    <title>implements package &mdash; implements documentation</title>
+
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css"/>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css"/>
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT: './',
+            VERSION: '',
+            COLLAPSE_INDEX: false,
+            FILE_SUFFIX: '.html',
+            HAS_SOURCE: true
+        };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="implements  documentation" href="index.html"/>
+    <link rel="prev" title="Welcome to implements’s documentation!" href="index.html"/>
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9"/>
+
+</head>
+<body role="document">
+
+<div class="document">
+    <div class="documentwrapper">
+        <div class="bodywrapper">
+            <div class="body" role="main">
+
+                <div class="section" id="implements-package">
+                    <h1>implements package<a class="headerlink" href="#implements-package"
+                                             title="Permalink to this headline">¶</a></h1>
+                    <div class="section" id="submodules">
+                        <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a>
+                        </h2>
+                    </div>
+                    <div class="section" id="module-implements.Exportation">
+                        <span id="implements-exportation-module"></span>
+                        <h2>implements.Exportation module<a class="headerlink" href="#module-implements.Exportation"
+                                                            title="Permalink to this headline">¶</a></h2>
+                        <p>creation de playlist</p>
+                        <dl class="function">
+                            <dt id="implements.Exportation.CreationPlaylist">
+                                <code class="descclassname">implements.Exportation.</code><code class="descname">CreationPlaylist</code><span
+                                    class="sig-paren">(</span><em>resultat</em><span class="sig-paren">)</span><a
+                                    class="reference internal"
+                                    href="_modules/implements/Exportation.html#CreationPlaylist"><span
+                                    class="viewcode-link">[source]</span></a><a class="headerlink"
+                                                                                href="#implements.Exportation.CreationPlaylist"
+                                                                                title="Permalink to this definition">¶</a>
+                            </dt>
+                            <dd><p>fonction de creation de playlist</p>
+                                <table class="docutils field-list" frame="void" rules="none">
+                                    <col class="field-name"/>
+                                    <col class="field-body"/>
+                                    <tbody valign="top">
+                                    <tr class="field-odd field">
+                                        <th class="field-name">Parameters:</th>
+                                        <td class="field-body"><strong>resultat</strong> &#8211; blabla</td>
+                                    </tr>
+                                    <tr class="field-even field">
+                                        <th class="field-name">Returns:</th>
+                                        <td class="field-body">blabla</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </dd>
+                        </dl>
+
+                    </div>
+                    <div class="section" id="module-implements.UI">
+                        <span id="implements-ui-module"></span>
+                        <h2>implements.UI module<a class="headerlink" href="#module-implements.UI"
+                                                   title="Permalink to this headline">¶</a></h2>
+                    </div>
+                    <div class="section" id="module-implements.algotriobjet">
+                        <span id="implements-algotriobjet-module"></span>
+                        <h2>implements.algotriobjet module<a class="headerlink" href="#module-implements.algotriobjet"
+                                                             title="Permalink to this headline">¶</a></h2>
+                        <dl class="class">
+                            <dt id="implements.algotriobjet.Musique">
+                                <em class="property">class </em><code
+                                    class="descclassname">implements.algotriobjet.</code><code
+                                    class="descname">Musique</code><span class="sig-paren">(</span><em>titre</em>, <em>emplacement</em>,
+                                <em>BPM_moy</em>, <em>BPM_debut</em>, <em>BPM_fin</em>, <em>pitch</em><span
+                                    class="sig-paren">)</span><a class="reference internal"
+                                                                 href="_modules/implements/algotriobjet.html#Musique"><span
+                                    class="viewcode-link">[source]</span></a><a class="headerlink"
+                                                                                href="#implements.algotriobjet.Musique"
+                                                                                title="Permalink to this definition">¶</a>
+                            </dt>
+                            <dd><p>Bases: <code class="xref py py-class docutils literal"><span
+                                    class="pre">object</span></code></p>
+                                <p>titre = &#8220;&#8221;
+                                    emplacement = &#8220;&#8221;
+                                    BPM_moy = 0
+                                    BPM_debut = 0
+                                    BPM_fin = 0
+                                    pitch = &#8220;&#8221;</p>
+                            </dd>
+                        </dl>
+
+                    </div>
+                    <div class="section" id="module-implements.analyseaudio">
+                        <span id="implements-analyseaudio-module"></span>
+                        <h2>implements.analyseaudio module<a class="headerlink" href="#module-implements.analyseaudio"
+                                                             title="Permalink to this headline">¶</a></h2>
+                        <p>anlalyse audio de fichier audio:
+                            -analyse du bpm
+                            -analyse de la tonalité (harmonique)</p>
+                        <dl class="class">
+                            <dt id="implements.analyseaudio.analyse">
+                                <em class="property">class </em><code
+                                    class="descclassname">implements.analyseaudio.</code><code
+                                    class="descname">analyse</code><span
+                                    class="sig-paren">(</span><em>PathToFile=None</em>, <em>NomFichierCsv=None</em>,
+                                <em>pathtobdd=None</em><span class="sig-paren">)</span><a class="reference internal"
+                                                                                          href="_modules/implements/analyseaudio.html#analyse"><span
+                                    class="viewcode-link">[source]</span></a><a class="headerlink"
+                                                                                href="#implements.analyseaudio.analyse"
+                                                                                title="Permalink to this definition">¶</a>
+                            </dt>
+                            <dd><p>Bases: <code class="xref py py-class docutils literal"><span
+                                    class="pre">object</span></code></p>
+                                <p>Classe définissant l&#8217;analyse d&#8217;une musique. On a l&#8217;analyse bpm et l&#8217;analyse
+                                    de la tonalité</p>
+                                <dl class="method">
+                            <dt id="implements.analyseaudio.analyse.__init__">
+                                <code class="descname">__init__</code><span class="sig-paren">(</span><em>PathToFile=None</em>,
+                                <em>NomFichierCsv=None</em>, <em>pathtobdd=None</em><span class="sig-paren">)</span><a
+                                    class="reference internal"
+                                    href="_modules/implements/analyseaudio.html#analyse.__init__"><span
+                                    class="viewcode-link">[source]</span></a><a class="headerlink"
+                                                                                href="#implements.analyseaudio.analyse.__init__"
+                                                                                title="Permalink to this definition">¶</a>
+                            </dt>
+                            <dd>
+                                <table class="docutils field-list" frame="void" rules="none">
+                                    <col class="field-name"/>
+                                    <col class="field-body"/>
+                                    <tbody valign="top">
+                                    <tr class="field-odd field">
+                                        <th class="field-name">Parameters:</th>
+                                        <td class="field-body">
+                                            <ul class="first simple">
+                                                <li><strong>PathToFile</strong> &#8211; chemin jusqu&#8217;au fichier
+                                                    audio
+                                                </li>
+                                                <li><strong>NomFichierCsv</strong> &#8211; chemin jusqu&#8217;au fichier
+                                                    csv qui être crée par l&#8217;analyse
+                                                </li>
+                                                <li><strong>pathtobdd</strong> &#8211; chemin jusqu&#8217;au fichier de
+                                                    la bdd
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr class="field-even field">
+                                        <th class="field-name">Returns:</th>
+                                        <td class="field-body"><p class="first last">None</p>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </dd>
+                        </dl>
+
+                        <dl class="method">
+                            <dt id="implements.analyseaudio.analyse.analyse_bpm">
+                                <code class="descname">analyse_bpm</code><span class="sig-paren">(</span><em>y</em>,
+                                <em>sr</em><span class="sig-paren">)</span><a class="reference internal"
+                                                                              href="_modules/implements/analyseaudio.html#analyse.analyse_bpm"><span
+                                    class="viewcode-link">[source]</span></a><a class="headerlink"
+                                                                                href="#implements.analyseaudio.analyse.analyse_bpm"
+                                                                                title="Permalink to this definition">¶</a>
+                            </dt>
+                            <dd>
+                                <dl class="docutils">
+                            <dt>blabla</dt>
+                            <dd>:exemple de test</dd>
+                        </dl>
+                        <p>analyse1 = analyse(&#8220;/home/bettini/Musique/Deorro.wav&#8221;, &#8220;fichier_csv&#8221;)
+                            y, sr = analyse1.extrairedatamusic()
+                            analyse1.analyse_bpm(y, sr)</p>
+                        <table class="docutils field-list" frame="void" rules="none">
+                            <col class="field-name"/>
+                            <col class="field-body"/>
+                            <tbody valign="top">
+                            <tr class="field-odd field">
+                                <th class="field-name">Parameters:</th>
+                                <td class="field-body">
+                                    <ul class="first last simple">
+                                        <li><strong>pathtofile</strong> &#8211; chemin absolue du fichier audio dont on
+                                            veut analyser le bpm
+                                        </li>
+                                        <li><strong>fichier_csv</strong> &#8211; fichier csv dans lequel sera enregistre
+                                            les bpms du morceau (nom de la playlist en cours)
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <p>:Comment ecrit dans le fichier csv a la fin</p>
+                        </dd></dl>
+
+                        <dl class="method">
+                            <dt id="implements.analyseaudio.analyse.analysefft">
+                                <code class="descname">analysefft</code><span class="sig-paren">(</span><em>y=None</em>,
+                                <em>Fs=None</em><span class="sig-paren">)</span><a class="reference internal"
+                                                                                   href="_modules/implements/analyseaudio.html#analyse.analysefft"><span
+                                    class="viewcode-link">[source]</span></a><a class="headerlink"
+                                                                                href="#implements.analyseaudio.analyse.analysefft"
+                                                                                title="Permalink to this definition">¶</a>
+                            </dt>
+                            <dd><p>blabla</p>
+                                <table class="docutils field-list" frame="void" rules="none">
+                                    <col class="field-name"/>
+                                    <col class="field-body"/>
+                                    <tbody valign="top">
+                                    <tr class="field-odd field">
+                                        <th class="field-name">Parameters:</th>
+                                        <td class="field-body">
+                                            <ul class="first simple">
+                                                <li><strong>y</strong> &#8211; l&#8217;amplitude su signal audio</li>
+                                                <li><strong>Fs</strong> &#8211; la fréquence d&#8217;échantillonnage
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr class="field-even field">
+                                        <th class="field-name">Returns:</th>
+                                        <td class="field-body"><p class="first last">retourne la fft du fichier
+                                            audio</p>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </dd>
+                        </dl>
+
+                        <dl class="method">
+                            <dt id="implements.analyseaudio.analyse.ecrirecsv">
+                                <code class="descname">ecrirecsv</code><span
+                                    class="sig-paren">(</span><em>pathtobdd</em>, <em>list</em><span
+                                    class="sig-paren">)</span><a class="reference internal"
+                                                                 href="_modules/implements/analyseaudio.html#analyse.ecrirecsv"><span
+                                    class="viewcode-link">[source]</span></a><a class="headerlink"
+                                                                                href="#implements.analyseaudio.analyse.ecrirecsv"
+                                                                                title="Permalink to this definition">¶</a>
+                            </dt>
+                            <dd>
+                                <table class="docutils field-list" frame="void" rules="none">
+                                    <col class="field-name"/>
+                                    <col class="field-body"/>
+                                    <tbody valign="top">
+                                    <tr class="field-odd field">
+                                        <th class="field-name">Parameters:</th>
+                                        <td class="field-body"><strong>list</strong> &#8211; liste dont les élements
+                                            vont être ajoutés à un fichier csv
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </dd>
+                        </dl>
+
+                        <dl class="method">
+                            <dt id="implements.analyseaudio.analyse.extraire_path">
+                                <code class="descname">extraire_path</code><span class="sig-paren">(</span><span
+                                    class="sig-paren">)</span><a class="reference internal"
+                                                                 href="_modules/implements/analyseaudio.html#analyse.extraire_path"><span
+                                    class="viewcode-link">[source]</span></a><a class="headerlink"
+                                                                                href="#implements.analyseaudio.analyse.extraire_path"
+                                                                                title="Permalink to this definition">¶</a>
+                            </dt>
+                            <dd><p>permet d&#8217;extraire d&#8217;un chemin absolu le nom du fichier une list</p>
+                                <table class="docutils field-list" frame="void" rules="none">
+                                    <col class="field-name"/>
+                                    <col class="field-body"/>
+                                    <tbody valign="top">
+                                    <tr class="field-odd field">
+                                        <th class="field-name">Parameters:</th>
+                                        <td class="field-body"><strong>path</strong> &#8211; chemin absolue d&#8217;une
+                                            fichier audio
+                                        </td>
+                                    </tr>
+                                    <tr class="field-even field">
+                                        <th class="field-name">Returns:</th>
+                                        <td class="field-body">list =[nom fichier, chemin du repertoire du dossier
+                                            contenant le fichier audio]
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </dd>
+                        </dl>
+
+                        <dl class="method">
+                            <dt id="implements.analyseaudio.analyse.extrairedatamusic">
+                                <code class="descname">extrairedatamusic</code><span class="sig-paren">(</span><span
+                                    class="sig-paren">)</span><a class="reference internal"
+                                                                 href="_modules/implements/analyseaudio.html#analyse.extrairedatamusic"><span
+                                    class="viewcode-link">[source]</span></a><a class="headerlink"
+                                                                                href="#implements.analyseaudio.analyse.extrairedatamusic"
+                                                                                title="Permalink to this definition">¶</a>
+                            </dt>
+                            <dd><p>extrait les données de n&#8217;importe quel format de fichier supporté par l&#8217;api
+                                audioread</p>
+                                <table class="docutils field-list" frame="void" rules="none">
+                                    <col class="field-name"/>
+                                    <col class="field-body"/>
+                                    <tbody valign="top">
+                                    <tr class="field-odd field">
+                                        <th class="field-name">Returns:</th>
+                                        <td class="field-body">données de la musique sous forme de liste</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </dd>
+                        </dl>
+
+                        <dl class="method">
+                            <dt id="implements.analyseaudio.analyse.islineincsc">
+                                <code class="descname">islineincsc</code><span
+                                    class="sig-paren">(</span><em>titre</em><span class="sig-paren">)</span><a
+                                    class="reference internal"
+                                    href="_modules/implements/analyseaudio.html#analyse.islineincsc"><span
+                                    class="viewcode-link">[source]</span></a><a class="headerlink"
+                                                                                href="#implements.analyseaudio.analyse.islineincsc"
+                                                                                title="Permalink to this definition">¶</a>
+                            </dt>
+                            <dd><p>blabla</p>
+                                <table class="docutils field-list" frame="void" rules="none">
+                                    <col class="field-name"/>
+                                    <col class="field-body"/>
+                                    <tbody valign="top">
+                                    <tr class="field-odd field">
+                                        <th class="field-name">Parameters:</th>
+                                        <td class="field-body"><strong>titre</strong> &#8211; le titre du fichier audio
+                                            dont on veut vérifier si il existe dans le fichier csv
+                                        </td>
+                                    </tr>
+                                    <tr class="field-even field">
+                                        <th class="field-name">Returns:</th>
+                                        <td class="field-body">True si le fichier audio à deja été analysé</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <p>Afin de vérifier si un fichier audio à deja été analysé, on compare les titres audio
+                                    deja analysés dans la base de donnée avec le titre du fichier que l&#8217;on veut
+                                    analyser</p>
+                            </dd>
+                        </dl>
+
+                        <dl class="method">
+                            <dt id="implements.analyseaudio.analyse.recherchenote">
+                                <code class="descname">recherchenote</code><span class="sig-paren">(</span><span
+                                    class="sig-paren">)</span><a class="reference internal"
+                                                                 href="_modules/implements/analyseaudio.html#analyse.recherchenote"><span
+                                    class="viewcode-link">[source]</span></a><a class="headerlink"
+                                                                                href="#implements.analyseaudio.analyse.recherchenote"
+                                                                                title="Permalink to this definition">¶</a>
+                            </dt>
+                            <dd><p>blabla</p>
+                                <table class="docutils field-list" frame="void" rules="none">
+                                    <col class="field-name"/>
+                                    <col class="field-body"/>
+                                    <tbody valign="top">
+                                    <tr class="field-odd field">
+                                        <th class="field-name">Parameters:</th>
+                                        <td class="field-body"><strong>self</strong> &#8211; </td>
+                                    </tr>
+                                    <tr class="field-even field">
+                                        <th class="field-name">Returns:</th>
+                                        <td class="field-body"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </dd>
+                        </dl>
+
+                        </dd></dl>
+
+                    </div>
+                    <div class="section" id="module-implements.parseaudio">
+                        <span id="implements-parseaudio-module"></span>
+                        <h2>implements.parseaudio module<a class="headerlink" href="#module-implements.parseaudio"
+                                                           title="Permalink to this headline">¶</a></h2>
+                        <p>permet de parcourir les fichiers audio contenu dans un fichier csv et de lancer leur analyse
+                            Ce module est initié par l&#8217;interface graphique</p>
+                        <dl class="function">
+                            <dt id="implements.parseaudio.getdirpath">
+                                <code class="descclassname">implements.parseaudio.</code><code class="descname">getdirpath</code><span
+                                    class="sig-paren">(</span><span class="sig-paren">)</span><a
+                                    class="reference internal"
+                                    href="_modules/implements/parseaudio.html#getdirpath"><span class="viewcode-link">[source]</span></a><a
+                                    class="headerlink" href="#implements.parseaudio.getdirpath"
+                                    title="Permalink to this definition">¶</a></dt>
+                            <dd><p>:return:le chemin du repertoire MusiCore</p>
+                            </dd>
+                        </dl>
+
+                        <dl class="function">
+                            <dt id="implements.parseaudio.parseaudio">
+                                <code class="descclassname">implements.parseaudio.</code><code class="descname">parseaudio</code><span
+                                    class="sig-paren">(</span><em>nomanalyse=None</em><span class="sig-paren">)</span><a
+                                    class="reference internal"
+                                    href="_modules/implements/parseaudio.html#parseaudio"><span class="viewcode-link">[source]</span></a><a
+                                    class="headerlink" href="#implements.parseaudio.parseaudio"
+                                    title="Permalink to this definition">¶</a></dt>
+                            <dd><p>exemple de test :
+                                analyse1 = implements.analyseaudio.analyse(&#8220;/home/gerox/Musique/Deorro.wav&#8221;,
+                                &#8220;fichier_csv&#8221;)
+                                if (analyse1.islineincsc(analyse1.extraire_path()[0]) == False):</p>
+                                <blockquote>
+                                    <div>y, sr = analyse1.extrairedatamusic()
+                                        analyse1.analyse_bpm(y, sr)
+                                    </div>
+                                </blockquote>
+                            </dd>
+                        </dl>
+
+                    </div>
+                    <div class="section" id="implements-test-fft-module">
+                        <h2>implements.test_fft module<a class="headerlink" href="#implements-test-fft-module"
+                                                         title="Permalink to this headline">¶</a></h2>
+                    </div>
+                    <div class="section" id="module-implements.version">
+                        <span id="implements-version-module"></span>
+                        <h2>implements.version module<a class="headerlink" href="#module-implements.version"
+                                                        title="Permalink to this headline">¶</a></h2>
+                        <p>Version info</p>
+                    </div>
+                    <div class="section" id="module-implements">
+                        <span id="module-contents"></span>
+                        <h2>Module contents<a class="headerlink" href="#module-implements"
+                                              title="Permalink to this headline">¶</a></h2>
+                        <p>Created on 7 avr. 2014
+                            &#64;author: Aurelien</p>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="index.html">Table Of Contents</a></h3>
+            <ul>
+                <li><a class="reference internal" href="#">implements package</a>
+                    <ul>
+                        <li><a class="reference internal" href="#submodules">Submodules</a></li>
+                        <li><a class="reference internal" href="#module-implements.Exportation">implements.Exportation
+                            module</a></li>
+                        <li><a class="reference internal" href="#module-implements.UI">implements.UI module</a></li>
+                        <li><a class="reference internal" href="#module-implements.algotriobjet">implements.algotriobjet
+                            module</a></li>
+                        <li><a class="reference internal" href="#module-implements.analyseaudio">implements.analyseaudio
+                            module</a></li>
+                        <li><a class="reference internal" href="#module-implements.parseaudio">implements.parseaudio
+                            module</a></li>
+                        <li><a class="reference internal" href="#implements-test-fft-module">implements.test_fft
+                            module</a></li>
+                        <li><a class="reference internal" href="#module-implements.version">implements.version
+                            module</a></li>
+                        <li><a class="reference internal" href="#module-implements">Module contents</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="relations">
+                <h3>Related Topics</h3>
+                <ul>
+                    <li><a href="index.html">Documentation overview</a>
+                        <ul>
+                            <li>Previous: <a href="index.html" title="previous chapter">Welcome to implements&#8217;s
+                                documentation!</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div role="note" aria-label="source link">
+                <h3>This Page</h3>
+                <ul class="this-page-menu">
+                    <li><a href="_sources/implements.txt"
+                           rel="nofollow">Show Source</a></li>
+                </ul>
+            </div>
+            <div id="searchbox" style="display: none" role="search">
+                <h3>Quick search</h3>
+                <form class="search" action="search.html" method="get">
+                    <input type="text" name="q"/>
+                    <input type="submit" value="Go"/>
+                    <input type="hidden" name="check_keywords" value="yes"/>
+                    <input type="hidden" name="area" value="default"/>
+                </form>
+            </div>
+            <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+    </div>
+    <div class="clearer"></div>
+</div>
+<div class="footer">
+    &copy;2016, Author.
+
+    |
+    Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.1</a>
+    &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
+
+    |
+    <a href="_sources/implements.txt"
+       rel="nofollow">Page source</a>
+</div>
+
+
+</body>
+</html>
