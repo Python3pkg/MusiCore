@@ -5,6 +5,7 @@ gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 import analyseaudio
 import parse_audio_2
+import Exportation
 
 ###Fonctions internes au GUI
 
@@ -26,6 +27,12 @@ def exportPaths():
         mat.append(row[-1])
     return mat
 
+def exportTitleandpath():
+    mat=[]
+    for row in playlist:
+        mat.append(list(row[k] for k in [0,-1]))
+    return mat
+
 def actualize(mat):
     for i,row in enumerate(mat):
       playlist[i]=row
@@ -33,7 +40,7 @@ def actualize(mat):
 
 ###Gestion des signaux###
 
-class Handler:
+class Handler(Gtk.Window):
  
     def onDeleteWindow(self, *args):
         Gtk.main_quit(*args)
@@ -144,6 +151,47 @@ True)
         """Called on any of the button clicks"""
         print('coucou')
 
+    def onM3u(self, widget):
+        saver = Gtk.FileChooserDialog("Please choose a file", self,
+            Gtk.FileChooserAction.SAVE,
+            (Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
+             Gtk.STOCK_OPEN, Gtk.ResponseType.OK))
+
+        response = saver.run()
+        if response == Gtk.ResponseType.OK:
+            print("Open clicked")
+            loc=saver.get_filename()
+        elif response == Gtk.ResponseType.CANCEL:
+            print("Cancel clicked")
+            loc=" "
+        saver.destroy()
+        if loc != " " :
+          pl = open(loc,"w")
+          pl.write("#EXTM3U")
+          resultat = exportTitleandpath()
+          for i in range(len(resultat)):
+            j=resultat[i]
+            pl.write("\nEXTINF:")
+            pl.write(str(i))
+            pl.write(", ")
+            pl.write(j[0])
+            pl.write("\n")
+            pl.write(j[1])
+          pl.close()
+        return None
+
+    def onOpen(self, button):
+        selected=dialog.get_filenames()
+        for row in selected:
+            playlist.append([getpath(row), None,  None, None, row])
+        return None
+
+
+
+
+
+
+
 ###Importation du fichier Glade
 
 builder = Gtk.Builder()
@@ -157,6 +205,8 @@ waiter = builder.get_object("Waiter")
 dialog = builder.get_object("FileChooser")
 playlist = builder.get_object("Playlist")
 ponderation= builder.get_object("ponderation")
+
+
 
 ###Affichage et lancement du Main###
 
