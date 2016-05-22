@@ -13,4 +13,6 @@
         Avec toutes ses opérations, le paquet librosa devrait fonctionner
         
     3) Pour effectuer des tests, choisir des fichiers mp3 ou wav et modifier en conséquence le fichier analyse_bpm
+    4) lancer un sudo apt-get install ffmpeg
+    5) lancer un sudo pip3 install pydub
 
