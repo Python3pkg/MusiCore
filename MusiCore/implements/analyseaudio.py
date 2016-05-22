@@ -751,7 +751,28 @@ class analyse:
         if self.major_plus_minor(Tonalite) != False:
             list_tonalite = self.major_plus_minor(Tonalite)
 
-        return Tonalite + [list_tonalite]
+        tonalite_max = self.tonalite_max(Tonalite)
+
+        return Tonalite + [tonalite_max]
+
+    def tonalite_max(self, tonalite):
+        '''
+
+        :param tonalite: liste des tonalités trouvées dans la musique
+        :return: renvoie si la musique est tonale ou atonale selon le critère que le coeff de correlation le plus élevé trouvé est plus faible que 0,7
+        '''
+        # on determine le coeff de correlation maximal
+        tonalite_max = 0
+        key_max = 0
+        for i in range(len(tonalite) // 2):
+            key = tonalite[2 * (i) + 1]
+            coef_corr = tonalite[2 * (i + 1)]
+            if coef_corr > tonalite_max:
+                tonalite_max = coef_corr
+                key_max = key
+                print("la tonalité max est : %s" % key)
+
+        return key_max
 
     def is_music_harmonic(self, tonalite):
         '''
