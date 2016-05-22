@@ -1,3 +1,6 @@
+
+
+
 # coding: utf-8
 #test orienté_objet
 #classe Musique déf par titre, BPM_debut, BPM_fin, pitch
@@ -173,11 +176,14 @@ def NumerotationHarmo (tableauharmo):
 
 #-----------------------------------------
 #Implémentation d'un algorithme génétique pour aboutir au tri final
-mus1 = Musique("titre1","coucou",125,80,130,2)
-mus2 = Musique("titre2","coucou2",110,78,130,6)
-mus3 = Musique("titre3","coucou3",102,90,129,8)
-mus4 = Musique("titre4","coucou4",105,28,85,15)
-tableaudobjets = [mus1,mus2,mus3,mus4]
+mus1 = Musique("titre1","coucou",125,80,130,1)
+mus2 = Musique("titre2","coucou2",110,78,130,12)
+mus3 = Musique("titre3","coucou3",102,90,129,13)
+mus4 = Musique("titre4","coucou4",105,28,85,24)
+mus5 = Musique("titre5","coucou5",139,38,58,6)
+mus6 = Musique("titre6","coucou5",194,48,45,3)
+mus7 = Musique("titre7","coucou6",193,55,34,8)
+tableaudobjets = [mus1,mus2,mus3,mus4,mus5,mus6,mus7]
 print tableaudobjets[1].titre
 
 """
@@ -352,29 +358,30 @@ B = creationtabl_HARMO()
 j=0
 i=0
 k=0
+l = 0
 valeur_random = 0
 tabl_valeurrandom = []
 for j in range (nbre_solution):
     #pour chaque ligne on ajoute toutes les musiques -> solution
     #il faut prendre un chiffre de tabl_bpm, le recopier et supprimer le bpm traité pr pas doublon)
     for i in range (len(tableaudobjets)):
-        valeur_random = randint(0,len(tableaudobjets)-1)
-        if B[valeur_random] == 9999 and A[valeur_random] == 9999 :
-            i += 1
-        else:
-            matrice_solutionsBPM[i,j] = A[valeur_random]
-            matrice_solutionsHARMO[i,j] = B[valeur_random]
-            A[valeur_random] = 9999
-            B[valeur_random] = 9999
-            i += 1
-        tabl_valeurrandom.append(valeur_random)
+        valeur_random = randint(0,len(A)-1)
+        matrice_solutionsBPM[j,i] = A[valeur_random]
+        matrice_solutionsHARMO[j,i] = B[valeur_random]
+        del A[valeur_random]
+        del B[valeur_random]
+        i += 1
+    A = creationtabl_BPM()
+    B = creationtabl_HARMO()
     j += 1
 
+A = creationtabl_HARMO()
+B = creationtabl_BPM()
 print matrice_solutionsHARMO
-print matrice_solutionsBPM
+#print matrice_solutionsBPM
 
 
-""" #NE PAS CHERCHER À COMPRENDRE, CA PUE 
+"""
     for j in range (nbre_solution):
     #pour chaque ligne on ajoute toutes les musiques -> solution
     #il faut prendre un chiffre de tabl_bpm, le recopier et supprimer le bpm traité pr pas doublon)
@@ -399,24 +406,71 @@ print matrice_solutionsBPM
 
 
     #Evaluation de la qualité des solutions
-
+#Détermination de la somme des écarts bpm pour chaque solution
 tabl_BPMsoustrait = []  #contient l'écart entre chaque musique pr chaque solution
 result_soustrac = 0
-for j in range (nbre_solution):
-    for i in range (len(tableaudobjets)):
-        while i+1 <= (len(tabl_BPM)-1) :
-            result_soustrac += abs(matrice_solutionsBPM[i,j] - matrice_solutionsBPM[i+1,j])
-            i += 1
-    tabl_BPMsoustrait.append(result_soustrac)
-    result_soustrac = 0
-    j = j+1
+j=0
+i=0
+for i in range (nbre_solution):
+    for j in range (1):
+        while j+1 <= (len(A)-1) :
+            result_soustrac += abs(matrice_solutionsBPM[i,j] - matrice_solutionsBPM[i,j+1])
+            j += 1
+        tabl_BPMsoustrait.append(result_soustrac)
+        result_soustrac = 0
+    i = i+1
 
 print result_soustrac
 print tabl_BPMsoustrait
 
+#Détermination de la somme des écarts harmo pr chaque solution
 tabl_HARMOsoustrait = [] #contient l'écart harmo entre chaque musique pr chaque solution
 result_soustrac2 = 0
-
+matrice_pitchs = range(25)
+x = 0
+y = 0
+i = 0
+j = 0
+for i in range (nbre_solution):
+    for j in range (1):
+        while j+1 <= (len(B)-1) :
+            x = matrice_solutionsHARMO[i,j]
+            y = matrice_solutionsHARMO[i,j+1]
+            if x <= 12 and y <=12 : #cas des harmos majeures
+                if abs(matrice_solutionsHARMO[i,j] - matrice_solutionsHARMO[i,j+1]) <= 7:
+                    result_soustrac2 += abs(matrice_pitchs.index(x) - matrice_pitchs.index(y))
+                else:
+                    if x > y :
+                        result_soustrac2 += abs(matrice_pitchs.index(x)-matrice_pitchs.index(x+y))
+                    else :
+                        result_soustrac2 += abs(matrice_pitchs.index(y)-matrice_pitchs.index(x+y))
+                j += 1
+            elif x > 12 and y > 12: #cas des harmos mineures
+                if abs(matrice_solutionsHARMO[i,j] - matrice_solutionsHARMO[i,j+1]) <= 7:
+                    result_soustrac2 += abs(matrice_pitchs.index(x) - matrice_pitchs.index(y))
+                else:
+                    if x > y :
+                        result_soustrac2 += abs(matrice_pitchs.index(x-12)-matrice_pitchs.index(x+y-12-12))
+                    else :
+                        result_soustrac2 += abs(matrice_pitchs.index(y-12)-matrice_pitchs.index(x+y-12-12))
+                j += 1
+            else: #cas où on a une différence mineur/majeur
+                if x > 12 :
+                    x = x-12
+                else:
+                    y = y-12
+                if abs(x-y) <= 7:
+                    result_soustrac2 += abs(matrice_pitchs.index(x) - matrice_pitchs.index(y))+1
+                else:
+                    if x > y:
+                        result_soustrac2 += abs(matrice_pitchs.index(x)-matrice_pitchs.index(x+y))+1
+                    else:
+                        result_soustrac2 += abs(matrice_pitchs.index(y)-matrice_pitchs.index(x+y))+1
+                j += 1
+        tabl_HARMOsoustrait.append(result_soustrac2)
+        result_soustrac2 = 0
+    i = i+1
+print tabl_HARMOsoustrait
 
 #FAIRE ECART HARMO + PONDERATION
 
@@ -424,12 +478,18 @@ result_soustrac2 = 0
 
 matrice_solutionsMutationBPM = matrice_solutionsBPM
 matrice_solutionsMutationHARMO = matrice_solutionsHARMO
-
 random1 = randint(0,len(tableaudobjets)-1)
 random2 = randint(0,len(tableaudobjets)-1)
 
-matrice_solutionsMutationBPM[random1] = matrice_solutionsMutationBPM[random2]
-matrice_solutionsMutationHARMO[random1] = matrice_solutionsMutationHARMO[random2]
+
+for j in range (len(tableaudobjets)):
+    matrice_solutionsMutationBPM[random1,j] = matrice_solutionsBPM[random2,j]
+    matrice_solutionsMutationBPM[random2,j] = matrice_solutionsBPM[random1,j]
+    j +=1
+
+print random1,random2
+print matrice_solutionsBPM
+print matrice_solutionsMutationBPM
 
 #Calculer les écarts sur les matrices mutées
 # A IMPLANTER (ok)
@@ -437,39 +497,41 @@ matrice_solutionsMutationHARMO[random1] = matrice_solutionsMutationHARMO[random2
 #On choisit les 2 meilleurs solutions des solutions initiales et les deux meilleurs des solutions mutées
 
 #PONDERATION
-a = 0 #Coefficient de pondération
+a = 0 #Coefficient de pondération si il vaut 0 alors on tient pas compte des écarts harmos
+b = 1 #si b vaut 0 et a = 1 alors on tient seulement compte du tri harmo
 i = 0
 valeur_ponderee = 0
 tabl_BPMHARMOpondeesoustrait = []
+a = 10 #cas où il y a la meme importance entre harmos et bpms
 for i in range (len(tabl_BPMsoustrait)):
-    valeur_ponderee = tabl_BPMsoustrait[i] + tabl_HARMOsoustrait[i]  #REGLER COEFF A POUR PONDERATION
+    valeur_ponderee = b*tabl_BPMsoustrait[i] + a*tabl_HARMOsoustrait[i]  #REGLER COEFF A POUR PONDERATION
     tabl_BPMHARMOpondeesoustrait.append(valeur_ponderee)
 m = min(tabl_BPMHARMOpondeesoustrait)
 
+print m
+
+#Création  de la nouvelle solution
 i = 0
 j = 0
 k = 0
+matrice_nouvellesolutionBPM = np.zeros((nbre_solution,len(tableaudobjets)))
+matrice_nouvellessolutionHARMO = np.zeros((nbre_solution,len(tableaudobjets)))
+
 for k in range (nbre_solution//2): #verif qu'on a bien Moitié moitié de solution
-    for i in range (len(tabl_BPMHARMOpondeesoustrait)):
+    for i in range (len(tabl_BPMHARMOpondeesoustrait)-1):
         if tabl_BPMHARMOpondeesoustrait[i] == min(tabl_BPMHARMOpondeesoustrait):
             for j in range (len(tabl_BPMHARMOpondeesoustrait)):
-                matrice_solutionsBPM[j,k] = matrice_solutionsBPM[i]
-                matrice_solutionsHARMO[j,k] = matrice_solutionsHARMO[i]
+                matrice_nouvellesolutionBPM[k,j] = matrice_solutionsBPM[i,j]
+                matrice_nouvellessolutionHARMO[k,j] = matrice_solutionsHARMO[i,j]
                 j += 1
-            tabl_BPMHARMOpondeesoustrait[i] = 99999
+                tabl_BPMHARMOpondeesoustrait[i] = 999999
         i += 1
     k+= 1
+
+print matrice_nouvellessolutionHARMO
+print matrice_nouvellesolutionBPM
 #Refaire l'opération avec matrice mutuée (créer fonction "nouvelles solutions")
 
 
-
-#Calcul somme pondérée harmo+BPM dans deux tableaux (1 pour solutions normales, 1 pour mutées)
-#On prend le min et le min-1 de chaque tableau et on a notre nouvelle matrice solution
-#(il faut juste réassocier les valeurs BPM/Harmo à la musique correspondante
-
-
-
-
-""
-
-
+#ce soir : échange ligne, tri sur matrice mutée (voir directement à inverser nombres sur tabl_bpm etc)
+#          et matrice solution finale
