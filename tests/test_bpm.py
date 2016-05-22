@@ -3,7 +3,10 @@
 import implements.analyseaudio
 import os
 
-# ==========test d'analyse avec 4 musiques===========
+# Test de l'analyse du BPM
+#
+# Commenaires: L'analyse du BPM est correct dans la majorité des cas
+# seul les musiques avec beaucoup de batteries peuvent engendrer un problème
 
 analyse1 = implements.analyseaudio.analyse("/home/gerox/Musique/Deorro.wav", "fichier_csv")
 if (analyse1.islineincsc(analyse1.extraire_path()[0]) == False):
