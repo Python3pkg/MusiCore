@@ -50,13 +50,16 @@ class csv_musicore:
         else:
             return False
 
-    def add_list(self, csv_file, list):
+    def add_list(self, csv_file, liste):
         '''
         permet de rajouter une liste dans un fichier csv
 
         :param list: liste dont les élements vont être ajoutés à un fichier csv
 
         '''
+
+        if isinstance(liste, list) == False:
+            raise ValueError('la liste doit être un objet list')
 
         fname = csv_file
         if os.path.isfile(csv_file) == True:  # si le fichier existe:
@@ -66,7 +69,7 @@ class csv_musicore:
                 # Creation de l'ecrivain CSV
                 writer = csv.writer(file)
                 # Ecriture des donnees.
-                writer.writerow(list)
+                writer.writerow(liste)
 
             finally:
                 # Fermeture du fichier source
@@ -86,7 +89,7 @@ class csv_musicore:
                 # writer.writerow(['NomFichier', 'BpmMoyen', 'BpmDebut', 'BpmFin'])  # il faudra rajouter la tonalité
 
                 # Ecriture des donnees.
-                writer.writerow(list)
+                writer.writerow(liste)
             finally:
                 # Fermeture du fichier source
                 file.close()
@@ -683,7 +686,7 @@ class analyse:
 
         for i in range(12):
             Major = numpy.corrcoef(DurationPitch, MajorProfil)[0, 1]
-            Minor = numpy.corrcoef(DurationPitch, MinorProfil)[0,1]
+            Minor = numpy.corrcoef(DurationPitch, MinorProfil)[0, 1]
             if Major > 0.5:
                 print("%sM avec un coef de corr: " % (Note[i]))
                 print(Major)
