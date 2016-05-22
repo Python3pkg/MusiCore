@@ -5,8 +5,8 @@ def CreationPlaylist(resultat):
     '''
     fonction de creation de playlist
 
-    :param resultat: blabla
-    :return: blabla
+    :param resultat: les objects musique une fois qu'ils sont tries
+    :return: un fichier .m3u qui correspond a cette playlist
 
     '''
 
