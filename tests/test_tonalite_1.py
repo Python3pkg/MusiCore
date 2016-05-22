@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 # fonction de test de l'analyse bpm
 import implements.analyseaudio
-import os
 
 # fonction de tests permettant de tester la detection de la tonalité
 # les musiques analysées sont prises de facon aléatoire sur le web
