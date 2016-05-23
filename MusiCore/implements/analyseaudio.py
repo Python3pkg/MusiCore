@@ -728,14 +728,14 @@ class analyse:
                 print(Major)
                 Tonalite.append(Note[i] + "M")
                 Tonalite.append(Major)
-                list_tonalite = list_tonalite + Note[i] + "M" + '/'
+                # list_tonalite = list_tonalite + Note[i] + "M" + '/'
 
             if Minor > 0.5:
                 print("%sm avec un coef de corr: " % (Note[i]))
                 print(Minor)
                 Tonalite.append(Note[i] + "m")
                 Tonalite.append(Minor)
-                list_tonalite = list_tonalite + Note[i] + "m" + '/'
+                # list_tonalite = list_tonalite + Note[i] + "m" + '/'
 
             temporel = DurationPitch[1:]  # on effectue une translation de la liste DurationPitch
             temporel.append(DurationPitch[0])
@@ -748,8 +748,8 @@ class analyse:
         else:
             print("l'algorithme estime que la musique est tonale")
 
-        if self.major_plus_minor(Tonalite) != False:
-            list_tonalite = self.major_plus_minor(Tonalite)
+        # if self.major_plus_minor(Tonalite) != False:
+        #    list_tonalite = self.major_plus_minor(Tonalite)
 
         tonalite_max = self.tonalite_max(Tonalite)
 
@@ -829,12 +829,21 @@ class analyse:
 # ======================================================
 
 def switch_harmonic(list_of_harmonique):
-    return
+    # mineur
+    mineur_camelot = ['1A', '2A', '3A', '4A', '5A', '6A', '7A', '8A', '9A', '10A', '11A', '12A']
+    mineur_tonalite = ['G#m', 'D#m', 'A#m', 'Fm', 'Cm', 'Gm', 'Dm', 'Am', 'Em', 'Bm', 'F#m', 'C#m']
+    mineur_equivalent = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 
-# plot(frq, abs(Y), 'r')  # plotting the spectrum
-# xlabel('Freq (Hz)')
-# ylabel('|Y(freq)|')
-# y = y[: 441000]
-# exemple fft
-# rate,data=read('/home/bettini/Musique/Deorro.wav')
-# x = numpy.arange(0,2000,100)
+    # majeur
+    majeur_camelot = ['1B', '2B', '3B', '4B', '5B', '6B', '7B', '8B', '9B', '10B', '11B', '12B']
+    majeur_tonalite = ['BM', 'F#M', 'C#M', 'G#M', 'D#M', 'A#M', 'FM', 'CM', 'GM', 'DM', 'AM', 'EM']
+    majeur_equivalent = [13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
+
+    for i in list_of_harmonique:
+        for j in range(len(mineur_tonalite)):
+            if i == mineur_tonalite[j]:
+                i = mineur_equivalent[j]
+        for j in range(len(majeur_tonalite)):
+            if i == majeur_tonalite[j]:
+                i = majeur_equivalent[j]
+    return list_of_harmonique
