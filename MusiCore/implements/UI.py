@@ -55,15 +55,15 @@ def switch_tonalite(list_tonalite):
 
     # Majeur
     majeur_tonalité = ['BM', 'F#M', 'C#M', 'G#M', 'D#M', 'A#M', 'FM', 'CM', 'GM', 'DM', 'AM', 'EM']
-    majeur_equivalent = [11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
+    majeur_equivalent = [13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
 
     for i in range(len(list_tonalite)):
         for j in range(len(mineur_tonalité)):
             if list_tonalite[i] == mineur_tonalité[j]:
                 list_tonalite[i] = mineur_equivalent[j]
-        for j in range(len(majeur_tonalité)):
-            if list_tonalite[i] == mineur_tonalité[j]:
-                list_tonalite[i] = majeur_equivalent[j]
+        for w in range(len(majeur_tonalité)):
+            if list_tonalite[i] == majeur_tonalité[w]:
+                list_tonalite[i] = majeur_equivalent[w]
     return list_tonalite
 
 def actualize(mat):
@@ -178,7 +178,7 @@ class Handler(Gtk.Window):
 
         k = 0
         for i in liste:
-            playlist[k][3] = i
+            playlist[k][3] = str(i)
             k += 1
 
     #        implements.tri()
