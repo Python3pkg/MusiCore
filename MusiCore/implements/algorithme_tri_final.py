@@ -163,6 +163,9 @@ def ponderation(tabl_BPMsoustrait,tabl_HARMOsoustrait):
             return tabl_BPMHARMOpondeesoustrait
 
 
+exemple = [['titre1', 'durée1', 'bpm1', 'tonalite1'], ['titre2', 'durée2', 'bpm2', 'tonalite2'],
+           ['titre3', 'durée3', 'bpm3', 'tonalite3'], ['titre4', 'durée4', 'bpm4', 'tonalite4']]
+
 def algorithme_genetique(playlist):
         #création de la population initiale de solutions
         #la solution doit passer par tous les points ET ne pas comporter de doublons
@@ -176,18 +179,14 @@ def algorithme_genetique(playlist):
 
         tableaudobjets = []
         for i in range(len(mat)):
+            nummusic = str(i)
+            music = "music" + nummusic
+            music = Musique(playlist[i][0], playlist[i][-1], playlist[i][2], None, None, playlist[i][3], playlist[i][1])
+            tableaudobjets.append(music)
             # mus1 = Musique("titre1","coucou",125,80,130,1,200)
-            liste = []
-            liste.append(playlist[i][0])  # titre
-            liste.append(playlist[i][-1])  # emplacement
-            liste.append(playlist[i][2])  # bpm_moyen
-            liste.append(None)
-            liste.append(None)
-            liste.append(playlist[i][3])  # tonalité
-            liste.append(playlist[i][1])  # dirée de la musique
-            tableaudobjets.append(liste)
 
-    nbre_solution = determination_nbre_sol()
+
+nbre_solution = determination_nbre_sol()
         #Création de la matrice bpm avec 4 solutions initiales
     matrice_solutionsBPM = np.zeros((nbre_solution,len(tableaudobjets)))
     matrice_solutionsHARMO = np.zeros((nbre_solution,len(tableaudobjets)))
