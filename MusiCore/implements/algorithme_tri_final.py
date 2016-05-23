@@ -163,11 +163,29 @@ def ponderation(tabl_BPMsoustrait,tabl_HARMOsoustrait):
             return tabl_BPMHARMOpondeesoustrait
 
 
-def algorithme_genetique():
+def algorithme_genetique(playlist):
         #création de la population initiale de solutions
         #la solution doit passer par tous les points ET ne pas comporter de doublons
 
         #Détermination du nombre de solutions
+
+        # arrangement de matrice playlist
+        mat = []
+        for row in playlist:
+            mat.append(row[3])
+
+        tableaudobjets = []
+        for i in range(len(mat)):
+            # mus1 = Musique("titre1","coucou",125,80,130,1,200)
+            liste = []
+            liste.append(playlist[i][0])  # titre
+            liste.append(playlist[i][-1])  # emplacement
+            liste.append(playlist[i][2])  # bpm_moyen
+            liste.append(None)
+            liste.append(None)
+            liste.append(playlist[i][3])  # tonalité
+            liste.append(playlist[i][1])  # dirée de la musique
+            tableaudobjets.append(liste)
 
     nbre_solution = determination_nbre_sol()
         #Création de la matrice bpm avec 4 solutions initiales
