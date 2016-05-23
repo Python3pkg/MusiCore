@@ -44,7 +44,7 @@ print(a.BPM_moy)
 
 #-----------------------------------------
 #Implémentation d'un algorithme génétique pour aboutir au tri final
-'''
+"""
 mus1 = Musique("titre1","coucou",125,80,130,1,200)
 mus2 = Musique("titre2","coucou2",110,78,130,12,300)
 mus3 = Musique("titre3","coucou3",102,90,129,13,400)
@@ -52,18 +52,20 @@ mus4 = Musique("titre4","coucou4",105,28,85,24,200)
 mus5 = Musique("titre5","coucou5",139,38,58,6,400)
 mus6 = Musique("titre6","coucou5",194,48,45,3,405)
 mus7 = Musique("titre7","coucou6",193,55,34,8,138)
-tableaudobjets = [mus1,mus2,mus3,mus4,mus5]
-'''
+#tableaudobjets = [mus1,mus2,mus3,mus4,mus5]"""
 
+exemple = [['titre1', 'durée1', 123, 12], ['titre2', 'durée2', 80, 20],
+           ['titre3', 'durée3', 140, 18], ['titre4', 'durée4', 130, 19]]
 # Exemple : print tableaudobjets[1].titre
-def determination_nbre_sol():
+
+def determination_nbre_sol(tableaudobjets):
     if len(tableaudobjets)<=100:
         nbre_solution = len(tableaudobjets)
     else:
         nbre_solution = 100
     return(nbre_solution)
 
-def creationtabl_BPM():
+def creationtabl_BPM(tableaudobjets):
     i=0
     tabl_BPM = []
     for i in range (len(tableaudobjets)):
@@ -72,7 +74,7 @@ def creationtabl_BPM():
     return(tabl_BPM)
 
 
-def creationtabl_HARMO():
+def creationtabl_HARMO(tableaudobjets):
     i=0
     tabl_HARMO = []
     for i in range (len(tableaudobjets)):
@@ -80,10 +82,10 @@ def creationtabl_HARMO():
         i +=1
     return(tabl_HARMO)
 
-def sommeecartBPM(matrice_solutionsBPM):
-        nbre_solution = determination_nbre_sol()
-        A = creationtabl_HARMO()
-        B = creationtabl_BPM()
+def sommeecartBPM(tableaudobjets,matrice_solutionsBPM):
+        nbre_solution = determination_nbre_sol(tableaudobjets)
+        A = creationtabl_HARMO(tableaudobjets)
+        B = creationtabl_BPM(tableaudobjets)
         tabl_BPMsoustrait = []  #contient l'écart entre chaque musique pr chaque solution
         result_soustrac = 0
         j=0
@@ -98,13 +100,13 @@ def sommeecartBPM(matrice_solutionsBPM):
             i = i+1
         return(tabl_BPMsoustrait)
 
-def sommeecartHARMO(matrice_solutionsHARMO):
+def sommeecartHARMO(tableaudobjets, matrice_solutionsHARMO):
             tabl_HARMOsoustrait = [] #contient l'écart harmo entre chaque musique pr chaque solution
             result_soustrac2 = 0
             matrice_pitchs = range(25)
-            nbre_solution = determination_nbre_sol()
-            A = creationtabl_HARMO()
-            B = creationtabl_BPM()
+            nbre_solution = determination_nbre_sol(tableaudobjets)
+            A = creationtabl_HARMO(tableaudobjets)
+            B = creationtabl_BPM(tableaudobjets)
             x = 0
             y = 0
             i = 0
@@ -164,36 +166,33 @@ def ponderation(tabl_BPMsoustrait,tabl_HARMOsoustrait):
             return tabl_BPMHARMOpondeesoustrait
 
 
-exemple = [['titre1', 'durée1', 'bpm1', 'tonalite1'], ['titre2', 'durée2', 'bpm2', 'tonalite2'],
-           ['titre3', 'durée3', 'bpm3', 'tonalite3'], ['titre4', 'durée4', 'bpm4', 'tonalite4']]
-
 def algorithme_genetique(playlist):
         #création de la population initiale de solutions
         #la solution doit passer par tous les points ET ne pas comporter de doublons
 
         #Détermination du nombre de solutions
 
-        # arrangement de matrice playlist
-        mat = []
-        for row in playlist:
-            mat.append(row[3])
+             # arrangement de matrice playlist
+    mat = []
+    for row in playlist:
+        mat.append(row[3])
 
-        tableaudobjets = []
-        for i in range(len(mat)):
-            nummusic = str(i)
-            music = "music" + nummusic
-            music = Musique(playlist[i][0], playlist[i][-1], playlist[i][2], None, None, playlist[i][3], playlist[i][1])
-            tableaudobjets.append(music)
-            # mus1 = Musique("titre1","coucou",125,80,130,1,200)
+    tableaudobjets = []
+    for i in range(len(mat)):
+        nummusic = str(i)
+        music = "music" + nummusic
+        music = Musique(playlist[i][0], playlist[i][-1], playlist[i][2], None, None, playlist[i][3], playlist[i][1])
+        tableaudobjets.append(music)
+        # mus1 = Musique("titre1","coucou",125,80,130,1,200)
 
 
-nbre_solution = determination_nbre_sol()
+    nbre_solution = determination_nbre_sol(tableaudobjets)
         #Création de la matrice bpm avec 4 solutions initiales
     matrice_solutionsBPM = np.zeros((nbre_solution,len(tableaudobjets)))
     matrice_solutionsHARMO = np.zeros((nbre_solution,len(tableaudobjets)))
 
-    A = creationtabl_BPM()
-    B = creationtabl_HARMO()
+    A = creationtabl_BPM(tableaudobjets)
+    B = creationtabl_HARMO(tableaudobjets)
     j=0
     i=0
     k=0
@@ -210,20 +209,20 @@ nbre_solution = determination_nbre_sol()
             del A[valeur_random]
             del B[valeur_random]
             i += 1
-        A = creationtabl_BPM()
-        B = creationtabl_HARMO()
+        A = creationtabl_BPM(tableaudobjets)
+        B = creationtabl_HARMO(tableaudobjets)
         j += 1
 
-    A = creationtabl_HARMO()
-    B = creationtabl_BPM()
+    A = creationtabl_HARMO(tableaudobjets)
+    B = creationtabl_BPM(tableaudobjets)
 
 
-    for nombre_generation in range (5000):
+    for nombre_generation in range (5):
         #Evaluation de la qualité des solutions
         #Détermination de la somme des écarts bpm pour chaque solution
 
 
-        sommeecartBPM(matrice_solutionsBPM)
+        sommeecartBPM(tableaudobjets, matrice_solutionsBPM)
 
 
         #Détermination de la somme des écarts harmo pr chaque solution
@@ -260,16 +259,16 @@ nbre_solution = determination_nbre_sol()
 
         #Calcule des écarts sur les matrices mutées
 
-        tabl_BPMsoustraitMUT = sommeecartBPM(matrice_solutionsMutationBPM)
-        tabl_HARMOsoustraitMUT = sommeecartHARMO(matrice_solutionsMutationHARMO)
+        tabl_BPMsoustraitMUT = sommeecartBPM(tableaudobjets, matrice_solutionsMutationBPM)
+        tabl_HARMOsoustraitMUT = sommeecartHARMO(tableaudobjets, matrice_solutionsMutationHARMO)
 
         #On choisit les 2 meilleurs solutions des solutions initiales et les deux meilleurs des solutions mutées
 
 
         #PONDERATION
 
-        tabl_BPMsoustrait = sommeecartBPM(matrice_solutionsBPM)
-        tabl_HARMOsoustrait = sommeecartHARMO(matrice_solutionsHARMO)
+        tabl_BPMsoustrait = sommeecartBPM(tableaudobjets, matrice_solutionsBPM)
+        tabl_HARMOsoustrait = sommeecartHARMO(tableaudobjets, matrice_solutionsHARMO)
 
         #Création  de la nouvelle solution
 
@@ -280,40 +279,47 @@ nbre_solution = determination_nbre_sol()
         matrice_nouvellesolutionBPM = np.zeros((nbre_solution,len(tableaudobjets)))
         matrice_nouvellessolutionHARMO = np.zeros((nbre_solution,len(tableaudobjets)))
 
-
-        for k in range (nbre_solution//2):
+        for k in [0,nbre_solution//2-1]:
             for i in range (len(tabl_BPMHARMOpondeesoustrait)):
+                if matrice_nouvellesolutionBPM[nbre_solution//2,3] != 0:
+                    break
                 if tabl_BPMHARMOpondeesoustrait[i] == min(tabl_BPMHARMOpondeesoustrait):
                     for j in range (len(tabl_BPMHARMOpondeesoustrait)):
                         matrice_nouvellesolutionBPM[k,j] = matrice_solutionsBPM[i,j]
                         matrice_nouvellessolutionHARMO[k,j] = matrice_solutionsHARMO[i,j]
                         j += 1
                         tabl_BPMHARMOpondeesoustrait[i] = 999999
-                    j = 0
                     i += 1
+                    j = 0
                 else:
                     i += 1
                     j = 0
             k+= 1
 
+        print matrice_nouvellesolutionBPM
+        print matrice_nouvellessolutionHARMO
 
         k = 0
         j = 0
         i = 0
         half = nbre_solution//2
         tabl_BPMHARMOpondeesoustraitMUT = ponderation(tabl_BPMsoustraitMUT,tabl_HARMOsoustraitMUT)
-
-        if nbre_solution%2 == 0 :  #si le nbre_solution est pair on
-            for k in [half, nbre_solution]: #verif qu'on a bien Moitié moitié de solution
+        print tabl_BPMHARMOpondeesoustraitMUT
+        print matrice_solutionsMutationBPM
+        if nbre_solution%2 == 0 :  #si le nbre_solution est pair on fait moitié moitié
+            for k in [half, nbre_solution-1]: #verif qu'on a bien Moitié moitié de solution
                 for i in range (len(tabl_BPMHARMOpondeesoustraitMUT)):
                     if tabl_BPMHARMOpondeesoustraitMUT[i] == min(tabl_BPMHARMOpondeesoustraitMUT):
-                        for j in range (len(tabl_BPMHARMOpondeesoustrait)):
-                            matrice_nouvellesolutionBPM[k,j] = matrice_solutionsMutationBPM[i,j]
-                            matrice_nouvellessolutionHARMO[k,j] = matrice_solutionsMutationHARMO[i,j]
-                            j += 1
-                            tabl_BPMHARMOpondeesoustraitMUT[i] = 999999
-                        i += 1
-                        j = 0
+                        if min(tabl_BPMHARMOpondeesoustraitMUT) != 999999:
+                            for j in range (len(tabl_BPMHARMOpondeesoustrait)):
+                                matrice_nouvellesolutionBPM[k,j] = matrice_solutionsMutationBPM[i,j]
+                                print matrice_nouvellesolutionBPM
+                                matrice_nouvellessolutionHARMO[k,j] = matrice_solutionsMutationHARMO[i,j]
+                                j += 1
+                                tabl_BPMHARMOpondeesoustraitMUT[i] = 999999
+                                print tabl_BPMHARMOpondeesoustraitMUT
+                            i += 1
+                            j = 0
                     else:
                         i += 1
                         j = 0
@@ -343,14 +349,19 @@ nbre_solution = determination_nbre_sol()
                     matrice_nouvellessolutionHARMO[-1,j] = matrice_solutionsHARMO[random3,j]
                     j += 1
 
+
+        print "coucou"
+        print matrice_nouvellesolutionBPM
+
+
         matrice_solutionsBPM = matrice_nouvellesolutionBPM
         matrice_solutionsHARMO = matrice_nouvellessolutionHARMO
         nombre_generation += 1
 
-    print matrice_solutionsBPM
-    print matrice_solutionsHARMO
-    tabl_BPMsoustrait = sommeecartBPM(matrice_solutionsBPM)
-    tabl_HARMOsoustrait = sommeecartHARMO(matrice_solutionsHARMO)
+   # print matrice_solutionsBPM
+    #print matrice_solutionsHARMO
+    tabl_BPMsoustrait = sommeecartBPM(tableaudobjets, matrice_solutionsBPM)
+    tabl_HARMOsoustrait = sommeecartHARMO(tableaudobjets, matrice_solutionsHARMO)
     tabl_final = ponderation(tabl_BPMsoustrait, tabl_HARMOsoustrait)
     solution_finaleBPM = []
     solution_finaleHARMO = []  #Le mauvais jeu de mot n'est pas voulu ...
@@ -369,10 +380,9 @@ nbre_solution = determination_nbre_sol()
     print solution_finaleHARMO
     """ PROBLEME FINAL  A REGLER
 
-    mat = []
+     mat = []
     for row in playlist:
         mat.append(row[3])
-
     k=0
     for i in range(len(solution_finaleBPM)):
         for j in range(len(mat)):
@@ -381,6 +391,7 @@ nbre_solution = determination_nbre_sol()
                     playlist[k][w], playlist[j,w] = playlist[j][w], playlist[k][w]
                     k += 1
 
+                    
     # Reste à retourner la liste d'objet "tableaudobjets" qui sera triée !
     # Il suffit de refaire la liaison entre les nombres des listes solution_finaleBPM,solution_finaleHARMO et
     # le tableau d'objets initial.
@@ -415,4 +426,5 @@ nbre_solution = determination_nbre_sol()
         i +=1
     print matrice_export
     return matrice_export
-algorithme_genetique()
+
+algorithme_genetique(exemple)
