@@ -350,6 +350,19 @@ def algorithme_genetique():
     print solution_finaleBPM
     print solution_finaleHARMO
     """ PROBLEME FINAL  A REGLER
+
+    mat = []
+    for row in playlist:
+        mat.append(row[3])
+
+    k=0
+    for i in range(len(solution_finaleBPM)):
+        for j in range(len(mat)):
+            if solution_finaleBPM[i] == mat[j]:
+                for w in range(5):
+                    playlist[k][w], playlist[j,w] = playlist[j][w], playlist[k][w]
+                    k += 1
+
     # Reste à retourner la liste d'objet "tableaudobjets" qui sera triée !
     # Il suffit de refaire la liaison entre les nombres des listes solution_finaleBPM,solution_finaleHARMO et
     # le tableau d'objets initial.
