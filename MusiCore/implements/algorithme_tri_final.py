@@ -44,7 +44,7 @@ print(a.BPM_moy)
 
 #-----------------------------------------
 #Implémentation d'un algorithme génétique pour aboutir au tri final
-
+'''
 mus1 = Musique("titre1","coucou",125,80,130,1,200)
 mus2 = Musique("titre2","coucou2",110,78,130,12,300)
 mus3 = Musique("titre3","coucou3",102,90,129,13,400)
@@ -53,6 +53,7 @@ mus5 = Musique("titre5","coucou5",139,38,58,6,400)
 mus6 = Musique("titre6","coucou5",194,48,45,3,405)
 mus7 = Musique("titre7","coucou6",193,55,34,8,138)
 tableaudobjets = [mus1,mus2,mus3,mus4,mus5]
+'''
 
 # Exemple : print tableaudobjets[1].titre
 def determination_nbre_sol():
