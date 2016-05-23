@@ -742,9 +742,9 @@ class analyse:
             DurationPitch = temporel
 
         # On regarde si la musique est harmonique
-        if self.is_music_harmonic(Tonalite) == False:
-            print("l'algo estime que la musique est atonale")
-            Tonalite = ['**Musique atonale**']
+            # if self.is_music_harmonic(Tonalite) == False:
+            # print("l'algo estime que la musique est atonale")
+            # Tonalite = ['**Musique atonale**']
         else:
             print("l'algorithme estime que la musique est tonale")
 
@@ -827,23 +827,3 @@ class analyse:
 # ======================================================
 # Fonctions annexes
 # ======================================================
-
-def switch_harmonic(list_of_harmonique):
-    # mineur
-    mineur_camelot = ['1A', '2A', '3A', '4A', '5A', '6A', '7A', '8A', '9A', '10A', '11A', '12A']
-    mineur_tonalite = ['G#m', 'D#m', 'A#m', 'Fm', 'Cm', 'Gm', 'Dm', 'Am', 'Em', 'Bm', 'F#m', 'C#m']
-    mineur_equivalent = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-
-    # majeur
-    majeur_camelot = ['1B', '2B', '3B', '4B', '5B', '6B', '7B', '8B', '9B', '10B', '11B', '12B']
-    majeur_tonalite = ['BM', 'F#M', 'C#M', 'G#M', 'D#M', 'A#M', 'FM', 'CM', 'GM', 'DM', 'AM', 'EM']
-    majeur_equivalent = [13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
-
-    for i in list_of_harmonique:
-        for j in range(len(mineur_tonalite)):
-            if i == mineur_tonalite[j]:
-                i = mineur_equivalent[j]
-        for j in range(len(majeur_tonalite)):
-            if i == majeur_tonalite[j]:
-                i = majeur_equivalent[j]
-    return list_of_harmonique
