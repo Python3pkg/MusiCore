@@ -87,6 +87,7 @@ class csv_musicore:
             finally:
                 # Fermeture du fichier source
                 file.close()
+        return None
 
     def find_title_in_database(self, titre):
         '''
@@ -149,6 +150,13 @@ class csv_musicore:
         return
 
     def get_column(self, num_col):
+        '''
+        getter pour obtneir la colonne num_col du fichier csv de l'analyse
+
+        :param num_col: numéro de la colonne que l'on souhaite obtenir
+        :return: list (colonne num_col)
+
+        '''
         fname = self.path_to_csv_file
         file = open(fname, "rt")  # on ouvre le fichier csv de la base de donnée
         colonne = []
@@ -165,7 +173,12 @@ class csv_musicore:
         return colonne
 
     def get_row(self, num_row):
+        '''
 
+        :param num_row: numéro de la ligne que l'on souhaite obtenir
+        :return: list (ligne num_row)
+
+        '''
         if isinstance(num_row, int) == False:
             raise ValueError('la liste doit être un entier')
 
@@ -183,7 +196,12 @@ class csv_musicore:
         return False
 
     def get_column_database(self, num_col):
+        '''
 
+        :param num_col: numéro de la colonne de la base de données
+        :return: list (colonne de la base de données)
+
+        '''
         if isinstance(num_col, int) == False:
             raise ValueError('la liste doit être un entier')
 
@@ -199,7 +217,12 @@ class csv_musicore:
         return colonne
 
     def get_row_database(self, num_row):
+        '''
 
+        :param num_row: numéro de la ligne que l'on souhaite obtenir
+        :return: list (ligne num_row de la base de données)
+
+        '''
         if isinstance(num_row, int) == False:
             raise ValueError('la liste doit être un entier')
 
@@ -217,7 +240,12 @@ class csv_musicore:
         return False
 
     def delete_row(self, num_row):
+        '''
 
+        :param num_row: numéro de la ligne à supprimer
+        :return: None
+
+        '''
         if isinstance(num_row, int) == False:
             raise ValueError('la liste doit être un entier')
 
@@ -235,10 +263,15 @@ class csv_musicore:
             os.remove(self.path_to_csv_file)
             os.rename(self.rootfolder + '/database/temp.csv', self.path_to_csv_file)
 
-        return
+        return None
 
     def delete_column(self, num_col):
+        '''
 
+        :param num_col: numéro de la colonne à supprimer
+        :return: None
+
+        '''
         if isinstance(num_col, int) == False:
             raise ValueError('la liste doit être un entier')
 
@@ -256,7 +289,12 @@ class csv_musicore:
         return
 
     def delete_row_database(self, num_row):
+        '''
 
+        :param num_row: numéro de la colonne de la base de données à supprimer
+        :return: None
+
+        '''
         if isinstance(num_row, int) == False:
             raise ValueError('la liste doit être un entier')
 
@@ -276,7 +314,12 @@ class csv_musicore:
         return
 
     def delete_column_database(self, num_col):
+        '''
 
+        :param num_col: numéro de la colonne de la base de données à supprimer
+        :return: None
+
+        '''
         if isinstance(num_col, int) == False:
             raise ValueError('la liste doit être un entier')
 
@@ -294,6 +337,11 @@ class csv_musicore:
         return
 
     def nombre_ligne_csv(self):
+        '''
+
+        :return: nombre de ligne deans le fichier csv
+
+        '''
         with open(self.path_to_csv_file, 'rt') as input:
             reader = csv.reader(input, delimiter=',')
             count = 0
@@ -302,6 +350,12 @@ class csv_musicore:
         return count
 
     def clear(self):
+        '''
+        permet de supprimer le fichier csv de l'analyse
+
+        :return: None
+
+        '''
         if self.is_file(self.path_to_csv_file) == True:
             os.remove(self.path_to_csv_file)
             print('fichier :' + self.path_to_csv_file + ' supprimé')
@@ -311,6 +365,7 @@ class csv_musicore:
     def safe_state(self):
         '''
         vérifie que le fichier csv n'a pas de problème c'est à dire des sauts de lignes blanc
+
         :return: boolean
         '''
         with open(self.path_to_csv_file, 'rt') as input:
@@ -327,7 +382,9 @@ class csv_musicore:
     def safe_state_database(self):
         '''
         vérifie que la fichier csv de la base de donné est dans un bon état
+
         :return: boolean
+
         '''
         with open(self.path_to_database, 'rt') as input:
             reader = csv.reader(input, delimiter=',')
@@ -390,14 +447,19 @@ class analyse:
                 self.PathToFile[:len(self.PathToFile) - k - 1]]  # path to directory , file name
 
     def clean_analyses(self):
+        '''
+        Permet de suppimer le fichier d'analyse
+
+        :return: None
+        '''
         for element in os.listdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/database'):
             print(element)
-            '''if element == 'database' or element == 'output_ui':
+            if element == 'database' or element == 'output_ui':
                 return
             else:
-                os.rmdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))+'/database'+element)'''
+                os.rmdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/database' + element)
 
-    def rajout_colonne_csv(self, path_to_csv_file, titre, element_a_rajouter):
+    '''def rajout_colonne_csv(self, path_to_csv_file, titre, element_a_rajouter):
         with open(path_to_csv_file, 'r') as csvinput:
             with open(path_to_csv_file, 'w') as csvoutput:
                 writer = csv.writer(csvoutput, lineterminator='\n')
@@ -413,7 +475,7 @@ class analyse:
                     all.append(row)
 
                 writer.writerows(all)
-        return
+        return'''
 
     def extrairedatamusic(self):
         '''
@@ -431,7 +493,7 @@ class analyse:
 
         y, s = librosa.load(filename)  # on charge le fichier de musique
 
-        # self.time = str(float("{0:.2f}".format(2 * (len(y) / 44100))))  # calcul de la durée de la musique en seconde
+        # calcul de la durée de la musique
         seconds = int(2 * (len(y) / 44100))
         minutes = str(seconds // 60)
         seconds = str(seconds % 60)
@@ -452,9 +514,7 @@ class analyse:
         :Comment ecrit dans le fichier csv a la fin
 
         """
-
         # creation de la liste qui va etre exportee dans le csv
-        # ElemCsv = [self.extraire_path()[0]]
         ElemCsv = []
 
         # execution du tracker bpm par default
@@ -474,11 +534,6 @@ class analyse:
         ElemCsv.append(tempo)
         ElemCsv.append(60 / (bpm_d / 100))
         ElemCsv.append(60 / (bpm_f / 100))
-
-        # print("la liste qui va etre implementé est: ", ElemCsv)
-        # ecriture des donnees dans la base de donnée et le fichier de playlist
-        # self.ecrirecsv(self.pathtobdd, ElemCsv)  # fichier
-        # self.ecrirecsv(self.NomFichierCsv, ElemCsv)
 
         return ElemCsv  # bpm debut, bpm fin , bpm moyen
 
@@ -735,6 +790,7 @@ class analyse:
             temporel.append(DurationPitch[0])
             DurationPitch = temporel
 
+            # Décommenter pour avoir une estimation de la tonalité d'une musique
         # On regarde si la musique est harmonique
             # if self.is_music_harmonic(Tonalite) == False:
             # print("l'algo estime que la musique est atonale")
@@ -742,6 +798,7 @@ class analyse:
         else:
             print("l'algorithme estime que la musique est tonale")
 
+        # Décommenter pour activé la détection double d'une tonalité
         # if self.major_plus_minor(Tonalite) != False:
         #    list_tonalite = self.major_plus_minor(Tonalite)
 
