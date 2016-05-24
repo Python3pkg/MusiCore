@@ -7,10 +7,12 @@ Ce module est initié par l'interface graphique
 
 ############################################################################################
 
-import analyseaudio
-import csv
+import MusiCore.implements.Analyse as Analyse
 import os
-import sys
+import gi
+
+gi.require_version('Gtk', '3.0')
+from gi.repository import Gtk
 
 
 def getdirpath():
@@ -18,6 +20,109 @@ def getdirpath():
     :return:le chemin du repertoire MusiCore
     '''
     return os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+
+def switch_tonalite(list_tonalite):
+    # Mineur
+    mineur_tonalité = ['G#m', 'D#m', 'A#m', 'Fm', 'Cm', 'Gm', 'Dm', 'Am', 'Em', 'Bm', 'F#m', 'C#m']
+    mineur_equivalent = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
+    # Majeur
+    majeur_tonalité = ['BM', 'F#M', 'C#M', 'G#M', 'D#M', 'A#M', 'FM', 'CM', 'GM', 'DM', 'AM', 'EM']
+    majeur_equivalent = [13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
+
+    for i in range(len(list_tonalite)):
+        for j in range(len(mineur_tonalité)):
+            if list_tonalite[i] == mineur_tonalité[j]:
+                list_tonalite[i] = mineur_equivalent[j]
+        for w in range(len(majeur_tonalité)):
+            if list_tonalite[i] == majeur_tonalité[w]:
+                list_tonalite[i] = majeur_equivalent[w]
+    return list_tonalite
+
+
+def analyseBPM(mat, playlist):
+    flag_bpm = True
+    flag_tonalite = False
+    nomanalyse = 'test'
+
+    # on initialise l'analyse
+    nom_analyse = Analyse.csv_musicore(nomanalyse)
+    nom_analyse.clear()
+    k = 1
+
+    for i in mat:  # on parcourt la liste de musique
+        numanalyse = str(k)
+        analysed = "analyse" + numanalyse
+        print(analysed + " : fichier " + i)
+        analysed = Analyse.analyse(i, nom_analyse.path_to_csv_file, nom_analyse.path_to_database)
+        get_bpm = parser(nom_analyse, analysed, True, False)
+        print(get_bpm)
+        playlist[k - 1][2] = float(get_bpm[1])
+        playlist[k - 1][1] = str(get_bpm[-1])
+        k += 1
+    return playlist
+
+
+def analyseHarm(mat, playlist):
+    flag_bpm = False
+    flag_tonalite = True
+    nomanalyse = 'test'
+
+    # on itnitialise l'analyse
+    nom_analyse = Analyse.csv_musicore(nomanalyse)
+    nom_analyse.clear()
+    k = 1
+
+    for i in mat:  # on parcourt la liste de musique
+        numanalyse = str(k)
+        analysed = "analyse" + numanalyse
+        print(analysed + " : fichier " + i)
+        analysed = Analyse.analyse(i, nom_analyse.path_to_csv_file, nom_analyse.path_to_database)
+
+        get_tonalite = parser(nom_analyse, analysed, False,
+                              True)
+        print(get_tonalite)
+        if get_tonalite[4] == '**Musique atonale**':
+            playlist[k - 1][3] = get_tonalite[4]
+        else:
+            playlist[k - 1][3] = str(get_tonalite[-2])
+        playlist[k - 1][1] = get_tonalite[-1]
+        while Gtk.events_pending():
+            Gtk.main_iteration()
+        k += 1
+    return playlist
+
+
+def analyseBoth(mat, playlist):
+    print("vous avez cliqué sur le bouton d'anlyse des deux caractéristiques")
+    flag_bpm = True
+    flag_tonalite = True
+    nomanalyse = 'test'
+
+    # on itnitialise l'analyse
+    nom_analyse = Analyse.csv_musicore(nomanalyse)
+    nom_analyse.clear()
+    k = 1
+
+    for i in mat:  # on parcourt la liste de musique
+        numanalyse = str(k)
+        analysed = "analyse" + numanalyse
+        print(analysed + " : fichier " + i)
+        analysed = Analyse.analyse(i, nom_analyse.path_to_csv_file, nom_analyse.path_to_database)
+
+        get_bpm = parser(nom_analyse, analysed, True, True)
+        print(get_bpm)
+        playlist[k - 1][2] = float(get_bpm[3])
+        if get_bpm[4] == '**Musique atonale**':
+            playlist[k - 1][3] = get_bpm[4]
+        else:
+            playlist[k - 1][3] = get_bpm[-2]
+        playlist[k - 1][1] = get_bpm[-1]
+        while Gtk.events_pending():
+            Gtk.main_iteration()
+        k += 1
+    return playlist
 
 
 def parser(nom_analyse, analyse, flag_bpm, flag_tonalite):

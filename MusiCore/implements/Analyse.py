@@ -9,78 +9,7 @@ import csv
 # Analyse Tonale
 from scipy import fft, arange, ifft
 import matplotlib.pyplot as plt
-from scipy.io.wavfile import read, write
 import numpy
-import implements.parse_audio_2 as parse_audio_2
-
-def switch_tonalite(list_tonalite):
-    # Mineur
-    mineur_tonalité = ['G#m', 'D#m', 'A#m', 'Fm', 'Cm', 'Gm', 'Dm', 'Am', 'Em', 'Bm', 'F#m', 'C#m']
-    mineur_equivalent = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-
-    # Majeur
-    majeur_tonalité = ['BM', 'F#M', 'C#M', 'G#M', 'D#M', 'A#M', 'FM', 'CM', 'GM', 'DM', 'AM', 'EM']
-    majeur_equivalent = [13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
-
-    for i in range(len(list_tonalite)):
-        for j in range(len(mineur_tonalité)):
-            if list_tonalite[i] == mineur_tonalité[j]:
-                list_tonalite[i] = mineur_equivalent[j]
-        for w in range(len(majeur_tonalité)):
-            if list_tonalite[i] == majeur_tonalité[w]:
-                list_tonalite[i] = majeur_equivalent[w]
-    return list_tonalite
-
-def analyseBPM(mat):
-        flag_bpm = True
-        flag_tonalite = False
-        nomanalyse = 'test'
-
-        # on initialise l'analyse
-        nom_analyse = csv_musicore(nomanalyse)
-        nom_analyse.clear()
-        k = 1
-
-        for i in mat:  # on parcourt la liste de musique
-            numanalyse = str(k)
-            analysed = "analyse" + numanalyse
-            print(analysed + " : fichier " + i)
-            analysed = analyse(i, nom_analyse.path_to_csv_file, nom_analyse.path_to_database)
-            get_bpm = parse_audio_2.parser(nom_analyse, analyse, True, False)
-            print(get_bpm)
-            playlist[k - 1][2] = float(get_bpm[1])
-            playlist[k - 1][1] = str(get_bpm[-1])
-            while Gtk.events_pending():
-                Gtk.main_iteration()
-            k += 1
-
-def analyseHarm(mat):
-        flag_bpm = False
-        flag_tonalite = True
-        nomanalyse = 'test'
-
-        # on itnitialise l'analyse
-        nom_analyse = analyseaudio.csv_musicore(nomanalyse)
-        nom_analyse.clear()
-        k = 1
-
-        for i in mat: # on parcourt la liste de musique
-            numanalyse = str(k)
-            analyse = "analyse" + numanalyse
-            print(analyse + " : fichier " + i)
-            analyse = analyseaudio.analyse(i, nom_analyse.path_to_csv_file, nom_analyse.path_to_database)
-
-            get_tonalite = parse_audio_2.parser(nom_analyse, analyse, False,
-                                                True)
-            print(get_tonalite)
-            if get_tonalite[4] == '**Musique atonale**':
-                playlist[k - 1][3] = get_tonalite[4]
-            else:
-                playlist[k - 1][3] = str(get_tonalite[-2])
-            playlist[k - 1][1] = get_tonalite[-1]
-            while Gtk.events_pending():
-                Gtk.main_iteration()
-            k += 1
 
 ###############################################################################
 # class `csv`
