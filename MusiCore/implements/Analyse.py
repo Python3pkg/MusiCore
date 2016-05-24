@@ -11,7 +11,7 @@ from scipy import fft, arange, ifft
 import matplotlib.pyplot as plt
 from scipy.io.wavfile import read, write
 import numpy
-
+import implements.parse_audio_2 as parse_audio_2
 
 def switch_tonalite(list_tonalite):
     # Mineur
@@ -43,9 +43,9 @@ def analyseBPM(mat):
 
         for i in mat:  # on parcourt la liste de musique
             numanalyse = str(k)
-            analyse = "analyse" + numanalyse
-            print(analyse + " : fichier " + i)
-            analyse = analyse(i, nom_analyse.path_to_csv_file, nom_analyse.path_to_database)
+            analysed = "analyse" + numanalyse
+            print(analysed + " : fichier " + i)
+            analysed = analyse(i, nom_analyse.path_to_csv_file, nom_analyse.path_to_database)
             get_bpm = parse_audio_2.parser(nom_analyse, analyse, True, False)
             print(get_bpm)
             playlist[k - 1][2] = float(get_bpm[1])
