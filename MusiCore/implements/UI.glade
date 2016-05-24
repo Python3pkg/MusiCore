@@ -1,337 +1,219 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.19.0 -->
+<!-- Generated with glade 3.20.0 -->
 <interface>
-  <requires lib="gtk+" version="3.16"/>
-  <object class="GtkAdjustment" id="adjustment1">
-    <property name="upper">100</property>
-    <property name="step_increment">1</property>
-    <property name="page_increment">10</property>
-  </object>
-  <object class="GtkImage" id="image1">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="stock">gtk-missing-image</property>
-  </object>
-  <object class="GtkImage" id="image10">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="stock">gtk-missing-image</property>
-  </object>
-  <object class="GtkImage" id="image11">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="stock">gtk-missing-image</property>
-  </object>
-  <object class="GtkImage" id="image12">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="stock">gtk-missing-image</property>
-  </object>
-  <object class="GtkImage" id="image2">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="stock">gtk-missing-image</property>
-  </object>
-  <object class="GtkImage" id="image3">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="stock">gtk-missing-image</property>
-  </object>
-  <object class="GtkImage" id="image4">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="stock">gtk-missing-image</property>
-  </object>
-  <object class="GtkImage" id="image5">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="stock">gtk-missing-image</property>
-  </object>
-  <object class="GtkImage" id="image6">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="stock">gtk-missing-image</property>
-  </object>
-  <object class="GtkImage" id="image7">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="stock">gtk-missing-image</property>
-  </object>
-  <object class="GtkImage" id="image8">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="stock">gtk-missing-image</property>
-  </object>
-  <object class="GtkImage" id="image9">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="stock">gtk-missing-image</property>
-  </object>
-  <object class="GtkListStore" id="liststore1">
+  <requires lib="gtk+" version="3.20"/>
+  <object class="GtkListStore" id="Playlist">
     <columns>
       <!-- column-name Title -->
       <column type="gchararray"/>
       <!-- column-name Time -->
       <column type="gchararray"/>
-      <!-- column-name Artist -->
-      <column type="gchararray"/>
-      <!-- column-name Album -->
-      <column type="gchararray"/>
-      <!-- column-name Genre -->
-      <column type="gchararray"/>
       <!-- column-name BPM -->
       <column type="gint"/>
       <!-- column-name Harmonic -->
       <column type="gchararray"/>
-    </columns>
-    <data>
-      <row>
-        <col id="0" translatable="yes">I like to Move it</col>
-        <col id="1" translatable="yes">4:00</col>
-        <col id="2" translatable="yes">Reel 2 Real</col>
-        <col id="3" translatable="yes">Move IT</col>
-        <col id="4" translatable="yes">House</col>
-        <col id="5">90</col>
-        <col id="6" translatable="yes">2A</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Party Rock</col>
-        <col id="1" translatable="yes">3:50</col>
-        <col id="2" translatable="yes">LMFAO</col>
-        <col id="3" translatable="yes">Party Rocking</col>
-        <col id="4" translatable="yes">Electro</col>
-        <col id="5">120</col>
-        <col id="6" translatable="yes">12B</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">The Final Countdown</col>
-        <col id="1" translatable="yes">4:55</col>
-        <col id="2" translatable="yes">Europe</col>
-        <col id="3" translatable="yes">1982-1992</col>
-        <col id="4" translatable="yes">Rock</col>
-        <col id="5">75</col>
-        <col id="6" translatable="yes">5A</col>
-      </row>
-    </data>
-  </object>
-  <object class="GtkListStore" id="liststore3">
-    <columns>
-      <!-- column-name gchararray1 -->
+      <!-- column-name Path -->
       <column type="gchararray"/>
     </columns>
-    <data>
-      <row>
-        <col id="0" translatable="yes">Preset</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Increasing</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Decreasing</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Up then Down</col>
-      </row>
-    </data>
+  </object>
+  <object class="GtkWindow" id="Waiter">
+    <property name="can_focus">False</property>
+    <child>
+      <object class="GtkSpinner">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="active">True</property>
+      </object>
+    </child>
+  </object>
+  <object class="GtkImage">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="stock">gtk-missing-image</property>
+  </object>
+  <object class="GtkImage">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="stock">gtk-missing-image</property>
+  </object>
+  <object class="GtkImage">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="stock">gtk-missing-image</property>
+  </object>
+  <object class="GtkFileFilter" id="musique">
+    <mime-types>
+      <mime-type>audio/mpeg</mime-type>
+    </mime-types>
+  </object>
+  <object class="GtkAdjustment" id="ponderation">
+    <property name="upper">100</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
   </object>
   <object class="GtkWindow" id="Main">
     <property name="can_focus">False</property>
+    <signal name="delete-event" handler="onDeleteWindow" swapped="no"/>
+    <signal name="destroy" handler="onDeleteWindow" swapped="no"/>
+    <signal name="destroy-event" handler="onDeleteWindow" swapped="no"/>
     <child>
-      <object class="GtkBox" id="VerticalBox">
+      <object class="GtkBox" id="SplitVertical0">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
         <child>
-          <object class="GtkMenuBar" id="Menu">
+          <object class="GtkBox">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <child>
-              <object class="GtkMenuItem" id="File">
+              <object class="GtkMenuBar">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">File</property>
-                <child type="submenu">
-                  <object class="GtkMenu" id="DropFichier">
+                <child>
+                  <object class="GtkMenuItem">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <child>
-                      <object class="GtkImageMenuItem" id="New">
-                        <property name="label">New</property>
+                    <property name="label" translatable="yes">_Analyse</property>
+                    <property name="use_underline">True</property>
+                    <child type="submenu">
+                      <object class="GtkMenu">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="image">image1</property>
-                        <property name="use_stock">False</property>
+                        <child>
+                          <object class="GtkImageMenuItem">
+                            <property name="label" translatable="yes">BPM</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="use_stock">False</property>
+                            <signal name="activate" handler="onBPM" swapped="no"/>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkImageMenuItem">
+                            <property name="label" translatable="yes">Both</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="use_stock">False</property>
+                            <signal name="activate" handler="onHarm" swapped="no"/>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkImageMenuItem">
+                            <property name="label" translatable="yes">Harmonic</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="use_stock">False</property>
+                            <signal name="activate" handler="onBoth" swapped="no"/>
+                          </object>
+                        </child>
                       </object>
                     </child>
-                    <child>
-                      <object class="GtkImageMenuItem" id="Open">
-                        <property name="label">Open</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkMenuItem">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">_Tri</property>
+                    <property name="use_underline">True</property>
+                    <child type="submenu">
+                      <object class="GtkMenu">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="image">image2</property>
-                        <property name="use_stock">False</property>
+                        <child>
+                          <object class="GtkImageMenuItem">
+                            <property name="label">gtk-cut</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="use_underline">True</property>
+                            <property name="use_stock">True</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkImageMenuItem">
+                            <property name="label">gtk-copy</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="use_underline">True</property>
+                            <property name="use_stock">True</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkImageMenuItem">
+                            <property name="label">gtk-paste</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="use_underline">True</property>
+                            <property name="use_stock">True</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkImageMenuItem">
+                            <property name="label">gtk-delete</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="use_underline">True</property>
+                            <property name="use_stock">True</property>
+                          </object>
+                        </child>
                       </object>
                     </child>
-                    <child>
-                      <object class="GtkImageMenuItem" id="Save">
-                        <property name="label">Save</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkMenuItem">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">_Export</property>
+                    <property name="use_underline">True</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkMenuItem">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">_Help</property>
+                    <property name="use_underline">True</property>
+                    <child type="submenu">
+                      <object class="GtkMenu">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="image">image3</property>
-                        <property name="use_stock">False</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkImageMenuItem" id="Save as">
-                        <property name="label">Save as</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="image">image4</property>
-                        <property name="use_stock">False</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkSeparatorMenuItem" id="Sep1">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkImageMenuItem" id="Quit">
-                        <property name="label">Quit</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="image">image5</property>
-                        <property name="use_stock">False</property>
+                        <child>
+                          <object class="GtkImageMenuItem">
+                            <property name="label">gtk-about</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="use_underline">True</property>
+                            <property name="use_stock">True</property>
+                          </object>
+                        </child>
                       </object>
                     </child>
                   </object>
                 </child>
               </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
             </child>
             <child>
-              <object class="GtkMenuItem" id="Analyse">
+              <object class="GtkButton">
+                <property name="label">gtk-quit</property>
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Analyse</property>
-                <child type="submenu">
-                  <object class="GtkMenu" id="DropAnalyse">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <child>
-                      <object class="GtkImageMenuItem" id="BPM">
-                        <property name="label">BPM</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="image">image7</property>
-                        <property name="use_stock">False</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkImageMenuItem" id="Harmonic">
-                        <property name="label">Harmonic</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="image">image8</property>
-                        <property name="use_stock">False</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkImageMenuItem" id="Both">
-                        <property name="label">Both</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="image">image6</property>
-                        <property name="use_stock">False</property>
-                      </object>
-                    </child>
-                  </object>
-                </child>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_stock">True</property>
+                <property name="always_show_image">True</property>
+                <signal name="clicked" handler="onDeleteWindow" swapped="no"/>
               </object>
-            </child>
-            <child>
-              <object class="GtkMenuItem" id="Sort">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Sort</property>
-                <child type="submenu">
-                  <object class="GtkMenu" id="DropSort">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <child>
-                      <object class="GtkImageMenuItem" id="Auto">
-                        <property name="label">Auto</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="image">image9</property>
-                        <property name="use_stock">False</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkImageMenuItem" id="Custom">
-                        <property name="label" translatable="yes">Custom</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="image">image10</property>
-                        <property name="use_stock">False</property>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-              </object>
-            </child>
-            <child>
-              <object class="GtkMenuItem" id="Export">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Export</property>
-                <child type="submenu">
-                  <object class="GtkMenu" id="menu9">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <child>
-                      <object class="GtkImageMenuItem" id="Playlist">
-                        <property name="label" translatable="yes">Playlist</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="image">image11</property>
-                        <property name="use_stock">False</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkImageMenuItem" id="Fichier Audio">
-                        <property name="label" translatable="yes">Fichier Audio</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="image">image7</property>
-                        <property name="use_stock">False</property>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-              </object>
-            </child>
-            <child>
-              <object class="GtkMenuItem" id="Help">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Help</property>
-                <child type="submenu">
-                  <object class="GtkMenu" id="DropHelp">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <child>
-                      <object class="GtkImageMenuItem" id="About">
-                        <property name="label">About</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="image">image12</property>
-                        <property name="use_stock">False</property>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="pack_type">end</property>
+                <property name="position">1</property>
+              </packing>
             </child>
           </object>
           <packing>
@@ -341,29 +223,85 @@
           </packing>
         </child>
         <child>
-          <object class="GtkBox" id="box4">
+          <object class="GtkBox" id="SplitHorizontal0">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="vexpand">True</property>
             <child>
-              <object class="GtkFileChooserWidget" id="Explorateur">
+              <object class="GtkBox">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-                <property name="resize_mode">immediate</property>
+                <property name="orientation">vertical</property>
+                <child>
+                  <object class="GtkFileChooserWidget" id="FileChooser">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="filter">musique</property>
+                    <property name="preview_widget_active">False</property>
+                    <property name="select_multiple">True</property>
+                    <property name="use_preview_label">False</property>
+                    <property name="search_mode">True</property>
+                  </object>
+                  <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButtonBox">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="homogeneous">True</property>
+                    <property name="layout_style">end</property>
+                    <child>
+                      <object class="GtkComboBoxText">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="active">0</property>
+                        <items>
+                          <item translatable="yes">File</item>
+                          <item translatable="yes">Folder</item>
+                        </items>
+                      </object>
+                      <packing>
+                        <property name="expand">True</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="Importer">
+                        <property name="label" translatable="yes">Import</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">True</property>
+                        <signal name="clicked" handler="onOpen" swapped="no"/>
+                      </object>
+                      <packing>
+                        <property name="expand">True</property>
+                        <property name="fill">True</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
               </object>
               <packing>
-                <property name="expand">True</property>
+                <property name="expand">False</property>
                 <property name="fill">True</property>
                 <property name="position">0</property>
               </packing>
             </child>
             <child>
-              <object class="GtkSeparator" id="separator4">
+              <object class="GtkSeparator" id="Separator1">
+                <property name="width_request">2</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="orientation">vertical</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -375,29 +313,30 @@
               <object class="GtkTreeView" id="Playlis">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="model">liststore1</property>
+                <property name="model">Playlist</property>
                 <property name="reorderable">True</property>
                 <property name="enable_grid_lines">both</property>
                 <child internal-child="selection">
-                  <object class="GtkTreeSelection" id="treeview-selection1"/>
+                  <object class="GtkTreeSelection" id="PlaylistSelect">
+                    <property name="mode">multiple</property>
+                  </object>
                 </child>
                 <child>
-                  <object class="GtkTreeViewColumn" id="treeviewcolumn1">
-                    <property name="title" translatable="yes">Titre</property>
+                  <object class="GtkTreeViewColumn" id="Titre">
+                    <property name="title" translatable="yes">Title</property>
                     <child>
-                      <object class="GtkCellRendererText" id="Titre"/>
+                      <object class="GtkCellRendererText" id="TitreText"/>
                       <attributes>
-                        <attribute name="foreground">11</attribute>
                         <attribute name="text">0</attribute>
                       </attributes>
                     </child>
                   </object>
                 </child>
                 <child>
-                  <object class="GtkTreeViewColumn" id="treeviewcolumn4">
+                  <object class="GtkTreeViewColumn" id="Time">
                     <property name="title" translatable="yes">Time</property>
                     <child>
-                      <object class="GtkCellRendererText" id="cellrenderertext1"/>
+                      <object class="GtkCellRendererText" id="TimeText"/>
                       <attributes>
                         <attribute name="text">1</attribute>
                       </attributes>
@@ -405,10 +344,10 @@
                   </object>
                 </child>
                 <child>
-                  <object class="GtkTreeViewColumn" id="treeviewcolumn5">
-                    <property name="title" translatable="yes">Artist</property>
+                  <object class="GtkTreeViewColumn" id="BPM">
+                    <property name="title" translatable="yes">BPM</property>
                     <child>
-                      <object class="GtkCellRendererText" id="cellrenderertext2"/>
+                      <object class="GtkCellRendererText" id="BPMText"/>
                       <attributes>
                         <attribute name="text">2</attribute>
                       </attributes>
@@ -416,61 +355,28 @@
                   </object>
                 </child>
                 <child>
-                  <object class="GtkTreeViewColumn" id="treeviewcolumn6">
-                    <property name="title" translatable="yes">Album</property>
+                  <object class="GtkTreeViewColumn" id="Harmonic">
+                    <property name="title" translatable="yes">Harmonic</property>
                     <child>
-                      <object class="GtkCellRendererText" id="cellrenderertext3"/>
+                      <object class="GtkCellRendererText" id="HarmonicText"/>
                       <attributes>
                         <attribute name="text">3</attribute>
                       </attributes>
                     </child>
                   </object>
                 </child>
-                <child>
-                  <object class="GtkTreeViewColumn" id="treeviewcolumn7">
-                    <property name="title" translatable="yes">Genre</property>
-                    <child>
-                      <object class="GtkCellRendererText" id="cellrenderertext4"/>
-                      <attributes>
-                        <attribute name="text">4</attribute>
-                      </attributes>
-                    </child>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkTreeViewColumn" id="treeviewcolumn2">
-                    <property name="title" translatable="yes">BPM</property>
-                    <child>
-                      <object class="GtkCellRendererText" id="cellrenderertext5"/>
-                      <attributes>
-                        <attribute name="text">5</attribute>
-                      </attributes>
-                    </child>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkTreeViewColumn" id="treeviewcolumn3">
-                    <property name="title" translatable="yes">Harmonic</property>
-                    <child>
-                      <object class="GtkCellRendererText" id="cellrenderertext6"/>
-                      <attributes>
-                        <attribute name="text">6</attribute>
-                      </attributes>
-                    </child>
-                  </object>
-                </child>
               </object>
               <packing>
-                <property name="expand">True</property>
+                <property name="expand">False</property>
                 <property name="fill">True</property>
                 <property name="position">2</property>
               </packing>
             </child>
             <child>
-              <object class="GtkSeparator" id="separator6">
+              <object class="GtkSeparator" id="Separator2">
+                <property name="width_request">2</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="orientation">vertical</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -479,13 +385,14 @@
               </packing>
             </child>
             <child>
-              <object class="GtkButtonBox" id="buttonbox2">
+              <object class="GtkButtonBox" id="MenuBar">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="orientation">vertical</property>
+                <property name="homogeneous">True</property>
                 <property name="layout_style">start</property>
                 <child>
-                  <object class="GtkLabel" id="label7">
+                  <object class="GtkLabel">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="label" translatable="yes">Analyse</property>
@@ -497,12 +404,12 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkButton" id="button4">
+                  <object class="GtkButton">
                     <property name="label" translatable="yes">BPM</property>
-                    <property name="width_request">112</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
+                    <signal name="clicked" handler="onBPM" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">True</property>
@@ -511,12 +418,12 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkButton" id="button8">
-                    <property name="label" translatable="yes">Harmonic</property>
-                    <property name="width_request">112</property>
+                  <object class="GtkButton">
+                    <property name="label" translatable="yes">Harm.</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
+                    <signal name="clicked" handler="onHarm" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">True</property>
@@ -525,12 +432,12 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkButton" id="button9">
+                  <object class="GtkButton">
                     <property name="label" translatable="yes">Both</property>
-                    <property name="width_request">112</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
+                    <signal name="clicked" handler="onBoth" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">True</property>
@@ -539,9 +446,10 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkSeparator" id="separator7">
+                  <object class="GtkLabel">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Tri</property>
                   </object>
                   <packing>
                     <property name="expand">True</property>
@@ -550,10 +458,14 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkLabel" id="label8">
+                  <object class="GtkComboBoxText">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">Sort</property>
+                    <property name="active">0</property>
+                    <items>
+                      <item translatable="yes">Growing</item>
+                      <item translatable="yes">Slowing</item>
+                    </items>
                   </object>
                   <packing>
                     <property name="expand">True</property>
@@ -562,19 +474,15 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkComboBox" id="combobox2">
-                    <property name="width_request">112</property>
+                  <object class="GtkScale">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="model">liststore3</property>
-                    <property name="active">0</property>
-                    <property name="active_id">0</property>
-                    <child>
-                      <object class="GtkCellRendererText" id="cellrenderertext7"/>
-                      <attributes>
-                        <attribute name="text">0</attribute>
-                      </attributes>
-                    </child>
+                    <property name="can_focus">True</property>
+                    <property name="adjustment">ponderation</property>
+                    <property name="show_fill_level">True</property>
+                    <property name="fill_level">100</property>
+                    <property name="round_digits">1</property>
+                    <property name="draw_value">False</property>
+                    <property name="has_origin">False</property>
                   </object>
                   <packing>
                     <property name="expand">True</property>
@@ -583,10 +491,52 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkLabel" id="label9">
+                  <object class="GtkBox">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">Settings</property>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label" translatable="yes">BPM</property>
+                        <attributes>
+                          <attribute name="font-desc" value="Monospace 10"/>
+                        </attributes>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label" translatable="yes">         </property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label" translatable="yes">HAR</property>
+                        <property name="justify">right</property>
+                        <attributes>
+                          <attribute name="font-desc" value="Monospace 10"/>
+                        </attributes>
+                      </object>
+                      <packing>
+                        <property name="expand">True</property>
+                        <property name="fill">True</property>
+                        <property name="position">2</property>
+                      </packing>
+                    </child>
                   </object>
                   <packing>
                     <property name="expand">True</property>
@@ -595,13 +545,12 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkScale" id="scale2">
+                  <object class="GtkButton">
+                    <property name="label" translatable="yes">Launch</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
-                    <property name="adjustment">adjustment1</property>
-                    <property name="show_fill_level">True</property>
-                    <property name="fill_level">100</property>
-                    <property name="draw_value">False</property>
+                    <property name="receives_default">True</property>
+                    <signal name="clicked" handler="onLaunch" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">True</property>
@@ -610,10 +559,10 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkLabel" id="label10">
+                  <object class="GtkLabel">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">BPM	Harm.</property>
+                    <property name="label" translatable="yes">Export</property>
                   </object>
                   <packing>
                     <property name="expand">True</property>
@@ -622,12 +571,12 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkButton" id="button10">
-                    <property name="label" translatable="yes">Custom Sort</property>
-                    <property name="width_request">112</property>
+                  <object class="GtkButton">
+                    <property name="label" translatable="yes">M3u</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
+                    <signal name="clicked" handler="onM3u" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">True</property>
@@ -636,9 +585,12 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkSeparator" id="separator9">
+                  <object class="GtkButton">
+                    <property name="label" translatable="yes">Mp3</property>
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <signal name="clicked" handler="onMp3" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">True</property>
@@ -647,10 +599,10 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkAccelLabel" id="accellabel2">
+                  <object class="GtkLabel">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">Export</property>
+                    <property name="label" translatable="yes">Play</property>
                   </object>
                   <packing>
                     <property name="expand">True</property>
@@ -659,9 +611,8 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkButton" id="button11">
-                    <property name="label" translatable="yes">Playlist</property>
-                    <property name="width_request">112</property>
+                  <object class="GtkButton">
+                    <property name="label" translatable="yes">Internal</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
@@ -673,12 +624,12 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkButton" id="button12">
-                    <property name="label" translatable="yes">Audio file</property>
-                    <property name="width_request">112</property>
+                  <object class="GtkButton">
+                    <property name="label" translatable="yes">VLC</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
+                    <signal name="clicked" handler="onVLC" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">True</property>
@@ -686,22 +637,11 @@
                     <property name="position">14</property>
                   </packing>
                 </child>
-                <child>
-                  <object class="GtkSeparator" id="separator10">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                  </object>
-                  <packing>
-                    <property name="expand">True</property>
-                    <property name="fill">True</property>
-                    <property name="position">15</property>
-                  </packing>
-                </child>
               </object>
               <packing>
-                <property name="expand">False</property>
+                <property name="expand">True</property>
                 <property name="fill">True</property>
-                <property name="position">5</property>
+                <property name="position">4</property>
               </packing>
             </child>
           </object>

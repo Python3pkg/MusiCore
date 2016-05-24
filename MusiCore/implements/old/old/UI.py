@@ -1,11 +1,17 @@
 #!/usr/bin/env python
 
 import gi
+
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
+import analyseaudio
+import parse_audio_2
+import Exportation
+from pydub import AudioSegment
 import os
 
-import implements.Analyse as Analyse
+
+###Fonctions internes au GUI
 
 def getpath(path):
     k = 0
@@ -13,11 +19,13 @@ def getpath(path):
         k = k + 1
     return path[len(path) - k:len(path) - 4]
 
+
 def exportPlaylist():
     mat = []
     for row in playlist:
         mat.append(row[:])
     return mat
+
 
 def exportPaths():
     mat = []
@@ -25,17 +33,38 @@ def exportPaths():
         mat.append(row[-1])
     return mat
 
+
 def exportTitleandpath():
     mat = []
     for row in playlist:
         mat.append(list(row[k] for k in [0, -1]))
     return mat
 
+
 def export_tonalite():
     mat = []
     for row in playlist:
         mat.append(row[3])
     return mat
+
+
+def switch_tonalite(list_tonalite):
+    # Mineur
+    mineur_tonalité = ['G#m', 'D#m', 'A#m', 'Fm', 'Cm', 'Gm', 'Dm', 'Am', 'Em', 'Bm', 'F#m', 'C#m']
+    mineur_equivalent = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
+    # Majeur
+    majeur_tonalité = ['BM', 'F#M', 'C#M', 'G#M', 'D#M', 'A#M', 'FM', 'CM', 'GM', 'DM', 'AM', 'EM']
+    majeur_equivalent = [13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
+
+    for i in range(len(list_tonalite)):
+        for j in range(len(mineur_tonalité)):
+            if list_tonalite[i] == mineur_tonalité[j]:
+                list_tonalite[i] = mineur_equivalent[j]
+        for w in range(len(majeur_tonalité)):
+            if list_tonalite[i] == majeur_tonalité[w]:
+                list_tonalite[i] = majeur_equivalent[w]
+    return list_tonalite
 
 def actualize(mat):
     for i, row in enumerate(mat):
@@ -57,12 +86,60 @@ class Handler(Gtk.Window):
 
     def onBPM(self, button):
         print("vous avez cliqué sur le bouton d'analyse du bpm")
-        Analyse.analyseBPM(exportPaths())
-        return None
+        flag_bpm = True
+        flag_tonalite = False
+        nomanalyse = 'test'
+
+        # on initialise l'analyse
+        nom_analyse = analyseaudio.csv_musicore(nomanalyse)
+        nom_analyse.clear()
+        k = 1
+
+        for i in exportPaths():  # on parcourt la liste de musique
+            numanalyse = str(k)
+            analyse = "analyse" + numanalyse
+            print(analyse + " : fichier " + i)
+            analyse = analyseaudio.analyse(i, nom_analyse.path_to_csv_file, nom_analyse.path_to_database)
+            get_bpm = parse_audio_2.parser(nom_analyse, analyse, True, False)
+            print(get_bpm)
+            playlist[k - 1][2] = float(get_bpm[1])
+            playlist[k - 1][1] = str(get_bpm[-1])
+            while Gtk.events_pending():
+                Gtk.main_iteration()
+            k += 1
+            #        implements.parseaudio.parseaudio(exportPaths(), True, False)
+            #        actualize()'''
 
     def onHarm(self, button):
         print("vous avez cliqué sur le bouton d'anlyse de la tonalité")
-        Analyse.analyseHarm(exportPaths())
+        flag_bpm = False
+        flag_tonalite = True
+        nomanalyse = 'test'
+
+        # on itnitialise l'analyse
+        nom_analyse = analyseaudio.csv_musicore(nomanalyse)
+        nom_analyse.clear()
+        k = 1
+
+        for i in exportPaths():  # on parcourt la liste de musique
+            numanalyse = str(k)
+            analyse = "analyse" + numanalyse
+            print(analyse + " : fichier " + i)
+            analyse = analyseaudio.analyse(i, nom_analyse.path_to_csv_file, nom_analyse.path_to_database)
+
+            get_tonalite = parse_audio_2.parser(nom_analyse, analyse, False,
+                                                True)
+            print(get_tonalite)
+            if get_tonalite[4] == '**Musique atonale**':
+                playlist[k - 1][3] = get_tonalite[4]
+            else:
+                playlist[k - 1][3] = str(get_tonalite[-2])
+            playlist[k - 1][1] = get_tonalite[-1]
+            while Gtk.events_pending():
+                Gtk.main_iteration()
+            k += 1
+            #        implements.parseaudio.parseaudio(exportPaths(), False, True)
+            #        actualize()
 
     def onBoth(self, button):
 
@@ -76,7 +153,7 @@ class Handler(Gtk.Window):
         nom_analyse.clear()
         k = 1
 
-        for i in exportPaths(): # on parcourt la liste de musique
+        for i in exportPaths():  # on parcourt la liste de musique
             numanalyse = str(k)
             analyse = "analyse" + numanalyse
             print(analyse + " : fichier " + i)
@@ -104,7 +181,8 @@ class Handler(Gtk.Window):
             playlist[k][3] = str(i)
             k += 1
 
-    #        implements.tri() actualize()
+    #        implements.tri()
+    #        actualize()
 
     def on_selection_button_clicked(self, widget):
         """Called on any of the button clicks"""
@@ -168,10 +246,11 @@ class Handler(Gtk.Window):
         os.system(loc)
         return None
 
+
 ###Importation du fichier Glade
 
 builder = Gtk.Builder()
-builder.add_from_file("./implements/UI.glade")
+builder.add_from_file("UI2.glade")
 builder.connect_signals(Handler())
 
 ###Definition des objets directement interagis
@@ -182,8 +261,7 @@ dialog = builder.get_object("FileChooser")
 playlist = builder.get_object("Playlist")
 ponderation = builder.get_object("ponderation")
 
+###Affichage et lancement du Main###
 
-def showUI():
-  window.show_all()
-  Gtk.main()
-  return None
+window.show_all()
+Gtk.main()
