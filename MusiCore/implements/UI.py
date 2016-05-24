@@ -9,12 +9,23 @@ import MusiCore.implements.Exportation as Exportation
 
 
 def getpath(path):
+    '''
+
+    :param path: string (chemin d'accces à un fichier)
+    :return: string (nom du fichier moins son extention)
+
+    '''
     k = 0
     while path[len(path) - k - 1] != "/":
         k = k + 1
     return path[len(path) - k:len(path) - 4]
 
 def exportPlaylist():
+    '''
+
+    :return: list (matrice contenant les valeurs de la TreeView)
+
+    '''
     mat = []
     for row in playlist:
         mat.append(row[:])
@@ -22,30 +33,56 @@ def exportPlaylist():
 
 
 def importPlaylist(mat):
+    '''
+
+    :param mat: matrice à remplcer dans la treeview
+    :return: list
+
+    '''
     playlist = []
     for row in mat:
         playlist.append(row[:])
     return mat
 
 def exportPaths():
+    '''
+
+    :return: list (liste des emplacement des musiques importées
+
+    '''
     mat = []
     for row in playlist:
         mat.append(row[-1])
     return mat
 
 def exportTitleandpath():
+    '''
+
+    :return: list (contient les titres et emplacement des musiques)
+    '''
+
     mat = []
     for row in playlist:
         mat.append(list(row[k] for k in [0, -1]))
     return mat
 
 def export_tonalite():
+    '''
+
+    :return: list (contient la tonalité des musiques)
+    '''
     mat = []
     for row in playlist:
         mat.append(row[3])
     return mat
 
 def actualize(mat):
+    '''
+    Permet d'actualiser la playlist
+
+    :param mat: list
+    :return: None
+    '''
     for i, row in enumerate(mat):
         playlist[i] = row
     return None
@@ -53,11 +90,24 @@ def actualize(mat):
 ###Gestion des signaux###
 
 class Handler(Gtk.Window):
+    '''
+    Classe gérant les signants
+    '''
     def onDeleteWindow(self, *args):
+        '''
+
+        :param args: permet de fermer la fenêtre
+        :return:
+        '''
         Gtk.main_quit(*args)
         return None
 
     def onOpen(self, button):
+        '''
+
+        :param button: permet d'ouvrir les fichiers
+        :return:
+        '''
         selected = dialog.get_filenames()
         for row in selected:
             playlist.append([getpath(row), None, None, None, row])
@@ -66,8 +116,8 @@ class Handler(Gtk.Window):
     def onBPM(self, button):
         '''
 
-        :param button:
-        :return:
+        :param button: bouton permettant de lancer l'analyse de la tonalité sur toutes les musiques importées
+        :return: None
         '''
 
         print("vous avez cliqué sur le bouton d'analyse du bpm")
@@ -78,6 +128,11 @@ class Handler(Gtk.Window):
         return None
 
     def onHarm(self, button):
+        '''
+
+        :param button: bouton permettant de lancer l'analyse de la tonalité sur toutes les musiques importées
+        :return: None
+        '''
         print("vous avez cliqué sur le bouton d'anlyse de la tonalité")
         mat = Parser.analyseHarm(exportPaths(), exportPlaylist())
         playlist.clear()
@@ -87,6 +142,11 @@ class Handler(Gtk.Window):
 
 
     def onBoth(self, button):
+        '''
+
+        :param button: bouton permettant de lancer l'analyse de toutes les caractéristiques des musiques importées
+        :return: None
+        '''
         print("vous avez cliqué sur le bouton d'anlyse des deux caractéristiques")
         mat = Parser.analyseBoth(exportPaths(), exportPlaylist())
         playlist.clear()
@@ -95,6 +155,11 @@ class Handler(Gtk.Window):
         return None
 
     def onLaunch(self, button):
+        '''
+
+        :param button: bouton permettant de lancer le tri
+        :return: None
+        '''
         print('test')
         liste = switch_tonalite(export_tonalite())
         print(liste)
@@ -107,6 +172,11 @@ class Handler(Gtk.Window):
     #        implements.tri() actualize()
 
     def onM3u(self, widget):
+        '''
+
+        :param widget: bonton permettant de lancer l'exportation d'un fichier m3u
+        :return: None
+        '''
         saver = Gtk.FileChooserDialog("Please select a file to save the playlist", self,
                                       Gtk.FileChooserAction.SAVE,
                                       (Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
@@ -124,6 +194,11 @@ class Handler(Gtk.Window):
         return None
 
     def onMp3(self, widget):
+        '''
+
+        :param widget: bouton permettant de lancer l'exportation des fichiers mp3
+        :return: None
+        '''
         saver = Gtk.FileChooserDialog("Please select a file to save the song", self,
                                       Gtk.FileChooserAction.SAVE,
                                       (Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
@@ -140,6 +215,11 @@ class Handler(Gtk.Window):
         return None
 
     def onVLC(self, button):
+        '''
+
+        :param button: bouton lancant la lecture
+        :return: None
+        '''
         file = open("save")
         loc = "vlc " + file.read()
         file.close()
@@ -162,6 +242,12 @@ ponderation = builder.get_object("ponderation")
 
 
 def showUI():
+    '''
+    Permet d'afficher l'UI
+
+    :return: None
+
+    '''
   window.show_all()
   Gtk.main()
   return None

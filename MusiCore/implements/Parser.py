@@ -23,6 +23,12 @@ def getdirpath():
 
 
 def switch_tonalite(list_tonalite):
+    '''
+    Permet de transformer la tonalite en nombre afin de l'utiliser pour le tri des musiques
+
+    :param list_tonalite: list contenant les tonalités à inverser
+    :return:
+    '''
     # Mineur
     mineur_tonalité = ['G#m', 'D#m', 'A#m', 'Fm', 'Cm', 'Gm', 'Dm', 'Am', 'Em', 'Bm', 'F#m', 'C#m']
     mineur_equivalent = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
@@ -42,6 +48,13 @@ def switch_tonalite(list_tonalite):
 
 
 def analyseBPM(mat, playlist):
+    '''
+
+    :param mat: liste contenant la liste des emplacements des musiques
+    :param playlist: TreeView
+    :return: la matrice TreeView actualisée avec m'analyse du bpm
+
+    '''
     flag_bpm = True
     flag_tonalite = False
     nomanalyse = 'test'
@@ -65,6 +78,13 @@ def analyseBPM(mat, playlist):
 
 
 def analyseHarm(mat, playlist):
+    '''
+
+    :param mat: liste contenant la liste des emplacements des musiques
+    :param playlist: TreeView
+    :return: la matrice TreeView actualisée avec m'analyse de la tonalité
+
+    '''
     flag_bpm = False
     flag_tonalite = True
     nomanalyse = 'test'
@@ -95,6 +115,13 @@ def analyseHarm(mat, playlist):
 
 
 def analyseBoth(mat, playlist):
+    '''
+
+    :param mat: liste contenant la liste des emplacements des musiques
+    :param playlist: TreeView
+    :return: la matrice TreeView actualisée avec m'analyse de la tonalité et du bpm
+
+    '''
     print("vous avez cliqué sur le bouton d'anlyse des deux caractéristiques")
     flag_bpm = True
     flag_tonalite = True
@@ -127,14 +154,19 @@ def analyseBoth(mat, playlist):
 
 def parser(nom_analyse, analyse, flag_bpm, flag_tonalite):
     '''
-
     exemple de test :
     analyse1 = implements.analyseaudio.analyse("/home/gerox/Musique/Deorro.wav", "fichier_csv")
     if (analyse1.islineincsc(analyse1.extraire_path()[0]) == False):
         y, sr = analyse1.extrairedatamusic()
         analyse1.analyse_bpm(y, sr)
-    '''
 
+    :param nom_analyse: string (nom de l'analyse)
+    :param analyse: objet analyse
+    :param flag_bpm: boolean
+    :param flag_tonalite: boolean
+    :return: list (valeurs ayant été analysée
+
+    '''
     output_csv = []
     research = nom_analyse.find_title_in_database(analyse.extraire_path()[0])
 
