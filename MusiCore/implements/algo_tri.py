@@ -218,7 +218,7 @@ def algorithme_genetique(playlist):
     B = creationtabl_BPM(tableaudobjets)
 
 
-    for nombre_generation in range (3):
+    for nombre_generation in range (500):
         #Evaluation de la qualité des solutions
         #Détermination de la somme des écarts bpm pour chaque solution
 
@@ -290,7 +290,6 @@ def algorithme_genetique(playlist):
                         matrice_nouvellessolutionHARMO[k,j] = matrice_solutionsHARMO[i,j]
                         j += 1
                         tabl_BPMHARMOpondeesoustrait[i] = 999999
-                        print tabl_BPMHARMOpondeesoustrait
                     j = 0
                 else:
                     i += 1
@@ -326,13 +325,12 @@ def algorithme_genetique(playlist):
                 for i in range (len(tabl_BPMHARMOpondeesoustraitMUT)):
                     if tabl_BPMHARMOpondeesoustraitMUT[i] == min(tabl_BPMHARMOpondeesoustraitMUT):
                         for j in range (len(tabl_BPMHARMOpondeesoustrait)):
-                            matrice_nouvellesolutionBPM[k,j] = matrice_solutionsMutationBPM[i,j]
-                            matrice_nouvellessolutionHARMO[k,j] = matrice_solutionsMutationHARMO[i,j]
+                            matrice_nouvellesolutionBPM[k ,j] = matrice_solutionsMutationBPM[i,j]
+                            matrice_nouvellessolutionHARMO[k ,j] = matrice_solutionsMutationHARMO[i,j]
                             j += 1
                             tabl_BPMHARMOpondeesoustraitMUT[i] = 999999
-                        k += 1
                         j = 0
-                        print matrice_nouvellesolutionBPM
+                        #print matrice_nouvellesolutionBPM
                     else:
                         i += 1
                         j = 0
