@@ -1,0 +1,7 @@
+Algo_tri module
+===============
+
+.. automodule:: Algo_tri
+    :members:
+    :undoc-members:
+    :show-inheritance:

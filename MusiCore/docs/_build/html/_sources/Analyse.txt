@@ -1,0 +1,7 @@
+Analyse module
+==============
+
+.. automodule:: Analyse
+    :members:
+    :undoc-members:
+    :show-inheritance:

@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<!--[if IE 8]>
+<html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Analyse module &mdash; MusiCore 1.0 documentation</title>
+
+
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css"/>
+
+
+    <link rel="top" title="MusiCore 1.0 documentation" href="index.html"/>
+    <link rel="next" title="Exportation module" href="Exportation.html"/>
+    <link rel="prev" title="Algo_tri module" href="Algo_tri.html"/>
+
+
+    <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+<div class="wy-grid-for-nav">
+
+
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+        <div class="wy-side-scroll">
+            <div class="wy-side-nav-search">
+
+
+                <a href="index.html" class="icon icon-home"> MusiCore
+
+
+                </a>
+
+
+                <div class="version">
+                    1.0
+                </div>
+
+
+                <div role="search">
+                    <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+                        <input type="text" name="q" placeholder="Search docs"/>
+                        <input type="hidden" name="check_keywords" value="yes"/>
+                        <input type="hidden" name="area" value="default"/>
+                    </form>
+                </div>
+
+
+            </div>
+
+            <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+
+
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="Algo_tri.html">Algo_tri module</a></li>
+                    <li class="toctree-l1 current"><a class="current reference internal" href="#">Analyse module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="Exportation.html">Exportation module</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="Parser.html">Parser module</a></li>
+                    <li class="toctree-l1"><a class="reference internal" href="UI.html">UI module</a></li>
+                </ul>
+
+
+            </div>
+        </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+
+        <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+            <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+            <a href="index.html">MusiCore</a>
+        </nav>
+
+
+        <div class="wy-nav-content">
+            <div class="rst-content">
+
+
+                <div role="navigation" aria-label="breadcrumbs navigation">
+                    <ul class="wy-breadcrumbs">
+                        <li><a href="index.html">Docs</a> &raquo;</li>
+
+                        <li>Analyse module</li>
+                        <li class="wy-breadcrumbs-aside">
+
+
+                            <a href="_sources/Analyse.txt" rel="nofollow"> View page source</a>
+
+
+                        </li>
+                    </ul>
+                    <hr/>
+                </div>
+                <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+                    <div itemprop="articleBody">
+
+                        <div class="section" id="module-Analyse">
+                            <span id="analyse-module"></span>
+                            <h1>Analyse module<a class="headerlink" href="#module-Analyse"
+                                                 title="Permalink to this headline">¶</a></h1>
+                            <dl class="class">
+                                <dt id="Analyse.analyse">
+                                    <em class="property">class </em><code class="descclassname">Analyse.</code><code
+                                        class="descname">analyse</code><span class="sig-paren">(</span><em>PathToFile=None</em>,
+                                    <em>NomFichierCsv=None</em>, <em>pathtobdd=None</em><span class="sig-paren">)</span><a
+                                        class="headerlink" href="#Analyse.analyse" title="Permalink to this definition">¶</a>
+                                </dt>
+                                <dd><p>Bases: <code class="xref py py-class docutils literal"><span
+                                        class="pre">object</span></code></p>
+                                    <p>Classe définissant l&#8217;analyse d&#8217;une musique. On a l&#8217;analyse bpm
+                                        et l&#8217;analyse de la tonalité</p>
+                                    <dl class="method">
+                                <dt id="Analyse.analyse.analyse_bpm">
+                                    <code class="descname">analyse_bpm</code><span class="sig-paren">(</span><em>y</em>,
+                                    <em>sr</em><span class="sig-paren">)</span><a class="headerlink"
+                                                                                  href="#Analyse.analyse.analyse_bpm"
+                                                                                  title="Permalink to this definition">¶</a>
+                                </dt>
+                                <dd><p>determine le bpm d&#8217;une musique
+                                    exemple de test:</p>
+                                    <blockquote>
+                                        <div>analyse1 = analyse(&#8220;/home/bettini/Musique/Deorro.wav&#8221;, &#8220;fichier_csv&#8221;)
+                                            y, sr = analyse1.extrairedatamusic()
+                                            analyse1.analyse_bpm(y, sr)
+                                        </div>
+                                    </blockquote>
+                                    <table class="docutils field-list" frame="void" rules="none">
+                                        <col class="field-name"/>
+                                        <col class="field-body"/>
+                                        <tbody valign="top">
+                                        <tr class="field-odd field">
+                                            <th class="field-name">Parameters:</th>
+                                            <td class="field-body">
+                                                <ul class="first last simple">
+                                                    <li><strong>pathtofile</strong> &#8211; chemin absolue du fichier
+                                                        audio dont on veut analyser le bpm
+                                                    </li>
+                                                    <li><strong>fichier_csv</strong> &#8211; fichier csv dans lequel
+                                                        sera enregistre les bpms du morceau (nom de la playlist en
+                                                        cours)
+                                                    </li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <p>:Comment ecrit dans le fichier csv a la fin</p>
+                                </dd>
+                            </dl>
+
+                            <dl class="method">
+                                <dt id="Analyse.analyse.analysefft">
+                                    <code class="descname">analysefft</code><span
+                                        class="sig-paren">(</span><em>y=None</em>, <em>Fs=None</em>, <em>k=None</em>,
+                                    <em>afficher=False</em><span class="sig-paren">)</span><a class="headerlink"
+                                                                                              href="#Analyse.analyse.analysefft"
+                                                                                              title="Permalink to this definition">¶</a>
+                                </dt>
+                                <dd><p>Analyse fft d&#8217;un signal</p>
+                                    <table class="docutils field-list" frame="void" rules="none">
+                                        <col class="field-name"/>
+                                        <col class="field-body"/>
+                                        <tbody valign="top">
+                                        <tr class="field-odd field">
+                                            <th class="field-name">Parameters:</th>
+                                            <td class="field-body">
+                                                <ul class="first simple">
+                                                    <li><strong>y</strong> &#8211; l&#8217;amplitude su signal audio
+                                                    </li>
+                                                    <li><strong>Fs</strong> &#8211; la fréquence d&#8217;échantillonnage
+                                                    </li>
+                                                    <li><strong>k</strong> &#8211; le nombre d&#8217;échantillon que l&#8217;on
+                                                        veut analyser dans la musique
+                                                    </li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                        <tr class="field-even field">
+                                            <th class="field-name">Returns:</th>
+                                            <td class="field-body"><p class="first last">retourne la fft du fichier
+                                                audio</p>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </dd>
+                            </dl>
+
+                            <dl class="method">
+                                <dt id="Analyse.analyse.clean_analyses">
+                                    <code class="descname">clean_analyses</code><span class="sig-paren">(</span><span
+                                        class="sig-paren">)</span><a class="headerlink"
+                                                                     href="#Analyse.analyse.clean_analyses"
+                                                                     title="Permalink to this definition">¶</a></dt>
+                                <dd><p>Permet de suppimer le fichier d&#8217;analyse</p>
+                                    <table class="docutils field-list" frame="void" rules="none">
+                                        <col class="field-name"/>
+                                        <col class="field-body"/>
+                                        <tbody valign="top">
+                                        <tr class="field-odd field">
+                                            <th class="field-name">Returns:</th>
+                                            <td class="field-body">None</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </dd>
+                            </dl>
+
+                            <dl class="method">
+                                <dt id="Analyse.analyse.extraire_path">
+                                    <code class="descname">extraire_path</code><span class="sig-paren">(</span><span
+                                        class="sig-paren">)</span><a class="headerlink"
+                                                                     href="#Analyse.analyse.extraire_path"
+                                                                     title="Permalink to this definition">¶</a></dt>
+                                <dd><p>permet d&#8217;extraire d&#8217;un chemin absolu le nom du fichier une list</p>
+                                    <table class="docutils field-list" frame="void" rules="none">
+                                        <col class="field-name"/>
+                                        <col class="field-body"/>
+                                        <tbody valign="top">
+                                        <tr class="field-odd field">
+                                            <th class="field-name">Parameters:</th>
+                                            <td class="field-body"><strong>path</strong> &#8211; chemin absolue d&#8217;une
+                                                fichier audio
+                                            </td>
+                                        </tr>
+                                        <tr class="field-even field">
+                                            <th class="field-name">Returns:</th>
+                                            <td class="field-body">list =[nom fichi er, chemin du repertoire du dossier
+                                                contenant le fichier audio]
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </dd>
+                            </dl>
+
+                            <dl class="method">
+                                <dt id="Analyse.analyse.extrairedatamusic">
+                                    <code class="descname">extrairedatamusic</code><span class="sig-paren">(</span><span
+                                        class="sig-paren">)</span><a class="headerlink"
+                                                                     href="#Analyse.analyse.extrairedatamusic"
+                                                                     title="Permalink to this definition">¶</a></dt>
+                                <dd><p>extrait les données de n&#8217;importe quel format de fichier supporté par l&#8217;api
+                                    audioread</p>
+                                    <table class="docutils field-list" frame="void" rules="none">
+                                        <col class="field-name"/>
+                                        <col class="field-body"/>
+                                        <tbody valign="top">
+                                        <tr class="field-odd field">
+                                            <th class="field-name">Returns:</th>
+                                            <td class="field-body">données de la musique sous forme de liste</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </dd>
+                            </dl>
+
+                            <dl class="method">
+                                <dt id="Analyse.analyse.is_music_harmonic">
+                                    <code class="descname">is_music_harmonic</code><span class="sig-paren">(</span><em>tonalite</em><span
+                                        class="sig-paren">)</span><a class="headerlink"
+                                                                     href="#Analyse.analyse.is_music_harmonic"
+                                                                     title="Permalink to this definition">¶</a></dt>
+                                <dd>
+                                    <table class="docutils field-list" frame="void" rules="none">
+                                        <col class="field-name"/>
+                                        <col class="field-body"/>
+                                        <tbody valign="top">
+                                        <tr class="field-odd field">
+                                            <th class="field-name">Parameters:</th>
+                                            <td class="field-body"><strong>tonalite</strong> &#8211; liste des tonalités
+                                                trouvées dans la musique
+                                            </td>
+                                        </tr>
+                                        <tr class="field-even field">
+                                            <th class="field-name">Returns:</th>
+                                            <td class="field-body">renvoie si la musique est tonale ou atonale selon le
+                                                critère que le coeff de correlation le plus élevé trouvé est plus faible
+                                                que 0,7
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </dd>
+                            </dl>
+
+                            <dl class="method">
+                                <dt id="Analyse.analyse.major_plus_minor">
+                                    <code class="descname">major_plus_minor</code><span class="sig-paren">(</span><em>tonalite</em><span
+                                        class="sig-paren">)</span><a class="headerlink"
+                                                                     href="#Analyse.analyse.major_plus_minor"
+                                                                     title="Permalink to this definition">¶</a></dt>
+                                <dd><p>On regarde si la musique possède des tonalités majeurs et mineurs
+                                    une même clé. Dans ce cas on prend le nom de la clé sans tenir
+                                    compte des mineur et majeur</p>
+                                    <table class="docutils field-list" frame="void" rules="none">
+                                        <col class="field-name"/>
+                                        <col class="field-body"/>
+                                        <tbody valign="top">
+                                        <tr class="field-odd field">
+                                            <th class="field-name">Parameters:</th>
+                                            <td class="field-body"><strong>tonalite</strong> &#8211; liste des tonalités
+                                                trouvées dans la musique
+                                            </td>
+                                        </tr>
+                                        <tr class="field-even field">
+                                            <th class="field-name">Returns:</th>
+                                            <td class="field-body">renvoie si la musique est tonale ou atonale selon le
+                                                critère que le coeff de correlation le plus élevé trouvé est plus faible
+                                                que 0,7
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </dd>
+                            </dl>
+
+                            <dl class="method">
+                                <dt id="Analyse.analyse.rechercheaccords">
+                                    <code class="descname">rechercheaccords</code><span class="sig-paren">(</span><em>freq</em><span
+                                        class="sig-paren">)</span><a class="headerlink"
+                                                                     href="#Analyse.analyse.rechercheaccords"
+                                                                     title="Permalink to this definition">¶</a></dt>
+                                <dd><p>permet de recercher les accords ou notes correspondantes aux fréquences
+                                    présentent dans la matrice fred</p>
+                                    <table class="docutils field-list" frame="void" rules="none">
+                                        <col class="field-name"/>
+                                        <col class="field-body"/>
+                                        <tbody valign="top">
+                                        <tr class="field-odd field">
+                                            <th class="field-name">Parameters:</th>
+                                            <td class="field-body"><strong>freq</strong> &#8211; matrice à 2 dim qui
+                                                permet contenant les fréquences de plusieurs samples
+                                            </td>
+                                        </tr>
+                                        <tr class="field-even field">
+                                            <th class="field-name">Returns:</th>
+                                            <td class="field-body">les notes correspondants à la matrices des
+                                                fréquences
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </dd>
+                            </dl>
+
+                            <dl class="method">
+                                <dt id="Analyse.analyse.tonalite_max">
+                                    <code class="descname">tonalite_max</code><span class="sig-paren">(</span><em>tonalite</em><span
+                                        class="sig-paren">)</span><a class="headerlink"
+                                                                     href="#Analyse.analyse.tonalite_max"
+                                                                     title="Permalink to this definition">¶</a></dt>
+                                <dd>
+                                    <table class="docutils field-list" frame="void" rules="none">
+                                        <col class="field-name"/>
+                                        <col class="field-body"/>
+                                        <tbody valign="top">
+                                        <tr class="field-odd field">
+                                            <th class="field-name">Parameters:</th>
+                                            <td class="field-body"><strong>tonalite</strong> &#8211; liste des tonalités
+                                                trouvées dans la musique
+                                            </td>
+                                        </tr>
+                                        <tr class="field-even field">
+                                            <th class="field-name">Returns:</th>
+                                            <td class="field-body">renvoie si la musique est tonale ou atonale selon le
+                                                critère que le coeff de correlation le plus élevé trouvé est plus faible
+                                                que 0,7
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </dd>
+                            </dl>
+
+                            </dd></dl>
+
+                            <dl class="class">
+                                <dt id="Analyse.csv_musicore">
+                                    <em class="property">class </em><code class="descclassname">Analyse.</code><code
+                                        class="descname">csv_musicore</code><span class="sig-paren">(</span><em>nom_fichier_csv</em><span
+                                        class="sig-paren">)</span><a class="headerlink" href="#Analyse.csv_musicore"
+                                                                     title="Permalink to this definition">¶</a></dt>
+                                <dd><p>Bases: <code class="xref py py-class docutils literal"><span
+                                        class="pre">object</span></code></p>
+                                    <p>Classe permettant la manipuation de fichiers cvs</p>
+                                    <dl class="method">
+                                <dt id="Analyse.csv_musicore.add_column">
+                                    <code class="descname">add_column</code><span class="sig-paren">(</span><em>path_to_csv_file</em>,
+                                    <em>list_a_rajouter</em>, <em>col=None</em><span class="sig-paren">)</span><a
+                                        class="headerlink" href="#Analyse.csv_musicore.add_column"
+                                        title="Permalink to this definition">¶</a></dt>
+                                <dd></dd>
+                            </dl>
+
+                            <dl class="method">
+                                <dt id="Analyse.csv_musicore.add_list">
+                                    <code class="descname">add_list</code><span
+                                        class="sig-paren">(</span><em>csv_file</em>, <em>liste</em><span
+                                        class="sig-paren">)</span><a class="headerlink"
+                                                                     href="#Analyse.csv_musicore.add_list"
+                                                                     title="Permalink to this definition">¶</a></dt>
+                                <dd><p>permet de rajouter une liste dans un fichier csv</p>
+                                    <table class="docutils field-list" frame="void" rules="none">
+                                        <col class="field-name"/>
+                                        <col class="field-body"/>
+                                        <tbody valign="top">
+                                        <tr class="field-odd field">
+                                            <th class="field-name">Parameters:</th>
+                                            <td class="field-body"><strong>list</strong> &#8211; liste dont les élements
+                                                vont être ajoutés à un fichier csv
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </dd>
+                            </dl>
+
+                            <dl class="method">
+                                <dt id="Analyse.csv_musicore.clear">
+                                    <code class="descname">clear</code><span class="sig-paren">(</span><span
+                                        class="sig-paren">)</span><a class="headerlink"
+                                                                     href="#Analyse.csv_musicore.clear"
+                                                                     title="Permalink to this definition">¶</a></dt>
+                                <dd><p>permet de supprimer le fichier csv de l&#8217;analyse</p>
+                                    <table class="docutils field-list" frame="void" rules="none">
+                                        <col class="field-name"/>
+                                        <col class="field-body"/>
+                                        <tbody valign="top">
+                                        <tr class="field-odd field">
+                                            <th class="field-name">Returns:</th>
+                                            <td class="field-body">None</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </dd>
+                            </dl>
+
+                            <dl class="method">
+                                <dt id="Analyse.csv_musicore.delete_column">
+                                    <code class="descname">delete_column</code><span class="sig-paren">(</span><em>num_col</em><span
+                                        class="sig-paren">)</span><a class="headerlink"
+                                                                     href="#Analyse.csv_musicore.delete_column"
+                                                                     title="Permalink to this definition">¶</a></dt>
+                                <dd>
+                                    <table class="docutils field-list" frame="void" rules="none">
+                                        <col class="field-name"/>
+                                        <col class="field-body"/>
+                                        <tbody valign="top">
+                                        <tr class="field-odd field">
+                                            <th class="field-name">Parameters:</th>
+                                            <td class="field-body"><strong>num_col</strong> &#8211; numéro de la colonne
+                                                à supprimer
+                                            </td>
+                                        </tr>
+                                        <tr class="field-even field">
+                                            <th class="field-name">Returns:</th>
+                                            <td class="field-body">None</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </dd>
+                            </dl>
+
+                            <dl class="method">
+                                <dt id="Analyse.csv_musicore.delete_column_database">
+                                    <code class="descname">delete_column_database</code><span class="sig-paren">(</span><em>num_col</em><span
+                                        class="sig-paren">)</span><a class="headerlink"
+                                                                     href="#Analyse.csv_musicore.delete_column_database"
+                                                                     title="Permalink to this definition">¶</a></dt>
+                                <dd>
+                                    <table class="docutils field-list" frame="void" rules="none">
+                                        <col class="field-name"/>
+                                        <col class="field-body"/>
+                                        <tbody valign="top">
+                                        <tr class="field-odd field">
+                                            <th class="field-name">Parameters:</th>
+                                            <td class="field-body"><strong>num_col</strong> &#8211; numéro de la colonne
+                                                de la base de données à supprimer
+                                            </td>
+                                        </tr>
+                                        <tr class="field-even field">
+                                            <th class="field-name">Returns:</th>
+                                            <td class="field-body">None</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </dd>
+                            </dl>
+
+                            <dl class="method">
+                                <dt id="Analyse.csv_musicore.delete_row">
+                                    <code class="descname">delete_row</code><span
+                                        class="sig-paren">(</span><em>num_row</em><span class="sig-paren">)</span><a
+                                        class="headerlink" href="#Analyse.csv_musicore.delete_row"
+                                        title="Permalink to this definition">¶</a></dt>
+                                <dd>
+                                    <table class="docutils field-list" frame="void" rules="none">
+                                        <col class="field-name"/>
+                                        <col class="field-body"/>
+                                        <tbody valign="top">
+                                        <tr class="field-odd field">
+                                            <th class="field-name">Parameters:</th>
+                                            <td class="field-body"><strong>num_row</strong> &#8211; numéro de la ligne à
+                                                supprimer
+                                            </td>
+                                        </tr>
+                                        <tr class="field-even field">
+                                            <th class="field-name">Returns:</th>
+                                            <td class="field-body">None</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </dd>
+                            </dl>
+
+                            <dl class="method">
+                                <dt id="Analyse.csv_musicore.delete_row_database">
+                                    <code class="descname">delete_row_database</code><span
+                                        class="sig-paren">(</span><em>num_row</em><span class="sig-paren">)</span><a
+                                        class="headerlink" href="#Analyse.csv_musicore.delete_row_database"
+                                        title="Permalink to this definition">¶</a></dt>
+                                <dd>
+                                    <table class="docutils field-list" frame="void" rules="none">
+                                        <col class="field-name"/>
+                                        <col class="field-body"/>
+                                        <tbody valign="top">
+                                        <tr class="field-odd field">
+                                            <th class="field-name">Parameters:</th>
+                                            <td class="field-body"><strong>num_row</strong> &#8211; numéro de la colonne
+                                                de la base de données à supprimer
+                                            </td>
+                                        </tr>
+                                        <tr class="field-even field">
+                                            <th class="field-name">Returns:</th>
+                                            <td class="field-body">None</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </dd>
+                            </dl>
+
+                            <dl class="method">
+                                <dt id="Analyse.csv_musicore.find_title_in_database">
+                                    <code class="descname">find_title_in_database</code><span class="sig-paren">(</span><em>titre</em><span
+                                        class="sig-paren">)</span><a class="headerlink"
+                                                                     href="#Analyse.csv_musicore.find_title_in_database"
+                                                                     title="Permalink to this definition">¶</a></dt>
+                                <dd><p>regarde si le titre de la muif os.path.isfile(pathtobdd) == True:sique existe
+                                    deja dans la base de données</p>
+                                    <table class="docutils field-list" frame="void" rules="none">
+                                        <col class="field-name"/>
+                                        <col class="field-body"/>
+                                        <tbody valign="top">
+                                        <tr class="field-odd field">
+                                            <th class="field-name">Parameters:</th>
+                                            <td class="field-body"><strong>titre</strong> &#8211; le titre du fichier
+                                                audio dont on veut vérifier si il existe dans le fichier csv
+                                            </td>
+                                        </tr>
+                                        <tr class="field-even field">
+                                            <th class="field-name">Returns:</th>
+                                            <td class="field-body">True si le fichier audio à deja été analysé</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <p>Afin de vérifier si un fichier audio à deja été analysé, on compare les titres
+                                        audio deja analysés dans la base de donnée avec le titre du fichier que l&#8217;on
+                                        veut analyser</p>
+                                </dd>
+                            </dl>
+
+                            <dl class="method">
+                                <dt id="Analyse.csv_musicore.get_column">
+                                    <code class="descname">get_column</code><span
+                                        class="sig-paren">(</span><em>num_col</em><span class="sig-paren">)</span><a
+                                        class="headerlink" href="#Analyse.csv_musicore.get_column"
+                                        title="Permalink to this definition">¶</a></dt>
+                                <dd><p>getter pour obtneir la colonne num_col du fichier csv de l&#8217;analyse</p>
+                                    <table class="docutils field-list" frame="void" rules="none">
+                                        <col class="field-name"/>
+                                        <col class="field-body"/>
+                                        <tbody valign="top">
+                                        <tr class="field-odd field">
+                                            <th class="field-name">Parameters:</th>
+                                            <td class="field-body"><strong>num_col</strong> &#8211; numéro de la colonne
+                                                que l&#8217;on souhaite obtenir
+                                            </td>
+                                        </tr>
+                                        <tr class="field-even field">
+                                            <th class="field-name">Returns:</th>
+                                            <td class="field-body">list (colonne num_col)</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </dd>
+                            </dl>
+
+                            <dl class="method">
+                                <dt id="Analyse.csv_musicore.get_column_database">
+                                    <code class="descname">get_column_database</code><span
+                                        class="sig-paren">(</span><em>num_col</em><span class="sig-paren">)</span><a
+                                        class="headerlink" href="#Analyse.csv_musicore.get_column_database"
+                                        title="Permalink to this definition">¶</a></dt>
+                                <dd>
+                                    <table class="docutils field-list" frame="void" rules="none">
+                                        <col class="field-name"/>
+                                        <col class="field-body"/>
+                                        <tbody valign="top">
+                                        <tr class="field-odd field">
+                                            <th class="field-name">Parameters:</th>
+                                            <td class="field-body"><strong>num_col</strong> &#8211; numéro de la colonne
+                                                de la base de données
+                                            </td>
+                                        </tr>
+                                        <tr class="field-even field">
+                                            <th class="field-name">Returns:</th>
+                                            <td class="field-body">list (colonne de la base de données)</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </dd>
+                            </dl>
+
+                            <dl class="method">
+                                <dt id="Analyse.csv_musicore.get_row">
+                                    <code class="descname">get_row</code><span
+                                        class="sig-paren">(</span><em>num_row</em><span class="sig-paren">)</span><a
+                                        class="headerlink" href="#Analyse.csv_musicore.get_row"
+                                        title="Permalink to this definition">¶</a></dt>
+                                <dd>
+                                    <table class="docutils field-list" frame="void" rules="none">
+                                        <col class="field-name"/>
+                                        <col class="field-body"/>
+                                        <tbody valign="top">
+                                        <tr class="field-odd field">
+                                            <th class="field-name">Parameters:</th>
+                                            <td class="field-body"><strong>num_row</strong> &#8211; numéro de la ligne
+                                                que l&#8217;on souhaite obtenir
+                                            </td>
+                                        </tr>
+                                        <tr class="field-even field">
+                                            <th class="field-name">Returns:</th>
+                                            <td class="field-body">list (ligne num_row)</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </dd>
+                            </dl>
+
+                            <dl class="method">
+                                <dt id="Analyse.csv_musicore.get_row_database">
+                                    <code class="descname">get_row_database</code><span class="sig-paren">(</span><em>num_row</em><span
+                                        class="sig-paren">)</span><a class="headerlink"
+                                                                     href="#Analyse.csv_musicore.get_row_database"
+                                                                     title="Permalink to this definition">¶</a></dt>
+                                <dd>
+                                    <table class="docutils field-list" frame="void" rules="none">
+                                        <col class="field-name"/>
+                                        <col class="field-body"/>
+                                        <tbody valign="top">
+                                        <tr class="field-odd field">
+                                            <th class="field-name">Parameters:</th>
+                                            <td class="field-body"><strong>num_row</strong> &#8211; numéro de la ligne
+                                                que l&#8217;on souhaite obtenir
+                                            </td>
+                                        </tr>
+                                        <tr class="field-even field">
+                                            <th class="field-name">Returns:</th>
+                                            <td class="field-body">list (ligne num_row de la base de données)</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </dd>
+                            </dl>
+
+                            <dl class="method">
+                                <dt id="Analyse.csv_musicore.is_file">
+                                    <code class="descname">is_file</code><span class="sig-paren">(</span><em>path_to_file</em><span
+                                        class="sig-paren">)</span><a class="headerlink"
+                                                                     href="#Analyse.csv_musicore.is_file"
+                                                                     title="Permalink to this definition">¶</a></dt>
+                                <dd>
+                                    <table class="docutils field-list" frame="void" rules="none">
+                                        <col class="field-name"/>
+                                        <col class="field-body"/>
+                                        <tbody valign="top">
+                                        <tr class="field-odd field">
+                                            <th class="field-name">Parameters:</th>
+                                            <td class="field-body"><strong>path_to_file</strong> &#8211; chemin du
+                                                fichier csv qui va être ouvert
+                                            </td>
+                                        </tr>
+                                        <tr class="field-even field">
+                                            <th class="field-name">Returns:</th>
+                                            <td class="field-body">retour True si le fichier existe, False sinon</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </dd>
+                            </dl>
+
+                            <dl class="method">
+                                <dt id="Analyse.csv_musicore.nombre_ligne_csv">
+                                    <code class="descname">nombre_ligne_csv</code><span class="sig-paren">(</span><span
+                                        class="sig-paren">)</span><a class="headerlink"
+                                                                     href="#Analyse.csv_musicore.nombre_ligne_csv"
+                                                                     title="Permalink to this definition">¶</a></dt>
+                                <dd>
+                                    <table class="docutils field-list" frame="void" rules="none">
+                                        <col class="field-name"/>
+                                        <col class="field-body"/>
+                                        <tbody valign="top">
+                                        <tr class="field-odd field">
+                                            <th class="field-name">Returns:</th>
+                                            <td class="field-body">nombre de ligne deans le fichier csv</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </dd>
+                            </dl>
+
+                            <dl class="method">
+                                <dt id="Analyse.csv_musicore.safe_state">
+                                    <code class="descname">safe_state</code><span class="sig-paren">(</span><span
+                                        class="sig-paren">)</span><a class="headerlink"
+                                                                     href="#Analyse.csv_musicore.safe_state"
+                                                                     title="Permalink to this definition">¶</a></dt>
+                                <dd><p>vérifie que le fichier csv n&#8217;a pas de problème c&#8217;est à dire des sauts
+                                    de lignes blanc</p>
+                                    <table class="docutils field-list" frame="void" rules="none">
+                                        <col class="field-name"/>
+                                        <col class="field-body"/>
+                                        <tbody valign="top">
+                                        <tr class="field-odd field">
+                                            <th class="field-name">Returns:</th>
+                                            <td class="field-body">boolean</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </dd>
+                            </dl>
+
+                            <dl class="method">
+                                <dt id="Analyse.csv_musicore.safe_state_database">
+                                    <code class="descname">safe_state_database</code><span
+                                        class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink"
+                                                                                                     href="#Analyse.csv_musicore.safe_state_database"
+                                                                                                     title="Permalink to this definition">¶</a>
+                                </dt>
+                                <dd><p>vérifie que la fichier csv de la base de donné est dans un bon état</p>
+                                    <table class="docutils field-list" frame="void" rules="none">
+                                        <col class="field-name"/>
+                                        <col class="field-body"/>
+                                        <tbody valign="top">
+                                        <tr class="field-odd field">
+                                            <th class="field-name">Returns:</th>
+                                            <td class="field-body">boolean</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </dd>
+                            </dl>
+
+                            </dd></dl>
+
+                        </div>
+
+
+                    </div>
+                </div>
+                <footer>
+
+                    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+
+                        <a href="Exportation.html" class="btn btn-neutral float-right" title="Exportation module"
+                           accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+
+
+                        <a href="Algo_tri.html" class="btn btn-neutral" title="Algo_tri module" accesskey="p"><span
+                                class="fa fa-arrow-circle-left"></span> Previous</a>
+
+                    </div>
+
+
+                    <hr/>
+
+                    <div role="contentinfo">
+                        <p>
+                            &copy; Copyright 2016, Aurelien BETTINI.
+
+                        </p>
+                    </div>
+                    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a
+                        href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a
+                        href="https://readthedocs.org">Read the Docs</a>.
+
+                </footer>
+
+            </div>
+        </div>
+
+    </section>
+
+</div>
+
+
+<script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+        URL_ROOT: './',
+        VERSION: '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE: true
+    };
+</script>
+<script type="text/javascript" src="_static/jquery.js"></script>
+<script type="text/javascript" src="_static/underscore.js"></script>
+<script type="text/javascript" src="_static/doctools.js"></script>
+
+
+<script type="text/javascript" src="_static/js/theme.js"></script>
+
+
+<script type="text/javascript">
+    jQuery(function () {
+        SphinxRtdTheme.StickyNav.enable();
+    });
+</script>
+
+
+</body>
+</html>
