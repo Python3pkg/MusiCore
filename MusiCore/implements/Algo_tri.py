@@ -168,12 +168,12 @@ def ponderation(tabl_BPMsoustrait,tabl_HARMOsoustrait):
 
 
 def algorithme_genetique(playlist):
-        #création de la population initiale de solutions
-        #la solution doit passer par tous les points ET ne pas comporter de doublons
+    # création de la population initiale de solutions
+    # la solution doit passer par tous les points ET ne pas comporter de doublons
 
-        #Détermination du nombre de solutions
+    #Détermination du nombre de solutions
 
-             # arrangement de matrice playlist
+    # arrangement de matrice playlist
     mat = []
     for row in playlist:
         mat.append(row[3])
@@ -185,6 +185,11 @@ def algorithme_genetique(playlist):
         music = Musique(playlist[i][0], playlist[i][-1], playlist[i][2], None, None, playlist[i][3], playlist[i][1])
         tableaudobjets.append(music)
         # mus1 = Musique("titre1","coucou",125,80,130,1,200)
+
+    print(tableaudobjets[1].titre)
+    print(tableaudobjets[1].emplacement)
+    print(tableaudobjets[1].BPM_moy)
+    print(tableaudobjets[1].pitch)
 
 
     nbre_solution = determination_nbre_sol(tableaudobjets)
@@ -282,8 +287,8 @@ def algorithme_genetique(playlist):
 
         for k in range (0,nbre_solution//2):
             for i in range (len(tabl_BPMHARMOpondeesoustrait)):
-                if matrice_nouvellesolutionBPM[nbre_solution//2,3] != 0:
-                    break
+                # if matrice_nouvellesolutionBPM[nbre_solution//2,3] != 0:
+                # break
                 if tabl_BPMHARMOpondeesoustrait[i] == min(tabl_BPMHARMOpondeesoustrait):
                     for j in range (len(tabl_BPMHARMOpondeesoustrait)):
                         matrice_nouvellesolutionBPM[k,j] = matrice_solutionsBPM[i,j]
@@ -296,8 +301,8 @@ def algorithme_genetique(playlist):
                     j = 0
         k=0
 
-        print matrice_nouvellesolutionBPM
-        print "coucou1"
+        print(matrice_nouvellesolutionBPM)
+        print("coucou1")
         #fonctionnel - pbm sur la suite
         k = 0
         j = 0
@@ -330,7 +335,7 @@ def algorithme_genetique(playlist):
                             j += 1
                             tabl_BPMHARMOpondeesoustraitMUT[i] = 999999
                         j = 0
-                        #print matrice_nouvellesolutionBPM
+                        #print(matrice_nouvellesolutionBPM)
                     else:
                         i += 1
                         j = 0
@@ -343,8 +348,8 @@ def algorithme_genetique(playlist):
                     matrice_nouvellesolutionBPM[-1,j] = matrice_solutionsBPM[random3,j]
                     matrice_nouvellessolutionHARMO[-1,j] = matrice_solutionsHARMO[random3,j]
                     j += 1
-        print "coucou"
-        print matrice_nouvellesolutionBPM
+        print("coucou")
+        print(matrice_nouvellesolutionBPM)
 
 
         matrice_solutionsBPM = matrice_nouvellesolutionBPM
@@ -368,8 +373,31 @@ def algorithme_genetique(playlist):
                 j += 1
         i +=1
 
-    print solution_finaleBPM
-    print solution_finaleHARMO
+    # Solution finale
+    print(solution_finaleBPM)
+    print(solution_finaleHARMO)
+
+    # on implemente les solutions dans la matrices playlist afin de l'exporter pour l'UI
+    # partie qui ne fonctionne pas
+    playlist_2 = playlist
+    for i in range(len(solution_finaleBPM)):
+        for j in range(len(solution_finaleBPM)):
+            # print(float(playlist[j][2]))
+            # print(solution_finaleBPM[i])
+            if solution_finaleBPM[i] == float(playlist[j][2]) and solution_finaleHARMO[i] == float(playlist[j][3]):
+                print('ca marche')
+                for w in range(5):
+                    playlist_2[i][w] = playlist[j][w]
+                solution_finaleBPM[i] = 9999
+                # playlist_2[i] = playlist[j]
+
+    # test
+    print(playlist_2[0][0])
+    print(playlist_2[1][0])
+    print(playlist_2[2][0])
+
+    return playlist_2
+
     """ PROBLEME FINAL  A REGLER
 
      mat = []
@@ -422,4 +450,4 @@ def algorithme_genetique(playlist):
 
     """
 
-algorithme_genetique(exemple)
+# algorithme_genetique(exemple)

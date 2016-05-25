@@ -6,6 +6,7 @@ from gi.repository import Gtk
 import os
 import MusiCore.implements.Parser as Parser
 import MusiCore.implements.Exportation as Exportation
+import MusiCore.implements.Algo_tri as Algo_tri
 
 
 def getpath(path):
@@ -65,6 +66,25 @@ def exportTitleandpath():
     for row in playlist:
         mat.append(list(row[k] for k in [0, -1]))
     return mat
+
+
+def switch_tonalite(list_tonalite):
+    # Mineur
+    mineur_tonalité = ['G#m', 'D#m', 'A#m', 'Fm', 'Cm', 'Gm', 'Dm', 'Am', 'Em', 'Bm', 'F#m', 'C#m']
+    mineur_equivalent = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
+    # Majeur
+    majeur_tonalité = ['BM', 'F#M', 'C#M', 'G#M', 'D#M', 'A#M', 'FM', 'CM', 'GM', 'DM', 'AM', 'EM']
+    majeur_equivalent = [13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
+
+    for i in range(len(list_tonalite)):
+        for j in range(len(mineur_tonalité)):
+            if list_tonalite[i] == mineur_tonalité[j]:
+                list_tonalite[i] = mineur_equivalent[j]
+        for w in range(len(majeur_tonalité)):
+            if list_tonalite[i] == majeur_tonalité[w]:
+                list_tonalite[i] = majeur_equivalent[w]
+    return list_tonalite
 
 def export_tonalite():
     '''
@@ -164,12 +184,29 @@ class Handler(Gtk.Window):
         liste = switch_tonalite(export_tonalite())
         print(liste)
 
+        for i in range(len(liste)):
+            playlist[i][3] = str(liste[i])
+
+        playlist_2 = Algo_tri.algorithme_genetique(playlist)
+
+        nb_ligne = len(exportPaths())
+
+        for i in range(nb_ligne):
+            print(playlist_2[i][0])
+
+        # playlist.clear()
+        for i in range(nb_ligne):
+            for j in range(5):
+                playlist[i][j] = playlist_2[i][j]
+
+        '''
         k = 0
         for i in liste:
             playlist[k][3] = str(i)
             k += 1
+        '''
 
-    #        implements.tri() actualize()
+    # implements.tri() actualize()
 
     def onM3u(self, widget):
         '''
@@ -248,6 +285,6 @@ def showUI():
     :return: None
 
     '''
-  window.show_all()
-  Gtk.main()
-  return None
+    window.show_all()
+    Gtk.main()
+    return None

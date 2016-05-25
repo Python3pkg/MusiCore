@@ -24,15 +24,15 @@ def m3u(loc, mat):
 
 
 def mp3(loc, mat):
-     '''
+    '''
     permet d'exporter la playlist sous le format mp3
-    
+
     :param loc: location du dossier destination, choisi par l'utilisateur, du fichier mp3
     :param mat: liste contenant les emplacements des différentes chansons ordonnées
     :return: None
     '''
-    
-    if loc != " ":
+
+    if loc != ' ':
         resultat = mat
         song = AudioSegment.from_mp3(resultat[0])#on crée la playlist
         playlist = song
