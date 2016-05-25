@@ -4,9 +4,9 @@ import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 import os
-import MusiCore.implements.Parser as Parser
-import MusiCore.implements.Exportation as Exportation
-import MusiCore.implements.Algo_tri as Algo_tri
+import implements.Parser as Parser
+import implements.Exportation as Exportation
+import implements.Algo_tri as Algo_tri
 
 
 def getpath(path):

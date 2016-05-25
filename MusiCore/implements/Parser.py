@@ -7,7 +7,7 @@ Ce module est initié par l'interface graphique
 
 ############################################################################################
 
-import MusiCore.implements.Analyse as Analyse
+from implements import Analyse
 import os
 import gi
 
