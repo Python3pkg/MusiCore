@@ -1,6 +1,6 @@
 # coding: utf-8
-#test orienté_objet
-#classe Musique déf par titre, BPM_debut, BPM_fin, pitch
+#classe Musique déf par titre, emplacement, BPM_moy, pitch, duree
+# Bpm_debut et bpm_fin ne sont pas utilisés
 
 #------------------------------
 #import des librairies nécessaires
@@ -32,14 +32,8 @@ class Musique:#def classe musique
        self.pitch = pitch
        self.duree = duree
 
-#-------------------------
-#Importation de la matrice avec les infos et conversion en objet
-
-#matrice_import = ??? à recevoir de tintin
-# définir la variable "tableaudobjets"
 
 #-----------------------------------------
-#Implémentation d'un algorithme génétique pour aboutir au tri final
 """
 mus1 = Musique("titre1","coucou",125,80,130,1,200)
 mus2 = Musique("titre2","coucou2",110,78,130,12,300)
@@ -57,10 +51,12 @@ exemple = [['titre1', 'durée1', 123, 12], ['titre2', 'durée2', 80, 20],
 
 def determination_nbre_sol(tableaudobjets):
     '''
-    retour un tableau de réponse bpm
+    retourne le nombre de solutions implémentées de base
+    <100 musiques => nombre de solution = nombre de musiques
+    >100musiques => 100 solutions
 
     :param tableaudobjets: list
-    :return: list
+    :return: int
     '''
     if len(tableaudobjets)<=100:
         nbre_solution = len(tableaudobjets)
@@ -70,7 +66,7 @@ def determination_nbre_sol(tableaudobjets):
 
 def creationtabl_BPM(tableaudobjets):
     '''
-    retourne un tableau de réponse bpm
+    retourne une liste avec les BPMs des musiques
 
     :param tableaudobjets: list
     :return: list
@@ -86,7 +82,7 @@ def creationtabl_BPM(tableaudobjets):
 
 def creationtabl_HARMO(tableaudobjets):
     '''
-    retourne une liste de solutions de tonalités
+    retourne une liste avec les tonalités des musiques
 
     :param tableaudobjets: list
     :return: list
@@ -101,7 +97,8 @@ def creationtabl_HARMO(tableaudobjets):
 
 def sommeecartBPM(tableaudobjets,matrice_solutionsBPM):
     '''
-    fait la somme des écarts bpm
+    fait la somme des écarts bpm pour chaque solution 
+    ex : première entrée du tableau correspond à la somme des écarts bpm de la solution1
 
     :param tableaudobjets: list
     :param matrice_solutionsBPM: list
@@ -126,8 +123,8 @@ def sommeecartBPM(tableaudobjets,matrice_solutionsBPM):
 
 def sommeecartHARMO(tableaudobjets, matrice_solutionsHARMO):
     '''
-    calcul les écarts harmoniques
-
+    fait la somme des écarts harmoniques pour chaque solution 
+    ex : première entrée du tableau correspond à la somme des écarts harmoniques de la solution1
     :param tableaudobjets: list
     :param matrice_solutionsHARMO: list
     :return: list
@@ -188,7 +185,7 @@ def sommeecartHARMO(tableaudobjets, matrice_solutionsHARMO):
 def ponderation(tabl_BPMsoustrait, tabl_HARMOsoustrait):
     '''
     pondération des résultats
-
+    récupère les deux tableaux des écarts et les combine pour former le tableau des écarts pondérés
     :param tabl_BPMsoustrait: list
     :param tabl_HARMOsoustrait: list
     :return: list
@@ -210,7 +207,9 @@ def ponderation(tabl_BPMsoustrait, tabl_HARMOsoustrait):
 def algorithme_genetique(playlist):
     '''
     algorithme génétique
-
+    Le détail du principe du l'algorithme est expliqué dans la partie 4.2 du rapport
+    Prends en entrée une liste de musiques sous la forme d'une matrice (nbre_mus x caractéristiques) 
+    Renvoie une liste ordonnée en fonction des écarts BPMs et harmoniques entre chacunes.
     :param playlist: list
     :return: list
     '''
