@@ -191,19 +191,10 @@ class Handler(Gtk.Window):
 
         nb_ligne = len(exportPaths())
 
-        # for i in range(nb_ligne):
-        #    print(playlist_2[i][0])
-
         for i in range(nb_ligne):
             for j in range(5):
                 playlist[i][j] = playlist_2[i][j]
 
-        '''
-        k = 0
-        for i in liste:
-            playlist[k][3] = str(i)
-            k += 1
-        '''
 
     def onM3u(self, widget):
         '''

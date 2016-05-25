@@ -21,6 +21,7 @@ class Musique:#def classe musique
     BPM_fin = 0
     pitch = ""
     duree = ""
+
     """
     def __init__(self, titre, emplacement, BPM_moy, BPM_debut, BPM_fin, pitch, duree):#methode constructeur
        self.titre = titre #il faut extraire les données du csv
@@ -30,11 +31,6 @@ class Musique:#def classe musique
        self.BPM_fin = BPM_fin
        self.pitch = pitch
        self.duree = duree
-
-""" #Exemple
-a = Musique("a","b","c","d","e","f","g")
-print(a.BPM_moy)
-"""
 
 #-------------------------
 #Importation de la matrice avec les infos et conversion en objet
@@ -58,8 +54,14 @@ exemple = [['titre1', 'durée1', 123, 12], ['titre2', 'durée2', 80, 20],
            ['titre3', 'durée3', 140, 18], ['titre4', 'durée4', 130, 19],
            ['titre5','durée5',169,6],['titre6','duree6',184,5],
            ['titre7','duree7',100,14]]
-# Exemple : print tableaudobets[1].titre
+
 def determination_nbre_sol(tableaudobjets):
+    '''
+    retour un tableau de réponse bpm
+
+    :param tableaudobjets: list
+    :return: list
+    '''
     if len(tableaudobjets)<=100:
         nbre_solution = len(tableaudobjets)
     else:
@@ -67,6 +69,13 @@ def determination_nbre_sol(tableaudobjets):
     return(nbre_solution)
 
 def creationtabl_BPM(tableaudobjets):
+    '''
+    retourne un tableau de réponse bpm
+
+    :param tableaudobjets: list
+    :return: list
+
+    '''
     i=0
     tabl_BPM = []
     for i in range (len(tableaudobjets)):
@@ -76,6 +85,13 @@ def creationtabl_BPM(tableaudobjets):
 
 
 def creationtabl_HARMO(tableaudobjets):
+    '''
+    retourne une liste de solutions de tonalités
+
+    :param tableaudobjets: list
+    :return: list
+
+    '''
     i=0
     tabl_HARMO = []
     for i in range (len(tableaudobjets)):
@@ -84,90 +100,120 @@ def creationtabl_HARMO(tableaudobjets):
     return(tabl_HARMO)
 
 def sommeecartBPM(tableaudobjets,matrice_solutionsBPM):
-        nbre_solution = determination_nbre_sol(tableaudobjets)
-        A = creationtabl_HARMO(tableaudobjets)
-        B = creationtabl_BPM(tableaudobjets)
-        tabl_BPMsoustrait = []  #contient l'écart entre chaque musique pr chaque solution
-        result_soustrac = 0
-        j=0
-        i=0
-        for i in range (nbre_solution):
-            for j in range (1):
-                 while j+1 <= (len(A)-1) :
-                    result_soustrac += abs(matrice_solutionsBPM[i,j] - matrice_solutionsBPM[i,j+1])
-                    j += 1
-                 tabl_BPMsoustrait.append(result_soustrac)
-                 result_soustrac = 0
-            i = i+1
-        return(tabl_BPMsoustrait)
+    '''
+    fait la somme des écarts bpm
+
+    :param tableaudobjets: list
+    :param matrice_solutionsBPM: list
+    :return: list
+    '''
+    nbre_solution = determination_nbre_sol(tableaudobjets)
+    A = creationtabl_HARMO(tableaudobjets)
+    B = creationtabl_BPM(tableaudobjets)
+    tabl_BPMsoustrait = []  # contient l'écart entre chaque musique pr chaque solution
+    result_soustrac = 0
+    j = 0
+    i = 0
+    for i in range(nbre_solution):
+        for j in range(1):
+            while j + 1 <= (len(A) - 1):
+                result_soustrac += abs(matrice_solutionsBPM[i, j] - matrice_solutionsBPM[i, j + 1])
+                j += 1
+            tabl_BPMsoustrait.append(result_soustrac)
+            result_soustrac = 0
+        i = i + 1
+    return (tabl_BPMsoustrait)
 
 def sommeecartHARMO(tableaudobjets, matrice_solutionsHARMO):
-            tabl_HARMOsoustrait = [] #contient l'écart harmo entre chaque musique pr chaque solution
-            result_soustrac2 = 0
-            matrice_pitchs = range(25)
-            nbre_solution = determination_nbre_sol(tableaudobjets)
-            A = creationtabl_HARMO(tableaudobjets)
-            B = creationtabl_BPM(tableaudobjets)
-            x = 0
-            y = 0
-            i = 0
-            j = 0
-            for i in range (nbre_solution):
-                for j in range (1):
-                    while j+1 <= (len(B)-1) :
-                        x = matrice_solutionsHARMO[i,j]
-                        y = matrice_solutionsHARMO[i,j+1]
-                        if x <= 12 and y <=12 : #cas des harmos majeures
-                            if abs(matrice_solutionsHARMO[i,j] - matrice_solutionsHARMO[i,j+1]) <= 7:
-                                result_soustrac2 += abs(matrice_pitchs.index(x) - matrice_pitchs.index(y))
-                            else:
-                                if x > y :
-                                    result_soustrac2 += abs(matrice_pitchs.index(x)-matrice_pitchs.index(x+y))
-                                else :
-                                    result_soustrac2 += abs(matrice_pitchs.index(y)-matrice_pitchs.index(x+y))
-                            j += 1
-                        elif x > 12 and y > 12: #cas des harmos mineures
-                            if abs(matrice_solutionsHARMO[i,j] - matrice_solutionsHARMO[i,j+1]) <= 7:
-                                result_soustrac2 += abs(matrice_pitchs.index(x) - matrice_pitchs.index(y))
-                            else:
-                                if x > y :
-                                    result_soustrac2 += abs(matrice_pitchs.index(x-12)-matrice_pitchs.index(x+y-12-12))
-                                else :
-                                    result_soustrac2 += abs(matrice_pitchs.index(y-12)-matrice_pitchs.index(x+y-12-12))
-                            j += 1
-                        else: #cas où on a une différence mineur/majeur
-                            if x > 12 :
-                                x = x-12
-                            else:
-                                y = y-12
-                            if abs(x-y) <= 7:
-                                result_soustrac2 += abs(matrice_pitchs.index(x) - matrice_pitchs.index(y))+1
-                            else:
-                                if x > y:
-                                    result_soustrac2 += abs(matrice_pitchs.index(x)-matrice_pitchs.index(x+y))+1
-                                else:
-                                    result_soustrac2 += abs(matrice_pitchs.index(y)-matrice_pitchs.index(x+y))+1
-                            j += 1
-                    tabl_HARMOsoustrait.append(result_soustrac2)
-                    result_soustrac2 = 0
-                i = i+1
-            return tabl_HARMOsoustrait
+    '''
+    calcul les écarts harmoniques
 
-def ponderation(tabl_BPMsoustrait,tabl_HARMOsoustrait):
-            a = 0 #Coefficient de pondération si il vaut 0 alors on tient pas compte des écarts harmos
-            b = 1 #si b vaut 0 et a = 1 alors on tient seulement compte du tri harmo
-            i = 0
-            valeur_ponderee = 0
-            tabl_BPMHARMOpondeesoustrait = []
-            a = 10 #cas où il y a la meme importance entre harmos et bpms
-            for i in range (len(tabl_BPMsoustrait)):
-                valeur_ponderee = b*tabl_BPMsoustrait[i] + a*tabl_HARMOsoustrait[i]  #REGLER COEFF A POUR PONDERATION
-                tabl_BPMHARMOpondeesoustrait.append(valeur_ponderee)
-            m = min(tabl_BPMHARMOpondeesoustrait)
-            return tabl_BPMHARMOpondeesoustrait
+    :param tableaudobjets: list
+    :param matrice_solutionsHARMO: list
+    :return: list
+    '''
+    tabl_HARMOsoustrait = []  # contient l'écart harmo entre chaque musique pr chaque solution
+    result_soustrac2 = 0
+    matrice_pitchs = range(25)
+    nbre_solution = determination_nbre_sol(tableaudobjets)
+    A = creationtabl_HARMO(tableaudobjets)
+    B = creationtabl_BPM(tableaudobjets)
+    x = 0
+    y = 0
+    i = 0
+    j = 0
+    for i in range(nbre_solution):
+        for j in range(1):
+            while j + 1 <= (len(B) - 1):
+                x = matrice_solutionsHARMO[i, j]
+                y = matrice_solutionsHARMO[i, j + 1]
+                if x <= 12 and y <= 12:  # cas des harmos majeures
+                    if abs(matrice_solutionsHARMO[i, j] - matrice_solutionsHARMO[i, j + 1]) <= 7:
+                        result_soustrac2 += abs(matrice_pitchs.index(x) - matrice_pitchs.index(y))
+                    else:
+                        if x > y:
+                            result_soustrac2 += abs(matrice_pitchs.index(x) - matrice_pitchs.index(x + y))
+                        else:
+                            result_soustrac2 += abs(matrice_pitchs.index(y) - matrice_pitchs.index(x + y))
+                    j += 1
+                elif x > 12 and y > 12:  # cas des harmos mineures
+                    if abs(matrice_solutionsHARMO[i, j] - matrice_solutionsHARMO[i, j + 1]) <= 7:
+                        result_soustrac2 += abs(matrice_pitchs.index(x) - matrice_pitchs.index(y))
+                    else:
+                        if x > y:
+                            result_soustrac2 += abs(
+                                matrice_pitchs.index(x - 12) - matrice_pitchs.index(x + y - 12 - 12))
+                        else:
+                            result_soustrac2 += abs(
+                                matrice_pitchs.index(y - 12) - matrice_pitchs.index(x + y - 12 - 12))
+                    j += 1
+                else:  # cas où on a une différence mineur/majeur
+                    if x > 12:
+                        x = x - 12
+                    else:
+                        y = y - 12
+                    if abs(x - y) <= 7:
+                        result_soustrac2 += abs(matrice_pitchs.index(x) - matrice_pitchs.index(y)) + 1
+                    else:
+                        if x > y:
+                            result_soustrac2 += abs(matrice_pitchs.index(x) - matrice_pitchs.index(x + y)) + 1
+                        else:
+                            result_soustrac2 += abs(matrice_pitchs.index(y) - matrice_pitchs.index(x + y)) + 1
+                    j += 1
+            tabl_HARMOsoustrait.append(result_soustrac2)
+            result_soustrac2 = 0
+        i = i + 1
+    return tabl_HARMOsoustrait
+
+def ponderation(tabl_BPMsoustrait, tabl_HARMOsoustrait):
+    '''
+    pondération des résultats
+
+    :param tabl_BPMsoustrait: list
+    :param tabl_HARMOsoustrait: list
+    :return: list
+
+    '''
+    a = 0  # Coefficient de pondération si il vaut 0 alors on tient pas compte des écarts harmos
+    b = 1  # si b vaut 0 et a = 1 alors on tient seulement compte du tri harmo
+    i = 0
+    valeur_ponderee = 0
+    tabl_BPMHARMOpondeesoustrait = []
+    a = 10  # cas où il y a la meme importance entre harmos et bpms
+    for i in range(len(tabl_BPMsoustrait)):
+        valeur_ponderee = b * tabl_BPMsoustrait[i] + a * tabl_HARMOsoustrait[i]  # REGLER COEFF A POUR PONDERATION
+        tabl_BPMHARMOpondeesoustrait.append(valeur_ponderee)
+    m = min(tabl_BPMHARMOpondeesoustrait)
+    return tabl_BPMHARMOpondeesoustrait
 
 
 def algorithme_genetique(playlist):
+    '''
+    algorithme génétique
+
+    :param playlist: list
+    :return: list
+    '''
     # création de la population initiale de solutions
     # la solution doit passer par tous les points ET ne pas comporter de doublons
 
@@ -185,11 +231,6 @@ def algorithme_genetique(playlist):
         music = Musique(playlist[i][0], playlist[i][-1], playlist[i][2], None, None, playlist[i][3], playlist[i][1])
         tableaudobjets.append(music)
         # mus1 = Musique("titre1","coucou",125,80,130,1,200)
-
-    print(tableaudobjets[1].titre)
-    print(tableaudobjets[1].emplacement)
-    print(tableaudobjets[1].BPM_moy)
-    print(tableaudobjets[1].pitch)
 
 
     nbre_solution = determination_nbre_sol(tableaudobjets)
@@ -229,10 +270,6 @@ def algorithme_genetique(playlist):
 
 
         sommeecartBPM(tableaudobjets, matrice_solutionsBPM)
-
-
-        #Détermination de la somme des écarts harmo pr chaque solution
-
 
         # Création de nouveaux individus par mutation
         # Mutation arbitrairement choisie : inversion de deux musiques dans chaque ligne (ie) interversion de deux colonnes
@@ -301,8 +338,6 @@ def algorithme_genetique(playlist):
                     j = 0
         k=0
 
-        print(matrice_nouvellesolutionBPM)
-        print("coucou1")
         #fonctionnel - pbm sur la suite
         k = 0
         j = 0
@@ -348,8 +383,6 @@ def algorithme_genetique(playlist):
                     matrice_nouvellesolutionBPM[-1,j] = matrice_solutionsBPM[random3,j]
                     matrice_nouvellessolutionHARMO[-1,j] = matrice_solutionsHARMO[random3,j]
                     j += 1
-        print("coucou")
-        print(matrice_nouvellesolutionBPM)
 
 
         matrice_solutionsBPM = matrice_nouvellesolutionBPM
@@ -418,53 +451,3 @@ def algorithme_genetique(playlist):
     print(playlist_2[2][0])
 
     return playlist_2
-
-    ''' PROBLEME FINAL  A REGLER
-
-     mat = []
-    for row in playlist:
-        mat.append(row[3])
-    k=0
-    for i in range(len(solution_finaleBPM)):
-        for j in range(len(mat)):
-            if solution_finaleBPM[i] == mat[j]:
-                for w in range(5):
-                    playlist[k][w], playlist[j,w] = playlist[j][w], playlist[k][w]
-                    k += 1
-
-
-    # Reste à retourner la liste d'objet "tableaudobjets" qui sera triée !
-    # Il suffit de refaire la liaison entre les nombres des listes solution_finaleBPM,solution_finaleHARMO et
-    # le tableau d'objets initial.
-    tableaudobjets_final = []
-    i = 0
-    k = 0
-
-    while (len(solution_finaleBPM)) != 0:
-        for i in range (len(tableaudobjets)):
-            if (len(tableaudobjets_final)) == (len(tableaudobjets)):
-                break
-            if tableaudobjets[i].BPM_moy == solution_finaleBPM[k] and tableaudobjets[i].pitch == solution_finaleHARMO[k]:
-                tableaudobjets_final.append(tableaudobjets[i])
-                del solution_finaleBPM[k]
-            i += 1
-
-    print tableaudobjets_final[2].BPM_moy
-    i = 0
-    for i in range (len(tableaudobjets_final)):
-        print tableaudobjets_final[i].BPM_moy, tableaudobjets_final[i].pitch
-        i += 1
-    """
-    """
-    #------------------------------------------------------------------------
-    #Transformation objet résultat en matrice résultat pour tintin
-    matrice_export = np.zeros(5,len(tableaudobjets))
-    for i in range (len(tableaudobjets_final)):
-        matrice_export[i,0]= tableaudobjets_final[i].emplacement
-        matrice_export[i,1]= tableaudobjets_final[i].titre
-        matrice_export[i,2]= tableaudobjets_final[i].duree
-        matrice_export[i,3]= tableaudobjets_final[i].BPM_moy
-        matrice_export[i,4]= tableaudobjets_final[i].pitch
-        i +=1
-    print matrice_export
-    return matrice_export'''
