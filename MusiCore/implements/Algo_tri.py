@@ -379,17 +379,38 @@ def algorithme_genetique(playlist):
 
     # on implemente les solutions dans la matrices playlist afin de l'exporter pour l'UI
     # partie qui ne fonctionne pas
-    playlist_2 = playlist
-    for i in range(len(solution_finaleBPM)):
-        for j in range(len(solution_finaleBPM)):
+    playlist_2 = []
+    i = 0
+    j = 0
+    nb_ligne = len(solution_finaleBPM)
+    while i < nb_ligne:
+        while j < nb_ligne:
             # print(float(playlist[j][2]))
             # print(solution_finaleBPM[i])
+            print(" i = %s" % i)
+            print(" j = %d" % j)
+            print('bpm solution: %s' % solution_finaleBPM[i])
+            print('bpm solution: %s' % float(playlist[j][2]))
+            print('bpm solution: %s' % solution_finaleHARMO[i])
+            print('bpm solution: %s' % float(playlist[j][3]))
+            if solution_finaleBPM[i] == float(playlist[j][2]) and solution_finaleHARMO[i] == float(playlist[j][3]):
+                print('ca marche')
+                list_output = []
+                for w in range(5):
+                    list_output.append(playlist[j][w])
+                playlist_2.append(list_output)
+            j += 1
+        i += 1
+        j = 0
+
+    print(playlist_2)
+    '''
             if solution_finaleBPM[i] == float(playlist[j][2]) and solution_finaleHARMO[i] == float(playlist[j][3]):
                 print('ca marche')
                 for w in range(5):
                     playlist_2[i][w] = playlist[j][w]
                 solution_finaleBPM[i] = 9999
-                # playlist_2[i] = playlist[j]
+                # playlist_2[i] = playlist[j]'''
 
     # test
     print(playlist_2[0][0])
@@ -398,7 +419,7 @@ def algorithme_genetique(playlist):
 
     return playlist_2
 
-    """ PROBLEME FINAL  A REGLER
+    ''' PROBLEME FINAL  A REGLER
 
      mat = []
     for row in playlist:
@@ -446,8 +467,4 @@ def algorithme_genetique(playlist):
         matrice_export[i,4]= tableaudobjets_final[i].pitch
         i +=1
     print matrice_export
-    return matrice_export
-
-    """
-
-# algorithme_genetique(exemple)
+    return matrice_export'''
