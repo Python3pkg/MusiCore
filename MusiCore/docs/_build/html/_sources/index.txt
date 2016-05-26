@@ -17,7 +17,19 @@ Contents:
    Parser
    UI
 
+Installation
+==================
 
+Vous pouvez les installer avec python-pip, dans le terminal faire :
+
+.. code-block:: bash
+
+   $ sudo apt-get install python3-pip
+   $ sudo pip install cairocffi numpy scipy audioread librosa audiosegment pydub
+
+La dernière version du projet est disponible sur : https://github.com/gerosix/MusiCore.git
+
+Lancer le programme: ./Lauch.py dans le répertoire /MusiCore/MusiCore/Lauch.py
 
 Indices and tables
 ==================

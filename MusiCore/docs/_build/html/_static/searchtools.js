@@ -292,7 +292,6 @@ var Search = {
       if (Search._pulse_status > -1)
         window.setTimeout(pulse, 500);
     }
-
     pulse();
   },
 
@@ -411,7 +410,6 @@ var Search = {
 
     // print the results
     var resultCount = results.length;
-
     function displayNextItem() {
       // results left, load the summary and display it
       if (results.length) {
@@ -474,7 +472,6 @@ var Search = {
         Search.status.fadeIn(500);
       }
     }
-
     displayNextItem();
   },
 

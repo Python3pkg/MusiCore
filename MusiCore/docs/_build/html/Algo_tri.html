@@ -135,21 +135,15 @@
                                         class="sig-paren">(</span><em>playlist</em><span class="sig-paren">)</span><a
                                         class="headerlink" href="#Algo_tri.algorithme_genetique"
                                         title="Permalink to this definition">¶</a></dt>
-                                <dd><p>algorithme génétique</p>
-                                    <table class="docutils field-list" frame="void" rules="none">
-                                        <col class="field-name"/>
-                                        <col class="field-body"/>
-                                        <tbody valign="top">
-                                        <tr class="field-odd field">
-                                            <th class="field-name">Parameters:</th>
-                                            <td class="field-body"><strong>playlist</strong> &#8211; list</td>
-                                        </tr>
-                                        <tr class="field-even field">
-                                            <th class="field-name">Returns:</th>
-                                            <td class="field-body">list</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
+                                <dd><p>algorithme génétique
+                                    Le détail du principe du l&#8217;algorithme est expliqué dans la partie 4.2 du
+                                    rapport
+                                    Prends en entrée une liste de musiques sous la forme d&#8217;une matrice (nbre_mus x
+                                    caractéristiques)
+                                    Renvoie une liste ordonnée en fonction des écarts BPMs et harmoniques entre
+                                    chacunes.
+                                    :param playlist: list
+                                    :return: list</p>
                                 </dd>
                             </dl>
 
@@ -160,7 +154,7 @@
                                         class="sig-paren">)</span><a class="headerlink"
                                                                      href="#Algo_tri.creationtabl_BPM"
                                                                      title="Permalink to this definition">¶</a></dt>
-                                <dd><p>retourne un tableau de réponse bpm</p>
+                                <dd><p>retourne une liste avec les BPMs des musiques</p>
                                     <table class="docutils field-list" frame="void" rules="none">
                                         <col class="field-name"/>
                                         <col class="field-body"/>
@@ -185,7 +179,7 @@
                                         class="sig-paren">)</span><a class="headerlink"
                                                                      href="#Algo_tri.creationtabl_HARMO"
                                                                      title="Permalink to this definition">¶</a></dt>
-                                <dd><p>retourne une liste de solutions de tonalités</p>
+                                <dd><p>retourne une liste avec les tonalités des musiques</p>
                                     <table class="docutils field-list" frame="void" rules="none">
                                         <col class="field-name"/>
                                         <col class="field-body"/>
@@ -210,7 +204,9 @@
                                         class="sig-paren">)</span><a class="headerlink"
                                                                      href="#Algo_tri.determination_nbre_sol"
                                                                      title="Permalink to this definition">¶</a></dt>
-                                <dd><p>retour un tableau de réponse bpm</p>
+                                <dd><p>retourne le nombre de solutions implémentées de base
+                                    &lt;100 musiques =&gt; nombre de solution = nombre de musiques
+                                    &gt;100musiques =&gt; 100 solutions</p>
                                     <table class="docutils field-list" frame="void" rules="none">
                                         <col class="field-name"/>
                                         <col class="field-body"/>
@@ -221,7 +217,7 @@
                                         </tr>
                                         <tr class="field-even field">
                                             <th class="field-name">Returns:</th>
-                                            <td class="field-body">list</td>
+                                            <td class="field-body">int</td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -236,27 +232,12 @@
                                                                                                    href="#Algo_tri.ponderation"
                                                                                                    title="Permalink to this definition">¶</a>
                                 </dt>
-                                <dd><p>pondération des résultats</p>
-                                    <table class="docutils field-list" frame="void" rules="none">
-                                        <col class="field-name"/>
-                                        <col class="field-body"/>
-                                        <tbody valign="top">
-                                        <tr class="field-odd field">
-                                            <th class="field-name">Parameters:</th>
-                                            <td class="field-body">
-                                                <ul class="first simple">
-                                                    <li><strong>tabl_BPMsoustrait</strong> &#8211; list</li>
-                                                    <li><strong>tabl_HARMOsoustrait</strong> &#8211; list</li>
-                                                </ul>
-                                            </td>
-                                        </tr>
-                                        <tr class="field-even field">
-                                            <th class="field-name">Returns:</th>
-                                            <td class="field-body"><p class="first last">list</p>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
+                                <dd><p>pondération des résultats
+                                    récupère les deux tableaux des écarts et les combine pour former le tableau des
+                                    écarts pondérés
+                                    :param tabl_BPMsoustrait: list
+                                    :param tabl_HARMOsoustrait: list
+                                    :return: list</p>
                                 </dd>
                             </dl>
 
@@ -268,7 +249,9 @@
                                                                                                     href="#Algo_tri.sommeecartBPM"
                                                                                                     title="Permalink to this definition">¶</a>
                                 </dt>
-                                <dd><p>fait la somme des écarts bpm</p>
+                                <dd><p>fait la somme des écarts bpm pour chaque solution
+                                    ex : première entrée du tableau correspond à la somme des écarts bpm de la
+                                    solution1</p>
                                     <table class="docutils field-list" frame="void" rules="none">
                                         <col class="field-name"/>
                                         <col class="field-body"/>
@@ -300,27 +283,12 @@
                                                                                                       href="#Algo_tri.sommeecartHARMO"
                                                                                                       title="Permalink to this definition">¶</a>
                                 </dt>
-                                <dd><p>calcul les écarts harmoniques</p>
-                                    <table class="docutils field-list" frame="void" rules="none">
-                                        <col class="field-name"/>
-                                        <col class="field-body"/>
-                                        <tbody valign="top">
-                                        <tr class="field-odd field">
-                                            <th class="field-name">Parameters:</th>
-                                            <td class="field-body">
-                                                <ul class="first simple">
-                                                    <li><strong>tableaudobjets</strong> &#8211; list</li>
-                                                    <li><strong>matrice_solutionsHARMO</strong> &#8211; list</li>
-                                                </ul>
-                                            </td>
-                                        </tr>
-                                        <tr class="field-even field">
-                                            <th class="field-name">Returns:</th>
-                                            <td class="field-body"><p class="first last">list</p>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
+                                <dd><p>fait la somme des écarts harmoniques pour chaque solution
+                                    ex : première entrée du tableau correspond à la somme des écarts harmoniques de la
+                                    solution1
+                                    :param tableaudobjets: list
+                                    :param matrice_solutionsHARMO: list
+                                    :return: list</p>
                                 </dd>
                             </dl>
 
@@ -357,7 +325,7 @@
 
                 </footer>
 
-            </div>
+        </div>
         </div>
 
     </section>
