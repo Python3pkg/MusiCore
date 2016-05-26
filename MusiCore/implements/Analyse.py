@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+# author: Aurélien BETTINI
 
 from __future__ import print_function
 import librosa
@@ -436,7 +437,7 @@ class analyse:
         permet d'extraire d'un chemin absolu le nom du fichier une list
 
         :param path: chemin absolue d'une fichier audio
-        :return: list =[nom fichi   er, chemin du repertoire du dossier contenant le fichier audio]
+        :return: list =[nom fichier, chemin du repertoire du dossier contenant le fichier audio]
 
         """
 

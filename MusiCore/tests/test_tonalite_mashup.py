@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # fonction de test de l'analyse bpm
-import implements.analyseaudio
+import implements.Analyse
 
 # fonction de tests permettant de tester la detection de la tonalité
 # les musiques analysées sont prises de facon aléatoire sur le web
@@ -13,7 +13,7 @@ k = 1
 flag_analyse = 0  # ce flag est mis à 1 si l'on veut analyser la musique
 if flag_analyse == 1:
     print('la musique n° %s est analysé' % k)
-    analyse = implements.analyseaudio.analyse(
+    analyse = implements.Analyse.analyse(
         "/home/gerox/Téléchargements/Bastille - Pompeii.mp3",
         'bdd')
     y, s = analyse.extrairedatamusic()
@@ -77,7 +77,7 @@ fichier /home/gerox/Téléchargements/Audien feat. Ruby Prophet - Circles.mp3
 flag_analyse = 1  # ce flag est mis à 1 si l'on veut analyser la musique
 if flag_analyse == 1:
     print('la musique n° %s est analysé' % k)
-    analyse = implements.analyseaudio.analyse(
+    analyse = implements.Analyse.analyse(
         "/home/gerox/Téléchargements/Mako - Our Story [Free].mp3",
         'bdd')
     y, s = analyse.extrairedatamusic()

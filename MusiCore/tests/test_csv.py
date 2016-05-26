@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
+# # author: Aurélien BETTINI
 # fonction de test des fichiers csv
-import implements.analyseaudio
-import implements.parse_audio_2
+import implements.Analyse
+import implements.Parser
 
 # test 1
 # ouverture d'un fichier csv
 
 # On instancie l'objet csv
-csv1 = implements.analyseaudio.csv_musicore('test')
+csv1 = implements.Analyse.csv_musicore('test')
 print('test1: ok')
 
 # test 2

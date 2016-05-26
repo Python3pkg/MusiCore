@@ -6,5 +6,5 @@ Created on 7 avr. 2014
 import sys, os
 
 # Importe tout les sous modules de analyseaudio
-from implements import analyseaudio
-from implements import parseaudio
+from implements import Analyse
+from implements import Parser

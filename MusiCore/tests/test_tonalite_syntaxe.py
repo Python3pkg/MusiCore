@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
+# author: Aurélien BETTINI
 # fonction de test de l'analyse de la tonalité
 
-import implements.analyseaudio as analyseaudio
+import implements.Analyse as Analyse
 
 # Test de le tonalité
 # Mettre le chemin de la musique dont on veut analyser la tonalité dans l'instanciation de l'objet analyse
 # Ceux-ci est la syntaxe pour pouvoir analyser la tonalité d'une musique
 
-analyse = analyseaudio.analyse("/home/gerox/Musique/Deorro.wav", "fichier_csv", 'bdd')
+analyse = Analyse.analyse("/home/gerox/Musique/Deorro.wav", "fichier_csv", 'bdd')
 y, s = analyse.extrairedatamusic()
 Fs = 44100  # sampling rate
 notefreq = analyse.analysefft(y, Fs, 50,

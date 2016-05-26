@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# author: Aurélien BETTINI
 
 '''
 permet de parcourir les fichiers audio contenu dans un fichier csv et de lancer leur analyse
@@ -127,7 +128,7 @@ def analyseBoth(mat, playlist):
     flag_tonalite = True
     nomanalyse = 'test'
 
-    # on itnitialise l'analyse
+    # on instancie un objet csv
     nom_analyse = Analyse.csv_musicore(nomanalyse)
     nom_analyse.clear()
     k = 1
@@ -136,6 +137,7 @@ def analyseBoth(mat, playlist):
         numanalyse = str(k)
         analysed = "analyse" + numanalyse
         print(analysed + " : fichier " + i)
+        # on instancie un objet analyse
         analysed = Analyse.analyse(i, nom_analyse.path_to_csv_file, nom_analyse.path_to_database)
 
         get_bpm = parser(nom_analyse, analysed, True, True)
@@ -173,10 +175,8 @@ def parser(nom_analyse, analyse, flag_bpm, flag_tonalite):
     # Distinction des différentes analyses, bpm ou tonalité suivant les choix de l'utilisateur
 
     if research[0] == True:
-        print(research[3])
         if research[2] != '//' and research[3] > 5:  # toutes les données de l'anaylse sont dans la base de données
             print('toutes les infomations sur la musique sont présentes')
-            print(research[1])
             output_csv = nom_analyse.get_row_database(research[1])
             return output_csv
             # nom_analyse.add_list(nom_analyse.path_to_csv_file,output_csv)  # rajout des données dans le csv de l'analyse
