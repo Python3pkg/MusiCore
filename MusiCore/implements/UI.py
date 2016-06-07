@@ -133,6 +133,18 @@ class Handler(Gtk.Window):
             playlist.append([getpath(row), None, None, None, row])
         return None
 
+    def onDelete(self, button):
+        '''
+
+        :param button: permet d'ouvrir les fichiers
+        :return:
+        '''
+        mat = exportPlaylist()
+        playlist.clear()
+        for i in range(len(mat)-1):
+            playlist.append(mat[i])
+        return None
+
     def onBPM(self, button):
         '''
 
@@ -180,14 +192,13 @@ class Handler(Gtk.Window):
         :param button: bouton permettant de lancer le tri
         :return: None
         '''
-        print('test')
         liste = switch_tonalite(export_tonalite())
         print(liste)
 
         for i in range(len(liste)):
             playlist[i][3] = str(liste[i])
 
-        playlist_2 = Algo_tri.algorithme_genetique(playlist)
+        playlist_2 = Algo_tri.algorithme_genetique(playlist,indic.get_value()*0.01)
 
         nb_ligne = len(exportPaths())
 
@@ -263,7 +274,7 @@ window = builder.get_object("Main")
 waiter = builder.get_object("Waiter")
 dialog = builder.get_object("FileChooser")
 playlist = builder.get_object("Playlist")
-ponderation = builder.get_object("ponderation")
+indic = builder.get_object("ponderation")
 
 
 def showUI():

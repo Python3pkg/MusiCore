@@ -1,5 +1,5 @@
 # coding: utf-8
-#classe Musique déf par titre, emplacement, BPM_moy, pitch, duree
+# classe Musique déf par titre, emplacement, BPM_moy, pitch, duree
 # Bpm_debut et bpm_fin ne sont pas utilisés
 
 #------------------------------
@@ -182,7 +182,7 @@ def sommeecartHARMO(tableaudobjets, matrice_solutionsHARMO):
         i = i + 1
     return tabl_HARMOsoustrait
 
-def ponderation(tabl_BPMsoustrait, tabl_HARMOsoustrait):
+def ponderation(tabl_BPMsoustrait, tabl_HARMOsoustrait, k):
     '''
     pondération des résultats
     récupère les deux tableaux des écarts et les combine pour former le tableau des écarts pondérés
@@ -198,13 +198,13 @@ def ponderation(tabl_BPMsoustrait, tabl_HARMOsoustrait):
     tabl_BPMHARMOpondeesoustrait = []
     a = 10  # cas où il y a la meme importance entre harmos et bpms
     for i in range(len(tabl_BPMsoustrait)):
-        valeur_ponderee = b * tabl_BPMsoustrait[i] + a * tabl_HARMOsoustrait[i]  # REGLER COEFF A POUR PONDERATION
+        valeur_ponderee = b * (1-k) * tabl_BPMsoustrait[i] + a * k * tabl_HARMOsoustrait[i]  # REGLER COEFF A POUR PONDERATION
         tabl_BPMHARMOpondeesoustrait.append(valeur_ponderee)
     m = min(tabl_BPMHARMOpondeesoustrait)
     return tabl_BPMHARMOpondeesoustrait
 
 
-def algorithme_genetique(playlist):
+def algorithme_genetique(playlist, k):
     '''
     algorithme génétique
     Le détail du principe du l'algorithme est expliqué dans la partie 4.2 du rapport
@@ -314,7 +314,7 @@ def algorithme_genetique(playlist):
 
         #Création  de la nouvelle solution
 
-        tabl_BPMHARMOpondeesoustrait = ponderation(tabl_BPMsoustrait,tabl_HARMOsoustrait)
+        tabl_BPMHARMOpondeesoustrait = ponderation(tabl_BPMsoustrait,tabl_HARMOsoustrait,k)
         i = 0
         j = 0
         k = 0
@@ -342,7 +342,7 @@ def algorithme_genetique(playlist):
         j = 0
         i = 0
         half = nbre_solution//2
-        tabl_BPMHARMOpondeesoustraitMUT = ponderation(tabl_BPMsoustraitMUT,tabl_HARMOsoustraitMUT)
+        tabl_BPMHARMOpondeesoustraitMUT = ponderation(tabl_BPMsoustraitMUT,tabl_HARMOsoustraitMUT,k)
         if nbre_solution%2 == 0 :  #si le nbre_solution est pair on fait moitié moitié
             for k in range (half, nbre_solution): #verif qu'on a bien Moitié moitié de solution
                 for i in range (len(tabl_BPMHARMOpondeesoustraitMUT)):
@@ -392,7 +392,7 @@ def algorithme_genetique(playlist):
     #print matrice_solutionsHARMO
     tabl_BPMsoustrait = sommeecartBPM(tableaudobjets, matrice_solutionsBPM)
     tabl_HARMOsoustrait = sommeecartHARMO(tableaudobjets, matrice_solutionsHARMO)
-    tabl_final = ponderation(tabl_BPMsoustrait, tabl_HARMOsoustrait)
+    tabl_final = ponderation(tabl_BPMsoustrait, tabl_HARMOsoustrait,k)
     solution_finaleBPM = []
     solution_finaleHARMO = []  #Le mauvais jeu de mot n'est pas voulu ...
     for i in range (len(tabl_final)):
