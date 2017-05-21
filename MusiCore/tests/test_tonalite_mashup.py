@@ -12,7 +12,7 @@ k = 1
 # Musique 1
 flag_analyse = 0  # ce flag est mis à 1 si l'on veut analyser la musique
 if flag_analyse == 1:
-    print('la musique n° %s est analysé' % k)
+    print(('la musique n° %s est analysé' % k))
     analyse = implements.Analyse.analyse(
         "/home/gerox/Téléchargements/Bastille - Pompeii.mp3",
         'bdd')
@@ -32,7 +32,7 @@ if flag_analyse == 1:
         print("le test n'est pas correct")
         flag_fail = 0
 else:
-    print("la musique n° %s n'est pas analysé" % k)
+    print(("la musique n° %s n'est pas analysé" % k))
 
 k += 1
 flag_analyse = 0
@@ -76,7 +76,7 @@ fichier /home/gerox/Téléchargements/Audien feat. Ruby Prophet - Circles.mp3
 # Musique 3
 flag_analyse = 1  # ce flag est mis à 1 si l'on veut analyser la musique
 if flag_analyse == 1:
-    print('la musique n° %s est analysé' % k)
+    print(('la musique n° %s est analysé' % k))
     analyse = implements.Analyse.analyse(
         "/home/gerox/Téléchargements/Mako - Our Story [Free].mp3",
         'bdd')
@@ -96,7 +96,7 @@ if flag_analyse == 1:
         print("le test n'est pas correct")
         flag_fail = 0
 else:
-    print("la musique n° %s n'est pas analysé" % k)
+    print(("la musique n° %s n'est pas analysé" % k))
 
 k += 1
 flag_analyse = 0

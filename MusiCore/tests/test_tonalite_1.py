@@ -13,7 +13,7 @@ k = 1
 # test de la musique Taylor swift
 flag_analyse = 0  # ce flag est mis à 1 si l'on veut analyser la musique
 if flag_analyse == 1:
-    print('la musique n° %s est analysé' % k)
+    print(('la musique n° %s est analysé' % k))
     analyse = implements.Analyse.analyse("/home/gerox/Téléchargements/Taylor Swift - New Romantics.mp3",
                                               "fichier_csv",
                                               'bdd')
@@ -33,7 +33,7 @@ if flag_analyse == 1:
         print("le test n'est pas correct")
         flag_fail = 0
 else:
-    print("la musique n° %s n'est pas analysé" % k)
+    print(("la musique n° %s n'est pas analysé" % k))
 
 k += 1
 flag_analyse = 0
@@ -56,7 +56,7 @@ flag_analyse = 0
 # test de la musique des beatles
 flag_analyse = 0  # ce flag est mis à 1 si l'on veut analyser la musique
 if flag_analyse == 1:
-    print('la musique n° %s est analysé' % k)
+    print(('la musique n° %s est analysé' % k))
     analyse = implements.Analyse.analyse("/home/gerox/Téléchargements/Beatles - Yellow Submarine.mp3",
                                               "fichier_csv",
                                               'bdd')
@@ -76,7 +76,7 @@ if flag_analyse == 1:
         print("le test n'est pas correct")
         flag_fail = 0
 else:
-    print("la musique n° %s n'est pas analysé" % k)
+    print(("la musique n° %s n'est pas analysé" % k))
 
 k += 1
 flag_analyse = 0
@@ -95,7 +95,7 @@ flag_analyse = 0
 # Musique 3
 flag_analyse = 0  # ce flag est mis à 1 si l'on veut analyser la musique
 if flag_analyse == 1:
-    print('la musique n° %s est analysé' % k)
+    print(('la musique n° %s est analysé' % k))
     analyse = implements.Analyse.analyse("/home/gerox/Musique/Alan Walker - Faded.mp3",
                                               'bdd')
     y, s = analyse.extrairedatamusic()
@@ -114,7 +114,7 @@ if flag_analyse == 1:
         print("le test n'est pas correct")
         flag_fail = 0
 else:
-    print("la musique n° %s n'est pas analysé" % k)
+    print(("la musique n° %s n'est pas analysé" % k))
 
 k += 1
 flag_analyse = 0
@@ -133,7 +133,7 @@ flag_analyse = 0
 # Musique 4
 flag_analyse = 0  # ce flag est mis à 1 si l'on veut analyser la musique
 if flag_analyse == 1:
-    print('la musique n° %s est analysé' % k)
+    print(('la musique n° %s est analysé' % k))
     analyse = implements.Analyse.analyse(
         "/home/gerox/Téléchargements/GESAFFELSTEIN - PURSUIT (Official video - CENSORED version).mp3",
         'bdd')
@@ -153,7 +153,7 @@ if flag_analyse == 1:
         print("le test n'est pas correct")
         flag_fail = 0
 else:
-    print("la musique n° %s n'est pas analysé" % k)
+    print(("la musique n° %s n'est pas analysé" % k))
 
 k += 1
 flag_analyse = 0
@@ -173,7 +173,7 @@ flag_analyse = 0
 # Musique 5
 flag_analyse = 0  # ce flag est mis à 1 si l'on veut analyser la musique
 if flag_analyse == 1:
-    print('la musique n° %s est analysé' % k)
+    print(('la musique n° %s est analysé' % k))
     analyse = implements.Analyse.analyse(
         "/home/gerox/Téléchargements/Let It Be- The Beatles Lyrics........[lyrics in Description].mp3",
         'bdd')
@@ -193,7 +193,7 @@ if flag_analyse == 1:
         print("le test n'est pas correct")
         flag_fail = 0
 else:
-    print("la musique n° %s n'est pas analysé" % k)
+    print(("la musique n° %s n'est pas analysé" % k))
 
 k += 1
 flag_analyse = 0
@@ -215,7 +215,7 @@ flag_analyse = 0
 # Musique 6
 flag_analyse = 0  # ce flag est mis à 1 si l'on veut analyser la musique
 if flag_analyse == 1:
-    print('la musique n° %s est analysé' % k)
+    print(('la musique n° %s est analysé' % k))
     analyse = implements.Analyse.analyse("/home/gerox/Téléchargements/Michael Jackson - Thriller (w-lyrics).mp3",
                                               'bdd')
     y, s = analyse.extrairedatamusic()
@@ -234,7 +234,7 @@ if flag_analyse == 1:
         print("le test n'est pas correct")
         flag_fail = 0
 else:
-    print("la musique n° %s n'est pas analysé" % k)
+    print(("la musique n° %s n'est pas analysé" % k))
 
 k += 1
 flag_analyse = 0
@@ -256,7 +256,7 @@ flag_analyse = 0
 # Musique 7
 flag_analyse = 0  # ce flag est mis à 1 si l'on veut analyser la musique
 if flag_analyse == 1:
-    print('la musique n° %s est analysé' % k)
+    print(('la musique n° %s est analysé' % k))
     analyse = implements.Analyse.analyse("/home/gerox/Téléchargements/michael jackson black or white lyrics.mp3",
                                               'bdd')
     y, s = analyse.extrairedatamusic()
@@ -275,7 +275,7 @@ if flag_analyse == 1:
         print("le test n'est pas correct")
         flag_fail = 0
 else:
-    print("la musique n° %s n'est pas analysé" % k)
+    print(("la musique n° %s n'est pas analysé" % k))
 
 k += 1
 flag_analyse = 0
@@ -295,7 +295,7 @@ flag_analyse = 0
 # Musique 8
 flag_analyse = 0  # ce flag est mis à 1 si l'on veut analyser la musique
 if flag_analyse == 1:
-    print('la musique n° %s est analysé' % k)
+    print(('la musique n° %s est analysé' % k))
     analyse = implements.Analyse.analyse("/home/gerox/Téléchargements/Hans Zimmer - Time (Inception).mp3",
                                               'bdd')
     y, s = analyse.extrairedatamusic()
@@ -314,7 +314,7 @@ if flag_analyse == 1:
         print("le test n'est pas correct")
         flag_fail = 0
 else:
-    print("la musique n° %s n'est pas analysé" % k)
+    print(("la musique n° %s n'est pas analysé" % k))
 
 k += 1
 flag_analyse = 0
@@ -336,7 +336,7 @@ flag_analyse = 0
 # Musique 9
 flag_analyse = 0  # ce flag est mis à 1 si l'on veut analyser la musique
 if flag_analyse == 1:
-    print('la musique n° %s est analysé' % k)
+    print(('la musique n° %s est analysé' % k))
     analyse = implements.Analyse.analyse(
         "/home/gerox/Téléchargements/Gladiator Super Theme Song (Honor Him, Elysium, & Now We Are Free).mp3",
         'bdd')
@@ -356,7 +356,7 @@ if flag_analyse == 1:
         print("le test n'est pas correct")
         flag_fail = 0
 else:
-    print("la musique n° %s n'est pas analysé" % k)
+    print(("la musique n° %s n'est pas analysé" % k))
 
 k += 1
 flag_analyse = 0
@@ -380,7 +380,7 @@ flag_analyse = 0
 # Musique 10
 flag_analyse = 0  # ce flag est mis à 1 si l'on veut analyser la musique
 if flag_analyse == 1:
-    print('la musique n° %s est analysé' % k)
+    print(('la musique n° %s est analysé' % k))
     analyse = implements.Analyse.analyse("/home/gerox/Téléchargements/Sweet Child O'Mine Lyrics-Guns N'Roses.mp3",
                                               'bdd')
     y, s = analyse.extrairedatamusic()
@@ -399,7 +399,7 @@ if flag_analyse == 1:
         print("le test n'est pas correct")
         flag_fail = 0
 else:
-    print("la musique n° %s n'est pas analysé" % k)
+    print(("la musique n° %s n'est pas analysé" % k))
 
 k += 1
 flag_analyse = 0
@@ -421,7 +421,7 @@ flag_analyse = 0
 # Musique 11
 flag_analyse = 0  # ce flag est mis à 1 si l'on veut analyser la musique
 if flag_analyse == 1:
-    print('la musique n° %s est analysé' % k)
+    print(('la musique n° %s est analysé' % k))
     analyse = implements.Analyse.analyse(
         "/home/gerox/Téléchargements/Guns N' Roses - November Rain(with lyrics).mp3",
         'bdd')
@@ -432,7 +432,7 @@ if flag_analyse == 1:
     tonalite = analyse.rechercheaccords(notefreq)
 
 else:
-    print("la musique n° %s n'est pas analysé" % k)
+    print(("la musique n° %s n'est pas analysé" % k))
 
 k += 1
 flag_analyse = 0
@@ -458,7 +458,7 @@ flag_analyse = 0
 # Musique 12
 flag_analyse = 0  # ce flag est mis à 1 si l'on veut analyser la musique
 if flag_analyse == 1:
-    print('la musique n° %s est analysé' % k)
+    print(('la musique n° %s est analysé' % k))
     analyse = implements.Analyse.analyse(
         "/home/gerox/Téléchargements/You Could Be Mine-Guns N' Roses W- Lyrics.mp3",
         'bdd')
@@ -469,7 +469,7 @@ if flag_analyse == 1:
     tonalite = analyse.rechercheaccords(notefreq)
 
 else:
-    print("la musique n° %s n'est pas analysé" % k)
+    print(("la musique n° %s n'est pas analysé" % k))
 
 k += 1
 flag_analyse = 0
@@ -525,7 +525,7 @@ fichier /home/gerox/Téléchargements/Martin Garrix - Animals (Original Mix).mp3
 # Musique 15
 flag_analyse = 0  # ce flag est mis à 1 si l'on veut analyser la musique
 if flag_analyse == 1:
-    print('la musique n° %s est analysé' % k)
+    print(('la musique n° %s est analysé' % k))
     analyse = implements.Analyse.analyse(
         "/home/gerox/Téléchargements/DVBBS & Borgeous - Tsunami (Original Mix).mp3",
         'bdd')
@@ -536,7 +536,7 @@ if flag_analyse == 1:
     tonalite = analyse.rechercheaccords(notefreq)
 
 else:
-    print("la musique n° %s n'est pas analysé" % k)
+    print(("la musique n° %s n'est pas analysé" % k))
 
 k += 1
 flag_analyse = 0
@@ -558,7 +558,7 @@ flag_analyse = 0
 # Musique 16
 flag_analyse = 0  # ce flag est mis à 1 si l'on veut analyser la musique
 if flag_analyse == 1:
-    print('la musique n° %s est analysé' % k)
+    print(('la musique n° %s est analysé' % k))
     analyse = implements.Analyse.analyse(
         "/home/gerox/Téléchargements/The Chainsmokers - Roses ft. ROZES.mp3",
         'bdd')
@@ -569,7 +569,7 @@ if flag_analyse == 1:
     tonalite = analyse.rechercheaccords(notefreq)
 
 else:
-    print("la musique n° %s n'est pas analysé" % k)
+    print(("la musique n° %s n'est pas analysé" % k))
 
 k += 1
 flag_analyse = 0
@@ -627,7 +627,7 @@ fichier /home/gerox/Téléchargements/DJ Snake - Middle (Audio) ft. Bipolar Suns
 # Musique 19
 flag_analyse = 0  # ce flag est mis à 1 si l'on veut analyser la musique
 if flag_analyse == 1:
-    print('la musique n° %s est analysé' % k)
+    print(('la musique n° %s est analysé' % k))
     analyse = implements.Analyse.analyse(
         "/home/gerox/Téléchargements/The Chainsmokers - Don't Let Me Down (Audio) ft. Daya.mp3",
         'bdd')
@@ -638,7 +638,7 @@ if flag_analyse == 1:
     tonalite = analyse.rechercheaccords(notefreq)
 
 else:
-    print("la musique n° %s n'est pas analysé" % k)
+    print(("la musique n° %s n'est pas analysé" % k))
 
 k += 1
 flag_analyse = 0
@@ -721,7 +721,7 @@ fichier /home/gerox/Téléchargements/Stand By Me, Ben E King, 1961.mp3
 # Musique 23
 flag_analyse = 1  # ce flag est mis à 1 si l'on veut analyser la musique
 if flag_analyse == 1:
-    print('la musique n° %s est analysé' % k)
+    print(('la musique n° %s est analysé' % k))
     analyse = implements.Analyse.analyse(
         "/home/gerox/Téléchargements/Louis Armstrong - What a wonderful world Lyrics.mp3",
         'bdd')
@@ -732,7 +732,7 @@ if flag_analyse == 1:
     tonalite = analyse.rechercheaccords(notefreq)
 
 else:
-    print("la musique n° %s n'est pas analysé" % k)
+    print(("la musique n° %s n'est pas analysé" % k))
 
 k += 1
 flag_analyse = 0

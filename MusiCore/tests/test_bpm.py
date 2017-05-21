@@ -14,7 +14,7 @@ analyse1 = implements.Analyse.analyse("/home/gerox/Musique/Deorro.wav", "fichier
 if os.path.isfile("/home/gerox/Musique/Deorro.wav") == True:
     y, sr = analyse1.extrairedatamusic()
     bpm = analyse1.analyse_bpm(y, sr)
-    print("\033[1;32;40m BPM 1 OK   \033[0;30;47m %s          \033[0m  " % bpm)
+    print(("\033[1;32;40m BPM 1 OK   \033[0;30;47m %s          \033[0m  " % bpm))
 else:
     print("la musique n'existe pas")
 
@@ -22,7 +22,7 @@ analyse1 = implements.Analyse.analyse("/home/gerox/Musique/AC-DC - Highway to He
 if os.path.isfile("/home/gerox/Musique/AC-DC - Highway to Hell.mp3") == True:
     y, sr = analyse1.extrairedatamusic()
     bpm = analyse1.analyse_bpm(y, sr)
-    print("\033[1;32;40m BPM 2 OK   \033[0;30;47m %s          \033[0m  " % bpm)
+    print(("\033[1;32;40m BPM 2 OK   \033[0;30;47m %s          \033[0m  " % bpm))
 else:
     print("la musique n'existe pas")
 
@@ -31,7 +31,7 @@ analyse1 = implements.Analyse.analyse("/home/gerox/Musique/Daft Punk - Get Lucky
 if os.path.isfile("/home/gerox/Musique/Daft Punk - Get Lucky ft. Pharrell Williams.mp3") == True:
     y, sr = analyse1.extrairedatamusic()
     bpm = analyse1.analyse_bpm(y, sr)
-    print("\033[1;32;40m BPM 3 OK   \033[0;30;47m %s          \033[0m  " % bpm)
+    print(("\033[1;32;40m BPM 3 OK   \033[0;30;47m %s          \033[0m  " % bpm))
 else:
     print("la musique n'existe pas")
 
@@ -39,6 +39,6 @@ analyse1 = implements.Analyse.analyse("/home/gerox/Musique/Happy - Pharrell Will
 if os.path.isfile("/home/gerox/Musique/Happy - Pharrell Williams.mp3") == True:
     y, sr = analyse1.extrairedatamusic()
     bpm = analyse1.analyse_bpm(y, sr)
-    print("\033[1;32;40m BPM 4 OK   \033[0;30;47m %s          \033[0m  " % bpm)
+    print(("\033[1;32;40m BPM 4 OK   \033[0;30;47m %s          \033[0m  " % bpm))
 else:
     print("la musique n'existe pas")

@@ -131,7 +131,7 @@ def sommeecartHARMO(tableaudobjets, matrice_solutionsHARMO):
     '''
     tabl_HARMOsoustrait = []  # contient l'écart harmo entre chaque musique pr chaque solution
     result_soustrac2 = 0
-    matrice_pitchs = range(25)
+    matrice_pitchs = list(range(25))
     nbre_solution = determination_nbre_sol(tableaudobjets)
     A = creationtabl_HARMO(tableaudobjets)
     B = creationtabl_BPM(tableaudobjets)
@@ -419,12 +419,12 @@ def algorithme_genetique(playlist, k):
         while j < nb_ligne:
             # print(float(playlist[j][2]))
             # print(solution_finaleBPM[i])
-            print(" i = %s" % i)
-            print(" j = %d" % j)
-            print('bpm solution: %s' % solution_finaleBPM[i])
-            print('bpm solution: %s' % float(playlist[j][2]))
-            print('bpm solution: %s' % solution_finaleHARMO[i])
-            print('bpm solution: %s' % float(playlist[j][3]))
+            print((" i = %s" % i))
+            print((" j = %d" % j))
+            print(('bpm solution: %s' % solution_finaleBPM[i]))
+            print(('bpm solution: %s' % float(playlist[j][2])))
+            print(('bpm solution: %s' % solution_finaleHARMO[i]))
+            print(('bpm solution: %s' % float(playlist[j][3])))
             if solution_finaleBPM[i] == float(playlist[j][2]) and solution_finaleHARMO[i] == float(playlist[j][3]):
                 print('ca marche')
                 list_output = []
@@ -445,8 +445,8 @@ def algorithme_genetique(playlist, k):
                 # playlist_2[i] = playlist[j]'''
 
     # test
-    print(playlist_2[0][0])
-    print(playlist_2[1][0])
-    print(playlist_2[2][0])
+    print((playlist_2[0][0]))
+    print((playlist_2[1][0]))
+    print((playlist_2[2][0]))
 
     return playlist_2

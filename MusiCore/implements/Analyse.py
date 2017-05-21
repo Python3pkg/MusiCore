@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # author: Aurélien BETTINI
 
-from __future__ import print_function
+
 import librosa
 import os
 import csv
@@ -568,12 +568,12 @@ class analyse:
             k2 = arange(n)
             T = n / Fs
             frq = k2 / T  # two sides frequency range
-            freq = frq[range(int(n / 2))]  # one side frequency range
+            freq = frq[list(range(int(n / 2)))]  # one side frequency range
 
             # réalisation de la fft et normalisation
 
             Y = fft(y2) / n
-            Y = abs(Y[range(int(n / 2))])
+            Y = abs(Y[list(range(int(n / 2)))])
 
             # affichage des samples analysées sous matplotlib dans le cas ou afficher = True
 
